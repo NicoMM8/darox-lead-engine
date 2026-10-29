@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAROX Lead Engine | Sales Ops Dashboard</title>
+  
+  <!-- Tipografía Profesional: Plus Jakarta Sans y JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN para utilidad visual rápida -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+          },
+          colors: {
+            slate: {
+              850: '#111726',
+              900: '#0c111d',
+              950: '#070a12'
+            },
+            darox: {
+              gold: '#F59E0B',
+              goldHover: '#D97706',
+              surface: '#0F1523',
+              card: '#131A2B',
+              border: '#1E283D',
+              borderHover: '#2E3D5C',
+              emerald: '#10B981',
+              sky: '#0284C7',
+              rose: '#F43F5E'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estilos base refinados no-IA */
+    body {
+      background-color: #080C15;
+      color: #E2E8F0;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Scrollbars elegantes */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #080C15;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E283D;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2E3D5C;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Animación del drawer lateral */
+    .drawer-backdrop {
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .drawer-panel {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Badge sutiles */
+    .badge-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-amber-500/20 selection:text-amber-200">
+
+  <!-- TOP APP HEADER -->
+  <header class="sticky top-0 z-30 bg-[#090D17]/95 backdrop-blur border-b border-[#1A2338] px-5 py-3">
+    <div class="max-w-[1700px] mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Marca y Sistema -->
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center font-black text-slate-950 font-mono tracking-tighter text-base shadow-sm shadow-amber-500/20">
+            DX
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-sm tracking-wider uppercase text-white">DAROX</span>
+              <span class="text-[10px] font-mono uppercase bg-amber-500/10 text-amber-400 border border-amber-500/30 px-1.5 py-0.5 rounded font-semibold tracking-wide">Sales Ops Engine</span>
+              <span class="text-[10px] font-mono text-slate-500">v2.4.0</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-none mt-0.5 hidden sm:block">Captación temprana B2B · Nuevas Sociedades (BORME) & Locales Sin Web (Maps)</p>
+          </div>
+        </div>
+
+        <!-- Live Sync Pill -->
+        <div class="hidden md:flex items-center gap-2 bg-[#101728] border border-[#1E283D] px-2.5 py-1 rounded-full text-[11px]">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="text-slate-300 font-medium" id="headerStatusText">Sincronizado con Registro</span>
+        </div>
+      </div>
+
+      <!-- Acciones de Cabecera -->
+      <div class="flex items-center gap-2.5">
+        <!-- Botón Ampliar Búsqueda -->
+        <button onclick="openSearchModal()" class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs px-3.5 py-2 rounded shadow-sm shadow-amber-500/20 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          <span>Ampliar Búsqueda</span>
+        </button>
+
+        <!-- Botón Exportar CSV -->
+        <button onclick="exportCurrentCSV()" class="flex items-center gap-1.5 bg-[#12192B] hover:bg-[#1A233A] border border-[#222E47] text-slate-200 text-xs font-medium px-3 py-2 rounded transition-colors" title="Exportar selección a CSV compatible con Excel">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span class="hidden sm:inline">Exportar CSV</span>
+        </button>
+
+        <!-- Botón Recargar -->
+        <button onclick="refreshData()" class="p-2 bg-[#12192B] hover:bg-[#1A233A] border border-[#222E47] text-slate-300 hover:text-white rounded transition-colors" title="Recargar datos">
+          <svg id="refreshIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CUERPO PRINCIPAL -->
+  <main class="flex-1 max-w-[1700px] w-full mx-auto px-5 py-5 space-y-5">
+    
+    <!-- METRIC KPI STRIP -->
+    <section class="grid grid-cols-2 md:grid-cols-5 gap-3" id="kpiStrip">
+      
+      <!-- Total Leads -->
+      <div class="bg-[#0E1424] border border-[#1C263B] p-3.5 rounded-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <span>Prospectos Calificados</span>
+          <span class="text-[10px] font-mono text-slate-500 uppercase">Total</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-2xl font-bold font-mono text-white tabular-nums" id="kpiTotal">-</span>
+          <span class="text-[11px] text-slate-400 font-mono" id="kpiBreakdown">-</span>
+        </div>
+      </div>
+
+      <!-- Hot Leads -->
+      <div class="bg-[#0E1424] border border-[#1C263B] p-3.5 rounded-lg flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-2 -bottom-2 w-14 h-14 bg-emerald-500/5 rounded-full pointer-events-none"></div>
+        <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Hot Leads (Sin Web)</span>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-1 py-0.5 rounded" id="kpiHotPct">-%</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-2xl font-bold font-mono text-emerald-400 tabular-nums" id="kpiHot">-</span>
+          <span class="text-[11px] text-slate-400">Prioridad 0</span>
+        </div>
+      </div>
+
+      <!-- Capital Total Auditado -->
+      <div class="bg-[#0E1424] border border-[#1C263B] p-3.5 rounded-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <span>Capital Social Auditado</span>
+          <span class="text-[10px] font-mono text-amber-400 font-bold bg-amber-500/10 px-1 py-0.5 rounded">BORME</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-2xl font-bold font-mono text-amber-300 tabular-nums" id="kpiCapital">- €</span>
+          <span class="text-[11px] text-slate-400">Liquidez fiscal</span>
+        </div>
+      </div>
+
+      <!-- Oportunidad de Dominios Libres -->
+      <div class="bg-[#0E1424] border border-[#1C263B] p-3.5 rounded-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <span>Dominios .es/.com Libres</span>
+          <span class="text-[10px] font-mono text-sky-400">DNS Ready</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-2xl font-bold font-mono text-sky-400 tabular-nums" id="kpiDomainPct">-%</span>
+          <span class="text-[11px] text-slate-400" id="kpiDomainCount">- empresas</span>
+        </div>
+      </div>
+
+      <!-- Contactos Directos -->
+      <div class="col-span-2 md:col-span-1 bg-[#0E1424] border border-[#1C263B] p-3.5 rounded-lg flex flex-col justify-between">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+          <span>Contactos con Decisor</span>
+          <span class="text-[10px] font-mono text-slate-400">OSINT</span>
+        </div>
+        <div class="mt-2 flex items-baseline justify-between">
+          <span class="text-2xl font-bold font-mono text-white tabular-nums" id="kpiContacts">-</span>
+          <span class="text-[11px] text-slate-400">LinkedIn / Tel</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CONTROL CENTER & OMNIBOX SEARCH -->
+    <section class="bg-[#0E1424] border border-[#1C263B] rounded-lg p-3.5 space-y-3">
+      
+      <!-- Fila 1: Omnibar + Pestañas de Fuente -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+        
+        <!-- Pestañas de Fuente (Segmented Control) -->
+        <div class="flex items-center bg-[#070A12] p-1 rounded-md border border-[#1A2338] self-start lg:self-auto">
+          <button onclick="setSourceTab('all')" id="tabSourceAll" class="px-3 py-1.5 text-xs font-semibold rounded text-white bg-[#1A243A] shadow-sm transition-all">
+            Todos <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourceAll">(0)</span>
+          </button>
+          <button onclick="setSourceTab('borme')" id="tabSourceBorme" class="px-3 py-1.5 text-xs font-semibold rounded text-slate-400 hover:text-white transition-all">
+            BORME (Día 0) <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourceBorme">(0)</span>
+          </button>
+          <button onclick="setSourceTab('places')" id="tabSourcePlaces" class="px-3 py-1.5 text-xs font-semibold rounded text-slate-400 hover:text-white transition-all">
+            Google Places <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourcePlaces">(0)</span>
+          </button>
+          <button onclick="setSourceTab('favorites')" id="tabSourceFavs" class="px-3 py-1.5 text-xs font-semibold rounded text-slate-400 hover:text-white transition-all flex items-center gap-1">
+            <span>⭐ Guardados</span> <span class="text-[10px] font-mono opacity-70" id="badgeSourceFavs">(0)</span>
+          </button>
+        </div>
+
+        <!-- Omnibox Search Bar -->
+        <div class="flex-1 relative max-w-2xl">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <input 
+            type="text" 
+            id="omniSearchInput" 
+            oninput="handleSearchInput(this.value)"
+            placeholder="Buscar por empresa, administrador, provincia, sector, CIF o palabras del objeto social..." 
+            class="w-full pl-9 pr-16 py-2 bg-[#070A12] border border-[#1E283D] focus:border-amber-500/70 focus:outline-none focus:ring-1 focus:ring-amber-500/50 rounded-md text-xs text-white placeholder-slate-500 font-sans"
+          />
+          <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1.5">
+            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden text-slate-400 hover:text-white p-0.5 rounded text-xs" title="Limpiar búsqueda">✕</button>
+            <span class="text-[10px] font-mono bg-[#141C2E] border border-[#222E47] text-slate-400 px-1.5 py-0.5 rounded pointer-events-none hidden sm:inline">Ctrl+K</span>
+          </div>
+        </div>
+
+        <!-- Botón toggle de filtros avanzados -->
+        <button onclick="toggleAdvancedFilters()" id="advancedFiltersToggleBtn" class="flex items-center justify-center gap-1.5 px-3 py-2 bg-[#12192B] hover:bg-[#1A243D] border border-[#1E283D] text-slate-300 text-xs rounded transition-colors self-end lg:self-auto cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+          <span>Filtros</span>
+          <span id="activeFiltersBadge" class="hidden text-[10px] font-mono bg-amber-500 text-slate-950 font-bold px-1.5 rounded-full">0</span>
+        </button>
+
+      </div>
+
+      <!-- Fila 2: Filtro Temporal por Días / Semanas / Mes / Año -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs border-t border-[#1A2338]/60 pt-2.5" id="timeFilterBar">
+        <span class="text-[11px] font-medium text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
+          <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          Período:
+        </span>
+        <button onclick="setTimeRange('all')" id="btnTimeAll" class="time-range-btn px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[11px] font-semibold whitespace-nowrap cursor-pointer">Todo el Histórico <span class="text-[10px] opacity-75 font-mono" id="timeCountAll">(0)</span></button>
+        <button onclick="setTimeRange('today')" id="btnTimeToday" class="time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">Hoy (24h) <span class="text-[10px] opacity-75 font-mono" id="timeCountToday">(0)</span></button>
+        <button onclick="setTimeRange('3d')" id="btnTime3d" class="time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">Últimos 3 días <span class="text-[10px] opacity-75 font-mono" id="timeCount3d">(0)</span></button>
+        <button onclick="setTimeRange('7d')" id="btnTime7d" class="time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">Última semana (7d) <span class="text-[10px] opacity-75 font-mono" id="timeCount7d">(0)</span></button>
+        <button onclick="setTimeRange('30d')" id="btnTime30d" class="time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">Último mes (30d) <span class="text-[10px] opacity-75 font-mono" id="timeCount30d">(0)</span></button>
+        <button onclick="setTimeRange('1y')" id="btnTime1y" class="time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">Último año (365d) <span class="text-[10px] opacity-75 font-mono" id="timeCount1y">(0)</span></button>
+      </div>
+
+      <!-- Fila 3: Chips de Sectores Rápidos -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none" id="sectorChipsContainer">
+        <span class="text-[11px] font-medium text-slate-500 uppercase tracking-wider shrink-0 mr-1">Sector:</span>
+        <button onclick="setSectorFilter('Todos')" class="sector-chip px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[11px] font-medium whitespace-nowrap cursor-pointer">Todos</button>
+        <button onclick="setSectorFilter('Salud, Dental & Estética')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">⚕️ Dental & Estética</button>
+        <button onclick="setSectorFilter('Inmobiliario & PropTech')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">🏢 Inmobiliario</button>
+        <button onclick="setSectorFilter('Hostelería & Gastronomía')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">🍽️ Hostelería & Gastro</button>
+        <button onclick="setSectorFilter('Construcción & Reformas')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">🔨 Reformas & Arquitectura</button>
+        <button onclick="setSectorFilter('Tecnología & Digital')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">💻 Tecnología & AI</button>
+        <button onclick="setSectorFilter('Asesoría & Legal')" class="sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer">⚖️ Legal & Consultoría</button>
+      </div>
+
+      <!-- Fila 4: Cajón Expandible de Filtros Avanzados -->
+      <div id="advancedFiltersDrawer" class="hidden pt-3 border-t border-[#1A2338] grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        
+        <!-- Filtro Provincia -->
+        <div>
+          <label class="block text-slate-400 font-medium mb-1.5">Provincia / Hub Mercantil</label>
+          <select id="filterProvince" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2.5 py-1.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+            <option value="TODAS">Todas las Provincias</option>
+            <option value="MADRID">Madrid</option>
+            <option value="BARCELONA">Barcelona</option>
+            <option value="VALENCIA">Valencia</option>
+            <option value="ALICANTE">Alicante</option>
+            <option value="SEVILLA">Sevilla</option>
+            <option value="MALAGA">Málaga</option>
+            <option value="ALBACETE">Albacete</option>
+          </select>
+        </div>
+
+        <!-- Filtro Rango de Capital -->
+        <div>
+          <label class="block text-slate-400 font-medium mb-1.5">Capital Social Mínimo</label>
+          <select id="filterCapital" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2.5 py-1.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+            <option value="0">Cualquier Capital</option>
+            <option value="5000">Mayor a 5.000 €</option>
+            <option value="15000">Mayor a 15.000 €</option>
+            <option value="50000">Solvente (> 50.000 €)</option>
+            <option value="100000">Gran Cuenta (> 100.000 €)</option>
+          </select>
+        </div>
+
+        <!-- Rango de Fechas Personalizado -->
+        <div>
+          <label class="block text-slate-400 font-medium mb-1.5">Rango de Fecha Exacto</label>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="text-[10px] text-slate-500">Desde</span>
+              <input type="date" id="filterFromDate" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2 py-1 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500">Hasta</span>
+              <input type="date" id="filterToDate" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2 py-1 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Ordenación -->
+        <div>
+          <label class="block text-slate-400 font-medium mb-1.5">Ordenar Por</label>
+          <select id="filterSort" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2.5 py-1.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+            <option value="score_desc">Puntuación / Oportunidad (Mayor)</option>
+            <option value="capital_desc">Capital Social (Mayor)</option>
+            <option value="name_asc">Razón Social (A-Z)</option>
+            <option value="date_desc">Fecha de Constitución (Reciente)</option>
+          </select>
+        </div>
+
+      </div>
+            <option value="score_desc">Puntuación / Oportunidad (Mayor)</option>
+            <option value="capital_desc">Capital Social (Mayor)</option>
+            <option value="name_asc">Razón Social (A-Z)</option>
+            <option value="date_desc">Fecha de Constitución (Reciente)</option>
+          </select>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TABLA MAESTRA DE LEADS -->
+    <section class="bg-[#0E1424] border border-[#1C263B] rounded-lg overflow-hidden flex flex-col shadow-sm">
+      
+      <!-- Barra superior de conteo -->
+      <div class="px-4 py-2.5 border-b border-[#1A2338] bg-[#0A0E1A] flex items-center justify-between text-xs text-slate-400">
+        <div class="flex items-center gap-2">
+          <span>Mostrando <strong class="text-white font-mono" id="tableCountText">0</strong> prospectos</span>
+          <span id="filterDescription" class="text-slate-500 hidden sm:inline"></span>
+        </div>
+        <div class="flex items-center gap-3 text-[11px]">
+          <span class="flex items-center gap-1.5 text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Hot Lead (>90)
+          </span>
+          <span class="flex items-center gap-1.5 text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span> Warm Lead (60-80)
+          </span>
+        </div>
+      </div>
+
+      <!-- Tabla Contenedor con Scroll Horizontal -->
+      <div class="overflow-x-auto min-h-[380px]">
+        <table class="w-full text-left text-xs border-collapse">
+          
+          <thead class="bg-[#090D18] text-slate-400 border-b border-[#1A2338] font-mono text-[11px] uppercase tracking-wider sticky top-0 z-10">
+            <tr>
+              <th class="py-3 px-3 w-10 text-center">⭐</th>
+              <th class="py-3 px-3 w-28 cursor-pointer hover:text-white" onclick="toggleSort('score')">Score ↕</th>
+              <th class="py-3 px-4 min-w-[240px] cursor-pointer hover:text-white" onclick="toggleSort('name')">Empresa / Razón Social ↕</th>
+              <th class="py-3 px-3 min-w-[140px]">Provincia / Sede</th>
+              <th class="py-3 px-3 min-w-[170px]">Sector / Actividad</th>
+              <th class="py-3 px-3 w-32 text-right cursor-pointer hover:text-white" onclick="toggleSort('capital')">Capital ↕</th>
+              <th class="py-3 px-3 min-w-[180px]">Estado Web / Dominio</th>
+              <th class="py-3 px-4 min-w-[180px]">Contacto / Decisor</th>
+              <th class="py-3 px-3 w-28 text-center">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody id="leadsTableBody" class="divide-y divide-[#151D2E] text-slate-300">
+            <!-- Filas dinámicas inyectadas por JS -->
+            <tr>
+              <td colspan="9" class="py-12 text-center text-slate-500 font-mono">
+                Cargando leads desde el motor de prospección...
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <!-- Paginación / Resumen inferior -->
+      <div class="px-4 py-3 border-t border-[#1A2338] bg-[#0A0E1A] flex items-center justify-between text-xs text-slate-400">
+        <div class="text-[11px] font-mono text-slate-500">
+          Tip: Haz clic en cualquier fila para inspeccionar el dossier completo y copiar el pitch.
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="prevPageBtn" onclick="changePage(-1)" class="px-2.5 py-1 bg-[#12192B] border border-[#1E283D] rounded text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed">Anterior</button>
+          <span class="font-mono text-xs px-2" id="pageIndicator">Página 1 de 1</span>
+          <button id="nextPageBtn" onclick="changePage(1)" class="px-2.5 py-1 bg-[#12192B] border border-[#1E283D] rounded text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed">Siguiente</button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- SLIDE-OVER INSPECTOR DRAWER (DOSSIER DEL LEAD) -->
+  <div id="inspectorDrawer" class="fixed inset-0 z-50 overflow-hidden hidden transition-opacity duration-300">
+    <!-- Backdrop oscuro -->
+    <div onclick="closeDrawer()" class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"></div>
+
+    <!-- Panel Lateral Deslizante -->
+    <div class="absolute inset-y-0 right-0 max-w-2xl w-full bg-[#0B0F1C] border-l border-[#1F2B45] shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out" id="drawerContent">
+      
+      <!-- Drawer Header -->
+      <div class="p-5 border-b border-[#1A2338] bg-[#080C16] flex items-start justify-between gap-4">
+        <div class="space-y-1.5 flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span id="drawerSourceBadge" class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">BORME</span>
+            <span id="drawerScoreBadge" class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">120 pts · HOT LEAD</span>
+            <span id="drawerDate" class="text-[11px] font-mono text-slate-400">2026-10-29</span>
+          </div>
+          <h2 id="drawerTitle" class="text-base font-bold text-white tracking-tight leading-snug break-words">EMPRESA EJEMPLO SL</h2>
+          <p id="drawerSubtitle" class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+            <span class="truncate">Madrid, España</span>
+          </p>
+        </div>
+
+        <!-- Acciones Cabecera Drawer -->
+        <div class="flex items-center gap-1">
+          <button onclick="toggleCurrentFavorite()" id="drawerFavBtn" class="p-2 text-slate-400 hover:text-amber-400 rounded transition-colors" title="Marcar como favorito">
+            ⭐
+          </button>
+          <button onclick="closeDrawer()" class="p-2 text-slate-400 hover:text-white rounded transition-colors text-lg" title="Cerrar (Esc)">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Drawer Tabs -->
+      <div class="flex border-b border-[#1A2338] bg-[#070A12] px-5 text-xs font-semibold">
+        <button onclick="setDrawerTab('dossier')" id="drawerTabDossier" class="py-2.5 px-3 border-b-2 border-amber-500 text-amber-400 transition-colors">
+          Diagnóstico de Oportunidad
+        </button>
+        <button onclick="setDrawerTab('pitch')" id="drawerTabPitch" class="py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+          <span>Pitch DAROX</span>
+          <span class="text-[9px] bg-amber-500/20 text-amber-300 px-1 rounded">1-Click</span>
+        </button>
+        <button onclick="setDrawerTab('crm')" id="drawerTabCrm" class="py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors">
+          Seguimiento CRM
+        </button>
+      </div>
+
+      <!-- Drawer Body con Scroll -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-5 text-xs">
+        
+        <!-- PESTAÑA 1: DIAGNÓSTICO -->
+        <div id="drawerPanelDossier" class="space-y-4">
+          
+          <!-- Oportunidad Táctica DAROX -->
+          <div class="bg-gradient-to-r from-amber-500/10 to-transparent border-l-4 border-amber-500 p-3.5 rounded-r bg-[#101726]">
+            <h4 class="font-bold text-amber-300 text-xs uppercase tracking-wider font-mono">Recomendación Táctica DAROX</h4>
+            <p id="drawerOpportunity" class="text-slate-200 text-xs mt-1 leading-relaxed">
+              Contactar hoy mismo por LinkedIn ofreciendo pack Web + Branding de lanzamiento.
+            </p>
+            <div id="drawerReasons" class="mt-2 text-[11px] text-slate-400 font-mono bg-black/20 p-2 rounded border border-white/5">
+              -
+            </div>
+          </div>
+
+          <!-- Auditoría de Dominios OSINT -->
+          <div class="bg-[#0E1526] border border-[#1C263B] p-4 rounded-lg space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-white uppercase tracking-wider text-[11px] font-mono">Auditoría DNS de Dominios</span>
+              <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono font-bold" id="drawerWebStatusText">Sin Web Detectada</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <div class="bg-[#070A12] border border-[#1A2338] p-2.5 rounded">
+                <div class="text-[10px] text-slate-400 font-mono">Dominio .es</div>
+                <div class="mt-1 flex items-center justify-between">
+                  <span class="font-mono text-white text-xs font-semibold" id="drawerDomainEs">empresa.es</span>
+                  <span id="drawerBadgeEs" class="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300">LIBRE</span>
+                </div>
+              </div>
+
+              <div class="bg-[#070A12] border border-[#1A2338] p-2.5 rounded">
+                <div class="text-[10px] text-slate-400 font-mono">Dominio .com</div>
+                <div class="mt-1 flex items-center justify-between">
+                  <span class="font-mono text-white text-xs font-semibold" id="drawerDomainCom">empresa.com</span>
+                  <span id="drawerBadgeCom" class="text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300">LIBRE</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-400 leading-tight">
+              Los dominios están disponibles para registrar. DAROX puede ofrecerles el registro conjunto con la creación de su primera identidad digital.
+            </p>
+          </div>
+
+          <!-- Ficha Registral / Oficial -->
+          <div class="bg-[#0E1526] border border-[#1C263B] p-4 rounded-lg space-y-3">
+            <span class="font-bold text-white uppercase tracking-wider text-[11px] font-mono">Ficha Mercantil / Ubicación</span>
+            
+            <div class="grid grid-cols-2 gap-3 pt-1 text-xs">
+              <div>
+                <span class="text-slate-500 font-mono text-[10px] uppercase">Capital Social</span>
+                <div class="font-mono font-bold text-amber-300 text-sm mt-0.5" id="drawerCapital">-</div>
+              </div>
+              <div>
+                <span class="text-slate-500 font-mono text-[10px] uppercase">Provincia / Sede</span>
+                <div class="font-semibold text-slate-200 mt-0.5" id="drawerProvince">-</div>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-[#1A2338]">
+              <span class="text-slate-500 font-mono text-[10px] uppercase">Domicilio Fiscal / Dirección</span>
+              <div class="text-slate-300 mt-0.5 flex items-start justify-between gap-2">
+                <span id="drawerAddress" class="break-words">-</span>
+                <a id="drawerMapsLink" href="#" target="_blank" class="shrink-0 text-amber-400 hover:text-amber-300 text-[11px] font-mono flex items-center gap-1 bg-[#151D30] px-2 py-1 rounded">
+                  <span>Ver Mapa</span> ↗
+                </a>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-[#1A2338]">
+              <span class="text-slate-500 font-mono text-[10px] uppercase">Objeto Social / Actividad Declarada</span>
+              <p id="drawerObjeto" class="text-slate-300 mt-1 leading-relaxed bg-[#070A12] p-2.5 rounded border border-[#1A2338] max-h-40 overflow-y-auto">
+                -
+              </p>
+            </div>
+
+            <div class="pt-2 border-t border-[#1A2338]" id="drawerAdminsBlock">
+              <span class="text-slate-500 font-mono text-[10px] uppercase">Administradores Oficiales</span>
+              <div id="drawerAdminsList" class="mt-1 space-y-1">
+                <!-- Lista de admins -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- PESTAÑA 2: PITCH GENERATOR -->
+        <div id="drawerPanelPitch" class="hidden space-y-4">
+          
+          <div class="bg-[#0E1526] border border-[#1C263B] p-4 rounded-lg space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="font-bold text-white text-xs">Pitch de Prospección Personalizado</h4>
+                <p class="text-[11px] text-slate-400 mt-0.5">Adaptado al fundador, sector y estado mercantil.</p>
+              </div>
+              <button onclick="copyGeneratedPitch()" class="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded text-xs transition-colors shadow-sm" id="copyPitchBtn">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span id="copyPitchText">Copiar Pitch</span>
+              </button>
+            </div>
+
+            <!-- Selector de Tipo de Pitch -->
+            <div class="flex items-center gap-2 pt-1 border-t border-[#1A2338]">
+              <span class="text-[10px] text-slate-400 font-mono">Canal:</span>
+              <button onclick="renderPitchTemplate('linkedin')" id="btnChannelLinkedin" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40">LinkedIn InMail</button>
+              <button onclick="renderPitchTemplate('email')" id="btnChannelEmail" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#070A12] text-slate-400 hover:text-white border border-[#1A2338]">Email Frío</button>
+              <button onclick="renderPitchTemplate('phone')" id="btnChannelPhone" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#070A12] text-slate-400 hover:text-white border border-[#1A2338]">Llamada / WhatsApp</button>
+            </div>
+
+            <!-- Caja de Texto del Pitch -->
+            <textarea id="pitchTextArea" rows="12" class="w-full bg-[#070A12] border border-[#1E283D] rounded-md p-3 text-slate-200 text-xs font-mono leading-relaxed focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500/30"></textarea>
+
+          </div>
+
+          <!-- Consejos de Conversión -->
+          <div class="bg-[#101728] border border-[#1A2338] p-3 rounded text-[11px] text-slate-400 space-y-1">
+            <strong class="text-amber-400 block font-mono uppercase text-[10px]">Táctica de Cierre DAROX</strong>
+            <p>1. No intentes vender en el primer mensaje: el objetivo es agendar una llamada de 15 minutos de asesoría sobre presencia digital.</p>
+            <p>2. Menciona la disponibilidad de su dominio .es o .com libre para generar sentido de urgencia.</p>
+          </div>
+
+        </div>
+
+        <!-- PESTAÑA 3: CRM -->
+        <div id="drawerPanelCrm" class="hidden space-y-4">
+          
+          <div class="bg-[#0E1526] border border-[#1C263B] p-4 rounded-lg space-y-3">
+            <span class="font-bold text-white uppercase tracking-wider text-[11px] font-mono">Estado de Prospección</span>
+            
+            <div class="space-y-1.5 pt-1">
+              <label class="block text-slate-400 font-medium">Estado del Lead</label>
+              <select id="crmStatusSelect" onchange="saveLeadCrmStatus()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-2 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
+                <option value="Nuevo">⚪ Nuevo (Sin contactar)</option>
+                <option value="Contactado">🟡 Contactado (Mensaje enviado)</option>
+                <option value="En Seguimiento">🔵 En Seguimiento (Conversación abierta)</option>
+                <option value="Reunión Agendada">🟢 Reunión Agendada (Demo/Presupuesto)</option>
+                <option value="Cerrado Ganado">🏆 Ganado (Cliente DAROX)</option>
+                <option value="Descartado">⚫ Descartado (Sin interés / No aplica)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5 pt-2 border-t border-[#1A2338]">
+              <label class="block text-slate-400 font-medium">Notas Privadas del SDR / Comercial</label>
+              <textarea id="crmNotesText" onblur="saveLeadCrmStatus()" rows="6" placeholder="Añade notas sobre llamadas, respuestas, objeciones o fecha de seguimiento..." class="w-full bg-[#070A12] border border-[#1E283D] rounded p-2.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none"></textarea>
+            </div>
+
+            <div class="text-[11px] text-slate-500 font-mono text-right" id="crmSavedNotice">
+              Guardado automáticamente
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Drawer Footer con Botones Directos -->
+      <div class="p-4 border-t border-[#1A2338] bg-[#080C16] flex items-center justify-between gap-3">
+        <a id="drawerLinkedInLink" href="#" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-[#0A66C2] hover:bg-[#095196] text-white font-semibold py-2 px-3 rounded text-xs transition-colors">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span>Abrir LinkedIn del Fundador</span>
+        </a>
+
+        <button onclick="setDrawerTab('pitch')" class="flex items-center gap-1.5 bg-[#141C2E] hover:bg-[#1C273E] border border-[#222E47] text-slate-200 font-semibold py-2 px-3 rounded text-xs transition-colors">
+          <span>Ver Pitch</span> →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: AMPLIAR BÚSQUEDA (LEAD ACQUISITION HUB) -->
+  <div id="searchModal" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <!-- Backdrop -->
+    <div onclick="closeSearchModal()" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+    <!-- Modal Box -->
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="bg-[#0B0F1C] border border-[#1F2B45] rounded-xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        
+        <!-- Modal Header -->
+        <div class="p-5 border-b border-[#1A2338] bg-[#080C16] flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center font-mono font-bold text-sm">
+              ⚡
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white tracking-tight">Lead Acquisition Hub | Ampliar Búsqueda</h3>
+              <p class="text-[11px] text-slate-400">Ejecuta extracción en vivo del BORME oficial o rastrea locales en Google Maps</p>
+            </div>
+          </div>
+          <button onclick="closeSearchModal()" class="text-slate-400 hover:text-white text-lg p-1">✕</button>
+        </div>
+
+        <!-- Subtabs del Modal -->
+        <div class="flex border-b border-[#1A2338] bg-[#070A12] px-5 text-xs font-semibold">
+          <button onclick="setSearchModalTab('borme')" id="modalTabBorme" class="py-2.5 px-3 border-b-2 border-amber-500 text-amber-400 transition-colors">
+            1. Scraper Oficial BORME (Día 0)
+          </button>
+          <button onclick="setSearchModalTab('places')" id="modalTabPlaces" class="py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors">
+            2. Google Places (Locales Sin Web)
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-5 space-y-4 overflow-y-auto text-xs">
+          
+          <!-- PANEL BORME -->
+          <div id="modalPanelBorme" class="space-y-4">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Provincias Objetivo</label>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="MADRID" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Madrid</span>
+                </label>
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="BARCELONA" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Barcelona</span>
+                </label>
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="VALENCIA" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Valencia</span>
+                </label>
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="SEVILLA" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Sevilla</span>
+                </label>
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="MALAGA" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Málaga</span>
+                </label>
+                <label class="flex items-center gap-1.5 p-2 bg-[#070A12] border border-[#1A2338] rounded cursor-pointer">
+                  <input type="checkbox" name="bormeProv" value="ALICANTE" checked class="text-amber-500 rounded">
+                  <span class="text-slate-200">Alicante</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Fecha del Boletín</label>
+                <input type="date" id="bormeSearchDate" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-1.5 text-slate-200 text-xs">
+                <span class="text-[10px] text-slate-500">Dejar en blanco para la última edición disponible</span>
+              </div>
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Límite de Sociedades</label>
+                <select id="bormeSearchLimit" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-1.5 text-slate-200 text-xs">
+                  <option value="25">25 sociedades</option>
+                  <option value="50" selected>50 sociedades</option>
+                  <option value="100">100 sociedades</option>
+                </select>
+              </div>
+            </div>
+
+            <button onclick="launchBormeSearch()" id="btnLaunchBorme" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <span>Iniciar Extracción Oficial del BORME</span> 🚀
+            </button>
+          </div>
+
+          <!-- PANEL PLACES -->
+          <div id="modalPanelPlaces" class="hidden space-y-4">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Nicho / Sector Comercial</label>
+              <select id="placesNicheSelect" onchange="updatePlacesQueryInput()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-1.5 text-slate-200 text-xs">
+                <option value="clinicas dentales">Clínicas Dentales & Odontología</option>
+                <option value="medicina estetica y belleza">Medicina Estética, Spa & Belleza</option>
+                <option value="estudios de arquitectura y reformas">Estudios de Arquitectura & Reformas</option>
+                <option value="bufetes de abogados y asesorias">Bufetes de Abogados & Asesorías</option>
+                <option value="restaurantes de autor y gastro">Restaurantes de Autor & Gastronomía</option>
+                <option value="inmobiliarias boutique">Inmobiliarias & Propiedades Prime</option>
+                <option value="gimnasios boutique y pilates">Gimnasios Boutique & Pilates</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Ciudad / Área</label>
+                <select id="placesCitySelect" onchange="updatePlacesQueryInput()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-1.5 text-slate-200 text-xs">
+                  <option value="Madrid">Madrid</option>
+                  <option value="Barcelona">Barcelona</option>
+                  <option value="Valencia">Valencia</option>
+                  <option value="Sevilla">Sevilla</option>
+                  <option value="Málaga">Málaga</option>
+                  <option value="Alicante">Alicante</option>
+                  <option value="Bilbao">Bilbao</option>
+                  <option value="Zaragoza">Zaragoza</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Consulta Completa</label>
+                <input type="text" id="placesQueryInput" value="clinicas dentales en Madrid" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-3 py-1.5 text-slate-200 text-xs">
+              </div>
+            </div>
+
+            <button onclick="launchPlacesSearch()" id="btnLaunchPlaces" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition-colors flex items-center justify-center gap-2 shadow-sm">
+              <span>Rastrear Google Places Sin Web</span> 📍
+            </button>
+          </div>
+
+          <!-- Terminal de Salida en Vivo -->
+          <div class="bg-[#05070D] border border-[#1A2338] rounded-md p-3 space-y-2">
+            <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono">
+              <span class="flex items-center gap-1.5">
+                <span id="jobStatusDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+                <span id="jobStatusLabel">Listo para ejecutar</span>
+              </span>
+              <span id="jobProgressText" class="text-slate-500 truncate max-w-xs"></span>
+            </div>
+            <div id="jobLogConsole" class="h-32 overflow-y-auto font-mono text-[11px] text-slate-400 space-y-0.5 select-text">
+              <div class="text-slate-600">// Los logs del crawler aparecerán aquí en tiempo real...</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-3 border-t border-[#1A2338] bg-[#080C16] flex items-center justify-end">
+          <button onclick="closeSearchModal()" class="px-4 py-1.5 bg-[#141C2E] text-slate-300 hover:text-white rounded text-xs">Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT CLIENTE COMPLETO -->
+  <script>
+    // Estado Global de la Aplicación
+    const STATE = {
+      leads: [],
+      filteredLeads: [],
+      stats: {},
+      selectedLead: null,
+      sourceTab: 'all', // all | borme | places | favorites
+      timeRange: 'all', // all | today | 3d | 7d | 30d | 1y
+      sectorFilter: 'Todos',
+      searchQuery: '',
+      fromDate: '',
+      toDate: '',
+      activeFilters: {
+        province: 'TODAS',
+        minCapital: 0,
+        hotOnly: false,
+        noWebOnly: false,
+        sortBy: 'score_desc'
+      },
+      pagination: {
+        page: 1,
+        pageSize: 15
+      },
+      pollingInterval: null
+    };
+
+    // Inicialización al cargar DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      // Cargar datos estáticos iniciales si están embebidos (modo offline / standalone)
+      if (window.INITIAL_DATA) {
+        if (window.INITIAL_DATA.stats) {
+          STATE.stats = window.INITIAL_DATA.stats;
+          renderStats(STATE.stats);
+        }
+        if (window.INITIAL_DATA.leads) {
+          STATE.leads = window.INITIAL_DATA.leads;
+          STATE.filteredLeads = window.INITIAL_DATA.leads;
+          updateTimeRangeBadges();
+          renderTable();
+        }
+      }
+
+      fetchStats();
+      fetchLeads();
+
+      // Atajo de teclado global Ctrl+K
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          document.getElementById('omniSearchInput').focus();
+        }
+        if (e.key === 'Escape') {
+          closeDrawer();
+          closeSearchModal();
+        }
+      });
+    });
+
+    // Petición de Estadísticas
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/stats');
+        if (!res.ok) return;
+        const data = await res.json();
+        STATE.stats = data;
+        renderStats(data);
+      } catch (err) {
+        console.warn('Modo API no disponible, usando estadísticas locales.');
+      }
+    }
+
+    // Render de KPIs
+    function renderStats(data) {
+      document.getElementById('kpiTotal').textContent = data.total_leads || 0;
+      document.getElementById('kpiBreakdown').textContent = `${data.borme_leads || 0} BORME · ${data.places_leads || 0} Maps`;
+      document.getElementById('kpiHot').textContent = data.hot_leads || 0;
+      document.getElementById('kpiHotPct').textContent = `${data.hot_percentage || 0}%`;
+      
+      const capFormatted = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(data.total_capital || 0);
+      document.getElementById('kpiCapital').textContent = `${capFormatted} €`;
+      
+      document.getElementById('kpiDomainPct').textContent = `${data.without_web_pct || 0}%`;
+      document.getElementById('kpiDomainCount').textContent = `${data.without_web_count || 0} sin web`;
+      
+      document.getElementById('kpiContacts').textContent = data.with_contact_count || 0;
+      
+      document.getElementById('badgeSourceAll').textContent = `(${data.total_leads || 0})`;
+      document.getElementById('badgeSourceBorme').textContent = `(${data.borme_leads || 0})`;
+      document.getElementById('badgeSourcePlaces').textContent = `(${data.places_leads || 0})`;
+    }
+
+    // Actualizar contadores de las píldoras de fecha
+    function updateTimeRangeBadges() {
+      if (!STATE.leads || !STATE.leads.length) return;
+      const now = new Date('2026-10-29T12:00:00');
+      let cToday = 0, c3d = 0, c7d = 0, c30d = 0, c1y = 0;
+
+      STATE.leads.forEach(l => {
+        if (!l.date) return;
+        const d = new Date(l.date.slice(0, 10) + 'T12:00:00');
+        const diffDays = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+        if (diffDays <= 0) cToday++;
+        if (diffDays <= 3) c3d++;
+        if (diffDays <= 7) c7d++;
+        if (diffDays <= 30) c30d++;
+        if (diffDays <= 365) c1y++;
+      });
+
+      const elAll = document.getElementById('timeCountAll'); if (elAll) elAll.textContent = `(${STATE.leads.length})`;
+      const elToday = document.getElementById('timeCountToday'); if (elToday) elToday.textContent = `(${cToday})`;
+      const el3d = document.getElementById('timeCount3d'); if (el3d) el3d.textContent = `(${c3d})`;
+      const el7d = document.getElementById('timeCount7d'); if (el7d) el7d.textContent = `(${c7d})`;
+      const el30d = document.getElementById('timeCount30d'); if (el30d) el30d.textContent = `(${c30d})`;
+      const el1y = document.getElementById('timeCount1y'); if (el1y) el1y.textContent = `(${c1y})`;
+    }
+
+    // Selector de rango temporal
+    function setTimeRange(range) {
+      STATE.timeRange = range;
+      STATE.pagination.page = 1;
+
+      const ranges = ['all', 'today', '3d', '7d', '30d', '1y'];
+      ranges.forEach(r => {
+        const btnId = 'btnTime' + r.charAt(0).toUpperCase() + r.slice(1);
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        if (r === range) {
+          btn.className = 'time-range-btn px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm';
+        } else {
+          btn.className = 'time-range-btn px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap cursor-pointer';
+        }
+      });
+
+      fetchLeads();
+    }
+
+    // Petición de Leads con fallback offline integrado
+    async function fetchLeads() {
+      try {
+        const params = new URLSearchParams();
+        if (STATE.sourceTab === 'borme') params.append('source', 'borme');
+        if (STATE.sourceTab === 'places') params.append('source', 'places');
+        if (STATE.sourceTab === 'favorites') params.append('favorites_only', 'true');
+        
+        if (STATE.timeRange !== 'all') params.append('time_range', STATE.timeRange);
+        if (STATE.fromDate) params.append('from_date', STATE.fromDate);
+        if (STATE.toDate) params.append('to_date', STATE.toDate);
+
+        if (STATE.searchQuery) params.append('q', STATE.searchQuery);
+        if (STATE.sectorFilter !== 'Todos') params.append('sector', STATE.sectorFilter);
+        
+        if (STATE.activeFilters.province !== 'TODAS') params.append('province', STATE.activeFilters.province);
+        if (STATE.activeFilters.minCapital > 0) params.append('min_capital', STATE.activeFilters.minCapital);
+        if (STATE.activeFilters.hotOnly) params.append('hot_only', 'true');
+        if (STATE.activeFilters.noWebOnly) params.append('no_web_only', 'true');
+
+        const [sortField, sortDir] = STATE.activeFilters.sortBy.split('_');
+        params.append('sort_by', sortField);
+        params.append('sort_order', sortDir);
+
+        const res = await fetch(`/api/leads?${params.toString()}`);
+        if (!res.ok) throw new Error('Error al consultar leads');
+        const data = await res.json();
+
+        STATE.leads = data.leads;
+        STATE.filteredLeads = data.leads;
+        updateTimeRangeBadges();
+
+        // Actualizar contador de favoritos
+        const favCount = STATE.leads.filter(l => l.is_favorite).length;
+        document.getElementById('badgeSourceFavs').textContent = `(${favCount})`;
+
+        renderTable();
+      } catch (err) {
+        // Fallback local en memoria si se abre como archivo HTML offline
+        applyClientSideFilter();
+      }
+    }
+
+    // Filtrado en memoria para modo Standalone Offline
+    function applyClientSideFilter() {
+      if (!STATE.leads || STATE.leads.length === 0) return;
+      let filtered = [...STATE.leads];
+
+      // Fuente
+      if (STATE.sourceTab === 'borme') filtered = filtered.filter(l => l.source === 'BORME');
+      if (STATE.sourceTab === 'places') filtered = filtered.filter(l => l.source === 'PLACES');
+      if (STATE.sourceTab === 'favorites') filtered = filtered.filter(l => l.is_favorite);
+
+      // Filtro Temporal
+      const now = new Date('2026-10-29T12:00:00');
+      if (STATE.timeRange !== 'all') {
+        filtered = filtered.filter(l => {
+          if (!l.date) return true;
+          const d = new Date(l.date.slice(0, 10) + 'T12:00:00');
+          const diffDays = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+          if (STATE.timeRange === 'today') return diffDays <= 0;
+          if (STATE.timeRange === '3d') return diffDays <= 3;
+          if (STATE.timeRange === '7d') return diffDays <= 7;
+          if (STATE.timeRange === '30d') return diffDays <= 30;
+          if (STATE.timeRange === '1y') return diffDays <= 365;
+          return true;
+        });
+      }
+
+      if (STATE.fromDate) {
+        filtered = filtered.filter(l => (l.date || '').slice(0, 10) >= STATE.fromDate);
+      }
+      if (STATE.toDate) {
+        filtered = filtered.filter(l => (l.date || '').slice(0, 10) <= STATE.toDate);
+      }
+
+      // Omnisearch
+      if (STATE.searchQuery) {
+        const tokens = STATE.searchQuery.toLowerCase().split(/\s+/).filter(Boolean);
+        filtered = filtered.filter(l => {
+          const searchable = `${l.name} ${l.province} ${l.city} ${l.sector} ${l.contact_name} ${l.objeto_social} ${l.phone} ${l.subtitle}`.toLowerCase();
+          return tokens.every(t => searchable.includes(t));
+        });
+      }
+
+      // Sector
+      if (STATE.sectorFilter !== 'Todos') {
+        filtered = filtered.filter(l => (l.sector || '').toLowerCase() === STATE.sectorFilter.toLowerCase());
+      }
+
+      // Filtros avanzados
+      if (STATE.activeFilters.province !== 'TODAS') {
+        filtered = filtered.filter(l => (l.province || '').toUpperCase().includes(STATE.activeFilters.province));
+      }
+      if (STATE.activeFilters.minCapital > 0) {
+        filtered = filtered.filter(l => (l.capital_num || 0) >= STATE.activeFilters.minCapital);
+      }
+      if (STATE.activeFilters.hotOnly) {
+        filtered = filtered.filter(l => (l.score || 0) >= 90 || (l.category && l.category.includes('HOT')));
+      }
+      if (STATE.activeFilters.noWebOnly) {
+        filtered = filtered.filter(l => l.sin_web_detectada);
+      }
+
+      // Ordenación
+      const [field, dir] = STATE.activeFilters.sortBy.split('_');
+      const rev = (dir === 'desc');
+      filtered.sort((a, b) => {
+        let va = a[field] || '';
+        let vb = b[field] || '';
+        if (field === 'capital') { va = a.capital_num || 0; vb = b.capital_num || 0; }
+        if (field === 'score') { va = a.score || 0; vb = b.score || 0; }
+        if (va < vb) return rev ? 1 : -1;
+        if (va > vb) return rev ? -1 : 1;
+        return 0;
+      });
+
+      STATE.filteredLeads = filtered;
+      updateTimeRangeBadges();
+      const favCount = STATE.leads.filter(l => l.is_favorite).length;
+      document.getElementById('badgeSourceFavs').textContent = `(${favCount})`;
+      renderTable();
+    }
+
+    // Render de Tabla
+    function renderTable() {
+      const tbody = document.getElementById('leadsTableBody');
+      const leads = STATE.filteredLeads;
+      document.getElementById('tableCountText').textContent = leads.length;
+
+      if (!leads || leads.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" class="py-12 text-center text-slate-400">
+              <div class="max-w-md mx-auto space-y-3">
+                <div class="text-3xl">🔍</div>
+                <div class="font-bold text-white text-sm">No se encontraron prospectos con estos filtros</div>
+                <p class="text-xs text-slate-500">Prueba cambiando los términos de búsqueda o pulsa en "Ampliar Búsqueda" para rastrear más provincias o sectores.</p>
+                <button onclick="clearAllFilters()" class="text-xs bg-[#151D30] hover:bg-[#1E2A45] border border-[#232F4C] text-amber-400 font-semibold px-3 py-1.5 rounded transition-colors">
+                  Limpiar Filtros
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+        document.getElementById('pageIndicator').textContent = 'Página 0 de 0';
+        document.getElementById('prevPageBtn').disabled = true;
+        document.getElementById('nextPageBtn').disabled = true;
+        return;
+      }
+
+      // Paginación
+      const totalPages = Math.ceil(leads.length / STATE.pagination.pageSize) || 1;
+      if (STATE.pagination.page > totalPages) STATE.pagination.page = totalPages;
+      if (STATE.pagination.page < 1) STATE.pagination.page = 1;
+
+      const startIdx = (STATE.pagination.page - 1) * STATE.pagination.pageSize;
+      const pagedLeads = leads.slice(startIdx, startIdx + STATE.pagination.pageSize);
+
+      document.getElementById('pageIndicator').textContent = `Página ${STATE.pagination.page} de ${totalPages}`;
+      document.getElementById('prevPageBtn').disabled = (STATE.pagination.page <= 1);
+      document.getElementById('nextPageBtn').disabled = (STATE.pagination.page >= totalPages);
+
+      let html = '';
+      pagedLeads.forEach(lead => {
+        const isHot = (lead.score >= 90 || (lead.category && lead.category.includes('HOT')));
+        const scoreColor = isHot ? 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' : 'text-amber-400 border-amber-500/30 bg-amber-500/10';
+        const sourceLabel = lead.source === 'BORME' ? 'BORME' : 'MAPS';
+        const sourceColor = lead.source === 'BORME' ? 'text-amber-400 bg-amber-500/10' : 'text-sky-400 bg-sky-500/10';
+
+        // Badges de dominio
+        let domainPills = '';
+        if (lead.source === 'BORME') {
+          if (lead.sin_web_detectada) {
+            domainPills = `<span class="inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold">.es y .com Libres</span>`;
+          } else {
+            domainPills = `<span class="inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">Web Existente</span>`;
+          }
+        } else {
+          domainPills = `<span class="inline-flex items-center text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/30 font-semibold">Sin Web en Maps</span>`;
+        }
+
+        // Contacto Clave
+        let contactHtml = '';
+        if (lead.contact_name) {
+          const hasLi = Boolean(lead.linkedin_url);
+          const icon = hasLi ? '🔗' : '👤';
+          contactHtml = `
+            <div class="flex items-center gap-1.5 truncate max-w-[170px]" title="${lead.contact_name}">
+              <span>${icon}</span>
+              <span class="truncate font-medium text-slate-200">${lead.contact_name}</span>
+            </div>
+          `;
+        } else if (lead.phone) {
+          contactHtml = `<span class="font-mono text-slate-300">${lead.phone}</span>`;
+        } else {
+          contactHtml = `<span class="text-slate-500 text-[11px] italic">No identificado</span>`;
+        }
+
+        html += `
+          <tr onclick="inspectLead('${lead.id}')" class="hover:bg-[#12192A] cursor-pointer transition-colors group">
+            
+            <!-- ⭐ Favorito -->
+            <td class="py-3 px-3 text-center" onclick="event.stopPropagation(); toggleFavorite('${lead.id}')">
+              <span class="text-sm ${lead.is_favorite ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
+                ${lead.is_favorite ? '★' : '☆'}
+              </span>
+            </td>
+
+            <!-- Score -->
+            <td class="py-3 px-3">
+              <div class="inline-flex items-center gap-1 font-mono text-[11px] font-bold px-2 py-0.5 rounded border ${scoreColor}">
+                <span class="w-1.5 h-1.5 rounded-full ${isHot ? 'bg-emerald-400' : 'bg-amber-400'}"></span>
+                <span>${lead.score} pts</span>
+              </div>
+            </td>
+
+            <!-- Empresa -->
+            <td class="py-3 px-4">
+              <div class="font-semibold text-white group-hover:text-amber-300 transition-colors line-clamp-1 text-xs">
+                ${lead.name}
+              </div>
+              <div class="flex items-center gap-2 mt-0.5 text-[11px]">
+                <span class="text-[9px] font-mono font-bold uppercase px-1 rounded ${sourceColor}">${sourceLabel}</span>
+                <span class="text-slate-400 font-mono text-[10px]">${lead.date || ''}</span>
+              </div>
+            </td>
+
+            <!-- Provincia / Sede -->
+            <td class="py-3 px-3">
+              <div class="font-medium text-slate-200">${lead.province}</div>
+              <div class="text-slate-400 text-[10px] truncate max-w-[130px] font-mono">${lead.subtitle || ''}</div>
+            </td>
+
+            <!-- Sector -->
+            <td class="py-3 px-3">
+              <span class="text-[11px] font-medium text-slate-300 bg-[#070A12] px-2 py-0.5 rounded border border-[#1A2338]">
+                ${lead.sector}
+              </span>
+            </td>
+
+            <!-- Capital Social -->
+            <td class="py-3 px-3 text-right font-mono font-bold text-amber-300 tabular-nums">
+              ${lead.capital}
+            </td>
+
+            <!-- Presencia Web / Dominio -->
+            <td class="py-3 px-3">
+              ${domainPills}
+            </td>
+
+            <!-- Contacto -->
+            <td class="py-3 px-4">
+              ${contactHtml}
+            </td>
+
+            <!-- Acciones -->
+            <td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="inspectLead('${lead.id}', 'pitch')" class="p-1.5 bg-[#141C2E] hover:bg-[#1E2A45] border border-[#222E47] text-amber-400 rounded text-xs" title="Copiar Pitch Directo">
+                  📋
+                </button>
+                <button onclick="inspectLead('${lead.id}')" class="p-1.5 bg-[#141C2E] hover:bg-[#1E2A45] border border-[#222E47] text-slate-300 hover:text-white rounded text-xs" title="Ver Expediente">
+                  👁️
+                </button>
+              </div>
+            </td>
+
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+    }
+
+    // Inspección de Lead en Slide-over Drawer
+    function inspectLead(leadId, defaultTab = 'dossier') {
+      const lead = STATE.leads.find(l => l.id === leadId);
+      if (!lead) return;
+      STATE.selectedLead = lead;
+
+      // Header Drawer
+      document.getElementById('drawerTitle').textContent = lead.name;
+      document.getElementById('drawerSubtitle').textContent = `${lead.province} · ${lead.subtitle || 'España'}`;
+      document.getElementById('drawerDate').textContent = lead.date || '';
+      
+      const sourceBadge = document.getElementById('drawerSourceBadge');
+      sourceBadge.textContent = lead.source_label || lead.source;
+      sourceBadge.className = lead.source === 'BORME' 
+        ? 'text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30'
+        : 'text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/30';
+
+      const scoreBadge = document.getElementById('drawerScoreBadge');
+      scoreBadge.textContent = `${lead.score} pts · ${lead.category}`;
+      scoreBadge.className = lead.score >= 90
+        ? 'text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+        : 'text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30';
+
+      document.getElementById('drawerFavBtn').textContent = lead.is_favorite ? '★' : '☆';
+
+      // Dossier Tab
+      document.getElementById('drawerOpportunity').textContent = lead.opportunity || 'Sin recomendación registrada.';
+      document.getElementById('drawerReasons').textContent = `Criterios: ${lead.reasons || 'Nuevo registro sin web'}`;
+      
+      document.getElementById('drawerCapital').textContent = lead.capital || 'N/D';
+      document.getElementById('drawerProvince').textContent = lead.province || 'España';
+      document.getElementById('drawerAddress').textContent = lead.subtitle || 'No especificado';
+      
+      const mapsQuery = encodeURIComponent(`${lead.name} ${lead.subtitle || ''} ${lead.province}`);
+      document.getElementById('drawerMapsLink').href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+      document.getElementById('drawerObjeto').textContent = lead.objeto_social || 'Constitución mercantil.';
+
+      // Dominio badges
+      const domEs = lead.domain_suggested ? `${lead.domain_suggested}.es` : 'No generado';
+      const domCom = lead.domain_suggested ? `${lead.domain_suggested}.com` : 'No generado';
+      document.getElementById('drawerDomainEs').textContent = domEs;
+      document.getElementById('drawerDomainCom').textContent = domCom;
+      
+      const badgeEs = document.getElementById('drawerBadgeEs');
+      badgeEs.textContent = lead.domain_es_available ? 'LIBRE' : 'OCUPADO';
+      badgeEs.className = lead.domain_es_available 
+        ? 'text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300' 
+        : 'text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-slate-800 text-slate-400';
+
+      const badgeCom = document.getElementById('drawerBadgeCom');
+      badgeCom.textContent = lead.domain_com_available ? 'LIBRE' : 'OCUPADO';
+      badgeCom.className = lead.domain_com_available 
+        ? 'text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300' 
+        : 'text-[10px] font-mono px-1.5 py-0.5 rounded font-bold bg-slate-800 text-slate-400';
+
+      // Administradores
+      const adminsListDiv = document.getElementById('drawerAdminsList');
+      if (lead.administradores && lead.administradores.length > 0) {
+        adminsListDiv.innerHTML = lead.administradores.map(a => `
+          <div class="flex items-center justify-between p-1.5 bg-[#070A12] border border-[#1A2338] rounded">
+            <span class="font-medium text-slate-200">${a}</span>
+            <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-1 rounded">Administrador</span>
+          </div>
+        `).join('');
+        document.getElementById('drawerAdminsBlock').classList.remove('hidden');
+      } else {
+        document.getElementById('drawerAdminsBlock').classList.add('hidden');
+      }
+
+      // Link LinkedIn
+      const liLink = document.getElementById('drawerLinkedInLink');
+      if (lead.linkedin_url) {
+        liLink.href = lead.linkedin_url;
+        liLink.classList.remove('hidden');
+      } else {
+        // Búsqueda en Google de LinkedIn
+        const q = encodeURIComponent(`site:linkedin.com/in/ "${lead.contact_name || lead.name}" España`);
+        liLink.href = `https://www.google.com/search?q=${q}`;
+        liLink.classList.remove('hidden');
+      }
+
+      // CRM Tab
+      document.getElementById('crmStatusSelect').value = lead.crm_status || 'Nuevo';
+      document.getElementById('crmNotesText').value = lead.notes || '';
+
+      // Generar Pitch Inicial
+      renderPitchTemplate('linkedin');
+
+      // Abrir Drawer y seleccionar pestaña
+      setDrawerTab(defaultTab);
+      openDrawer();
+    }
+
+    function openDrawer() {
+      const drawer = document.getElementById('inspectorDrawer');
+      const panel = document.getElementById('drawerContent');
+      drawer.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+      });
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('inspectorDrawer');
+      const panel = document.getElementById('drawerContent');
+      panel.classList.remove('translate-x-0');
+      panel.classList.add('translate-x-full');
+      setTimeout(() => {
+        drawer.classList.add('hidden');
+      }, 250);
+    }
+
+    // Pestañas del Drawer
+    function setDrawerTab(tab) {
+      const tabs = ['dossier', 'pitch', 'crm'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`drawerTab${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        const panel = document.getElementById(`drawerPanel${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (t === tab) {
+          btn.className = 'py-2.5 px-3 border-b-2 border-amber-500 text-amber-400 font-semibold transition-colors';
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = 'py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors';
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Generador de Pitchs Comerciales DAROX
+    function renderPitchTemplate(channel) {
+      if (!STATE.selectedLead) return;
+      const lead = STATE.selectedLead;
+      const founder = lead.contact_name || 'Estimado/a Fundador/a';
+      const company = lead.name;
+      const sector = lead.sector;
+      const domainSlug = lead.domain_suggested || 'tu-empresa';
+
+      // Actualizar botones de canal
+      ['linkedin', 'email', 'phone'].forEach(c => {
+        const btn = document.getElementById(`btnChannel${c.charAt(0).toUpperCase() + c.slice(1)}`);
+        if (c === channel) {
+          btn.className = 'px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        } else {
+          btn.className = 'px-2 py-0.5 rounded text-[11px] font-semibold bg-[#070A12] text-slate-400 hover:text-white border border-[#1A2338]';
+        }
+      });
+
+      let text = '';
+      if (channel === 'linkedin') {
+        text = `Hola ${founder},\n\n` +
+          `Enhorabuena por la reciente constitución de ${company} en el Registro Mercantil.\n\n` +
+          `Te contacto desde DAROX (Agencia de Diseño & Posicionamiento Digital). Hemos detectado que aún tenéis libres los dominios corporativos (${domainSlug}.es y .com) y estáis a tiempo de lanzar vuestra identidad visual y landing corporativa desde el Día 0.\n\n` +
+          `Ayudamos a nuevas sociedades del sector ${sector} a proyectar la máxima solvencia frente a clientes e inversores antes de su salida al mercado.\n\n` +
+          `¿Tendrías 10 minutos esta semana para una breve videollamada y os mostramos una propuesta previa sin compromiso?\n\n` +
+          `Un cordial saludo,\nEquipo Sales Ops | DAROX`;
+      } else if (channel === 'email') {
+        text = `Asunto: Lanzamiento digital y presencia corporativa para ${company}\n\n` +
+          `Estimado/a ${founder},\n\n` +
+          `Le escribimos con motivo de la publicación oficial de la constitución de ${company} en el BORME.\n\n` +
+          `Desde DAROX colaboramos con empresas de reciente creación en la fase crítica de apertura, encargándonos de:\n` +
+          `1. Registro y blindaje de marca en dominios clave (.es, .com).\n` +
+          `2. Diseño web corporativo de alta conversión, adaptado a su actividad (${sector}).\n` +
+          `3. Configuración del perfil de Google Empresas y captación temprana de clientes.\n\n` +
+          `Nos encantaría coordinar una breve llamada exploratoria de 15 minutos cuando le resulte más conveniente.\n\n` +
+          `Atentamente,\nDAROX Digital Studio\nhttps://darox.agency`;
+      } else if (channel === 'phone') {
+        text = `[GUIÓN TELEFÓNICO / WHATSAPP PARA NEGOCIOS LOCALES]\n\n` +
+          `"Hola buenos días, ¿podría hablar con el responsable o propietario de ${company}?"\n\n` +
+          `[PRESENTACIÓN]\n` +
+          `"Mi nombre es [Tu Nombre] de la agencia DAROX en ${lead.province}. Les llamo porque hemos visto su ficha comercial en Google Maps con muy buenas valoraciones (${lead.rating || 4.5} estrellas), pero vemos que aún no disponen de una página web oficial vinculada para reservas y captación de clientes."\n\n` +
+          `[PROPUESTA DE VALOR]\n` +
+          `"Nos especializamos en el sector de ${sector} creando webs rápidas optimizadas para móvil que multiplican las llamadas y citas directas. ¿A qué correo os puedo enviar un dossier de ejemplos de clientes de vuestra zona?"`;
+      }
+
+      document.getElementById('pitchTextArea').value = text;
+    }
+
+    // Copiar Pitch
+    async function copyGeneratedPitch() {
+      const text = document.getElementById('pitchTextArea').value;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        const btnText = document.getElementById('copyPitchText');
+        btnText.textContent = '¡Copiado!';
+        setTimeout(() => { btnText.textContent = 'Copiar Pitch'; }, 2000);
+      } catch (err) {
+        alert('Copiado al portapapeles');
+      }
+    }
+
+    // Guardar Estado CRM del Lead
+    async function saveLeadCrmStatus() {
+      if (!STATE.selectedLead) return;
+      const status = document.getElementById('crmStatusSelect').value;
+      const notes = document.getElementById('crmNotesText').value;
+
+      try {
+        await fetch('/api/crm/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: STATE.selectedLead.id,
+            status: status,
+            notes: notes
+          })
+        });
+
+        STATE.selectedLead.crm_status = status;
+        STATE.selectedLead.notes = notes;
+        
+        const notice = document.getElementById('crmSavedNotice');
+        notice.textContent = '✓ Guardado exitosamente';
+        setTimeout(() => { notice.textContent = 'Guardado automáticamente'; }, 2500);
+      } catch (err) {
+        console.error('Error guardando CRM:', err);
+      }
+    }
+
+    // Alternar Favorito
+    async function toggleFavorite(leadId) {
+      const lead = STATE.leads.find(l => l.id === leadId);
+      if (!lead) return;
+      lead.is_favorite = !lead.is_favorite;
+
+      try {
+        await fetch('/api/crm/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: lead.id,
+            favorite: lead.is_favorite
+          })
+        });
+        renderTable();
+        const favCount = STATE.leads.filter(l => l.is_favorite).length;
+        document.getElementById('badgeSourceFavs').textContent = `(${favCount})`;
+      } catch (err) {
+        console.error('Error guardando favorito:', err);
+      }
+    }
+
+    function toggleCurrentFavorite() {
+      if (!STATE.selectedLead) return;
+      toggleFavorite(STATE.selectedLead.id);
+      document.getElementById('drawerFavBtn').textContent = STATE.selectedLead.is_favorite ? '★' : '☆';
+    }
+
+    // Control de Búsqueda y Filtros
+    let searchDebounceTimeout = null;
+    function handleSearchInput(val) {
+      document.getElementById('clearSearchBtn').classList.toggle('hidden', !val);
+      clearTimeout(searchDebounceTimeout);
+      searchDebounceTimeout = setTimeout(() => {
+        STATE.searchQuery = val.trim();
+        STATE.pagination.page = 1;
+        fetchLeads();
+      }, 250);
+    }
+
+    function clearSearch() {
+      document.getElementById('omniSearchInput').value = '';
+      document.getElementById('clearSearchBtn').classList.add('hidden');
+      STATE.searchQuery = '';
+      STATE.pagination.page = 1;
+      fetchLeads();
+    }
+
+    function setSourceTab(tab) {
+      STATE.sourceTab = tab;
+      STATE.pagination.page = 1;
+
+      ['all', 'borme', 'places', 'favorites'].forEach(t => {
+        const btn = document.getElementById(`tabSource${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (t === tab) {
+          btn.className = 'px-3 py-1.5 text-xs font-semibold rounded text-white bg-[#1A243A] shadow-sm transition-all';
+        } else {
+          btn.className = 'px-3 py-1.5 text-xs font-semibold rounded text-slate-400 hover:text-white transition-all';
+        }
+      });
+
+      fetchLeads();
+    }
+
+    function setSectorFilter(sec) {
+      STATE.sectorFilter = sec;
+      STATE.pagination.page = 1;
+
+      // Actualizar estilo chips
+      document.querySelectorAll('.sector-chip').forEach(btn => {
+        if (btn.textContent.includes(sec) || (sec === 'Todos' && btn.textContent === 'Todos')) {
+          btn.className = 'sector-chip px-2.5 py-1 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 text-[11px] font-medium whitespace-nowrap';
+        } else {
+          btn.className = 'sector-chip px-2.5 py-1 rounded bg-[#0A0E1A] text-slate-300 hover:text-white border border-[#1C263B] text-[11px] font-medium whitespace-nowrap';
+        }
+      });
+
+      fetchLeads();
+    }
+
+    function toggleAdvancedFilters() {
+      const drawer = document.getElementById('advancedFiltersDrawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function applyFilters() {
+      STATE.activeFilters.province = document.getElementById('filterProvince').value;
+      STATE.activeFilters.minCapital = parseFloat(document.getElementById('filterCapital').value) || 0;
+      STATE.activeFilters.sortBy = document.getElementById('filterSort').value;
+      STATE.fromDate = document.getElementById('filterFromDate') ? document.getElementById('filterFromDate').value : '';
+      STATE.toDate = document.getElementById('filterToDate') ? document.getElementById('filterToDate').value : '';
+
+      // Contador de filtros activos
+      let activeCount = 0;
+      if (STATE.activeFilters.province !== 'TODAS') activeCount++;
+      if (STATE.activeFilters.minCapital > 0) activeCount++;
+      if (STATE.fromDate || STATE.toDate) activeCount++;
+
+      const badge = document.getElementById('activeFiltersBadge');
+      if (activeCount > 0) {
+        badge.textContent = activeCount;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      STATE.pagination.page = 1;
+      fetchLeads();
+    }
+
+    function clearAllFilters() {
+      clearSearch();
+      setSectorFilter('Todos');
+      setTimeRange('all');
+      setSourceTab('all');
+      document.getElementById('filterProvince').value = 'TODAS';
+      document.getElementById('filterCapital').value = '0';
+      if (document.getElementById('filterFromDate')) document.getElementById('filterFromDate').value = '';
+      if (document.getElementById('filterToDate')) document.getElementById('filterToDate').value = '';
+      applyFilters();
+    }
+
+    function toggleSort(field) {
+      const current = STATE.activeFilters.sortBy;
+      if (current === `${field}_desc`) {
+        STATE.activeFilters.sortBy = `${field}_asc`;
+      } else {
+        STATE.activeFilters.sortBy = `${field}_desc`;
+      }
+      document.getElementById('filterSort').value = STATE.activeFilters.sortBy;
+      fetchLeads();
+    }
+
+    function changePage(delta) {
+      STATE.pagination.page += delta;
+      renderTable();
+    }
+
+    function refreshData() {
+      const icon = document.getElementById('refreshIcon');
+      icon.classList.add('animate-spin');
+      fetchStats();
+      fetchLeads().finally(() => {
+        setTimeout(() => icon.classList.remove('animate-spin'), 600);
+      });
+    }
+
+    function exportCurrentCSV() {
+      // Si estamos en entorno servidor, usar endpoint optimizado de descarga
+      if (window.location.protocol.startsWith('http')) {
+        const params = new URLSearchParams();
+        if (STATE.sourceTab === 'borme') params.append('source', 'borme');
+        if (STATE.sourceTab === 'places') params.append('source', 'places');
+        if (STATE.timeRange !== 'all') params.append('time_range', STATE.timeRange);
+        if (STATE.fromDate) params.append('from_date', STATE.fromDate);
+        if (STATE.toDate) params.append('to_date', STATE.toDate);
+        if (STATE.searchQuery) params.append('q', STATE.searchQuery);
+        if (STATE.sectorFilter !== 'Todos') params.append('sector', STATE.sectorFilter);
+        if (STATE.activeFilters.province !== 'TODAS') params.append('province', STATE.activeFilters.province);
+        if (STATE.activeFilters.minCapital > 0) params.append('min_capital', STATE.activeFilters.minCapital);
+        if (STATE.activeFilters.hotOnly) params.append('hot_only', 'true');
+
+        window.location.href = `/api/export-csv?${params.toString()}`;
+        return;
+      }
+
+      // Modo offline / archivo local: exportar directo en navegador como Blob UTF-8 BOM
+      const leads = STATE.filteredLeads || STATE.leads;
+      if (!leads.length) return alert('No hay prospectos para exportar.');
+      
+      const headers = ['Categoria', 'Score', 'Empresa', 'Provincia', 'Capital', 'Objeto Social', 'Administrador', 'LinkedIn', 'Telefono', 'Sin Web', 'Dominio Sugerido', 'Oportunidad'];
+      const rows = leads.map(l => [
+        `"${(l.category || '').replace(/"/g, '""')}"`,
+        l.score,
+        `"${(l.name || '').replace(/"/g, '""')}"`,
+        `"${(l.province || '').replace(/"/g, '""')}"`,
+        `"${(l.capital || '').replace(/"/g, '""')}"`,
+        `"${(l.objeto_social || '').replace(/"/g, '""')}"`,
+        `"${(l.contact_name || '').replace(/"/g, '""')}"`,
+        `"${(l.linkedin_url || '').replace(/"/g, '""')}"`,
+        `"${(l.phone || '').replace(/"/g, '""')}"`,
+        l.sin_web_detectada ? 'SI' : 'NO',
+        `"${(l.domain_suggested || '').replace(/"/g, '""')}"`,
+        `"${(l.opportunity || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = '\uFEFF' + [headers.join(';'), ...rows.map(r => r.join(';'))].join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `darox_leads_export_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // MODAL DE AMPLIAR BÚSQUEDA
+    function openSearchModal() {
+      document.getElementById('searchModal').classList.remove('hidden');
+      checkJobStatus();
+    }
+
+    function closeSearchModal() {
+      document.getElementById('searchModal').classList.add('hidden');
+    }
+
+    function setSearchModalTab(tab) {
+      const isBorme = (tab === 'borme');
+      document.getElementById('modalTabBorme').className = isBorme
+        ? 'py-2.5 px-3 border-b-2 border-amber-500 text-amber-400 transition-colors'
+        : 'py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors';
+      document.getElementById('modalTabPlaces').className = !isBorme
+        ? 'py-2.5 px-3 border-b-2 border-amber-500 text-amber-400 transition-colors'
+        : 'py-2.5 px-3 border-b-2 border-transparent text-slate-400 hover:text-white transition-colors';
+
+      document.getElementById('modalPanelBorme').classList.toggle('hidden', !isBorme);
+      document.getElementById('modalPanelPlaces').classList.toggle('hidden', isBorme);
+    }
+
+    function updatePlacesQueryInput() {
+      const niche = document.getElementById('placesNicheSelect').value;
+      const city = document.getElementById('placesCitySelect').value;
+      document.getElementById('placesQueryInput').value = `${niche} en ${city}`;
+    }
+
+    async function launchBormeSearch() {
+      const checkboxes = document.querySelectorAll('input[name="bormeProv"]:checked');
+      const provinces = Array.from(checkboxes).map(c => c.value);
+      const limit = parseInt(document.getElementById('bormeSearchLimit').value) || 30;
+      const dateVal = document.getElementById('bormeSearchDate').value;
+
+      try {
+        const res = await fetch('/api/search/borme', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            provinces: provinces,
+            max_companies: limit,
+            date: dateVal
+          })
+        });
+        if (res.status === 409) {
+          alert('Ya hay una búsqueda en ejecución actualmente.');
+          return;
+        }
+        startJobPolling();
+      } catch (err) {
+        console.error('Error lanzando BORME:', err);
+      }
+    }
+
+    async function launchPlacesSearch() {
+      const query = document.getElementById('placesQueryInput').value.trim();
+      if (!query) {
+        alert('Por favor introduce una consulta para Google Places.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/search/places', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: query })
+        });
+        if (res.status === 409) {
+          alert('Ya hay una búsqueda en ejecución actualmente.');
+          return;
+        }
+        startJobPolling();
+      } catch (err) {
+        console.error('Error lanzando Places:', err);
+      }
+    }
+
+    function startJobPolling() {
+      if (STATE.pollingInterval) clearInterval(STATE.pollingInterval);
+      STATE.pollingInterval = setInterval(checkJobStatus, 1500);
+      checkJobStatus();
+    }
+
+    async function checkJobStatus() {
+      try {
+        const res = await fetch('/api/search/job-status');
+        if (!res.ok) return;
+        const job = await res.json();
+
+        const dot = document.getElementById('jobStatusDot');
+        const label = document.getElementById('jobStatusLabel');
+        const progress = document.getElementById('jobProgressText');
+        const consoleDiv = document.getElementById('jobLogConsole');
+
+        if (job.status === 'running') {
+          dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-ping';
+          label.textContent = `Ejecutando ${job.type}...`;
+          progress.textContent = job.progress || '';
+        } else if (job.status === 'done') {
+          dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+          label.textContent = 'Búsqueda completada con éxito';
+          progress.textContent = 'Datos actualizados en base de datos y CSV';
+          if (STATE.pollingInterval) {
+            clearInterval(STATE.pollingInterval);
+            STATE.pollingInterval = null;
+            // Refrescar leads
+            fetchStats();
+            fetchLeads();
+          }
+        } else if (job.status === 'error') {
+          dot.className = 'w-2 h-2 rounded-full bg-rose-500';
+          label.textContent = 'Error en la ejecución';
+          progress.textContent = job.progress || '';
+          if (STATE.pollingInterval) {
+            clearInterval(STATE.pollingInterval);
+            STATE.pollingInterval = null;
+          }
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-slate-500';
+          label.textContent = 'Listo para ejecutar';
+          progress.textContent = '';
+        }
+
+        if (job.logs && job.logs.length > 0) {
+          consoleDiv.innerHTML = job.logs.map(l => `<div>${l}</div>`).join('');
+          consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+      } catch (err) {
+        console.error('Error consultando job status:', err);
+      }
+    }
+  </script>
+
+</body>
+</html>
