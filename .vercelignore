@@ -1,0 +1,12 @@
+# Python source files (not needed for static dashboard deployment)
+*.py
+requirements.txt
+modules/
+config/
+templates/
+__pycache__/
+*.pyc
+*.db
+*.sqlite
+.env
+.env.*
