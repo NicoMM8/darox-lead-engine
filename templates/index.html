@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+  <!-- SheetJS para Exportación Nativa a Excel (.xlsx) Client-Side sin servidores -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -181,15 +184,63 @@
           <span>Sincronizado con Registro & Maps</span>
         </div>
 
-        <!-- Botón Exportar CSV -->
-        <button 
-          onclick="exportLeadsCsv()" 
-          class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#D5C9BA] hover:border-[#A74B2C] bg-[#FFFFFF] hover:bg-[#FDF6F3] text-xs font-semibold text-[#544A3F] hover:text-[#A74B2C] transition-all shadow-sm cursor-pointer"
-          title="Descargar datos en CSV para Excel / Sheets"
-        >
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span class="hidden sm:inline">Exportar</span><span class="sm:hidden">CSV</span>
-        </button>
+        <!-- Botón Exportar con Menú Desplegable (Excel, CSV, JSON) -->
+        <div class="relative">
+          <button 
+            onclick="toggleExportMenu(event)" 
+            id="exportMenuBtn" 
+            class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#D5C9BA] hover:border-[#A74B2C] bg-[#FFFFFF] hover:bg-[#FDF6F3] text-xs font-semibold text-[#544A3F] hover:text-[#A74B2C] transition-all shadow-sm cursor-pointer"
+            title="Opciones de Exportación"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span class="hidden sm:inline">Exportar</span><span class="sm:hidden">Exp.</span>
+            <svg class="w-2.5 h-2.5 ml-0.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+
+          <!-- Menú Flotante de Exportación -->
+          <div id="exportDropdownMenu" class="hidden absolute right-0 mt-2 w-64 bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl shadow-warm-lg z-50 p-2 space-y-1 text-xs font-medium">
+            <div class="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#A89987] border-b border-[#E7DFD4]/60 flex items-center justify-between">
+              <span>Formato de descarga</span>
+              <span id="exportCountBadge" class="text-[#A74B2C] font-mono font-bold">820</span>
+            </div>
+            
+            <!-- Opción Excel -->
+            <button onclick="exportData('excel')" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#1A1612] hover:bg-[#FAF7F2] hover:text-[#A74B2C] transition-colors text-left cursor-pointer">
+              <span class="w-7 h-7 rounded-lg bg-[#F0F6F3] text-[#1E5443] flex items-center justify-center font-bold text-xs shrink-0">📊</span>
+              <div>
+                <div class="font-bold">Microsoft Excel (.xlsx)</div>
+                <div class="text-[10px] text-[#7A6D5E]">Libro formateado nativo</div>
+              </div>
+            </button>
+
+            <!-- Opción CSV -->
+            <button onclick="exportData('csv')" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#1A1612] hover:bg-[#FAF7F2] hover:text-[#A74B2C] transition-colors text-left cursor-pointer">
+              <span class="w-7 h-7 rounded-lg bg-[#FAECE6] text-[#A74B2C] flex items-center justify-center font-bold text-xs shrink-0">📄</span>
+              <div>
+                <div class="font-bold">Archivo CSV (.csv)</div>
+                <div class="text-[10px] text-[#7A6D5E]">Separado por ';' con UTF-8 BOM</div>
+              </div>
+            </button>
+
+            <!-- Opción JSON -->
+            <button onclick="exportData('json')" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[#1A1612] hover:bg-[#FAF7F2] hover:text-[#A74B2C] transition-colors text-left cursor-pointer">
+              <span class="w-7 h-7 rounded-lg bg-[#F2ECE4] text-[#544A3F] flex items-center justify-center font-bold text-xs shrink-0">{ }</span>
+              <div>
+                <div class="font-bold">Datos JSON (.json)</div>
+                <div class="text-[10px] text-[#7A6D5E]">Estructura completa para desarrolladores</div>
+              </div>
+            </button>
+
+            <!-- Selector de ámbito -->
+            <div class="pt-1.5 border-t border-[#E7DFD4]/60 flex items-center justify-between px-3 py-1 text-[10px] text-[#7A6D5E]">
+              <span>Ámbito:</span>
+              <label class="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" id="chkExportFilteredOnly" checked class="rounded border-[#D5C9BA] text-[#A74B2C] focus:ring-[#A74B2C]">
+                <span class="font-semibold text-[#544A3F]">Solo los filtrados</span>
+              </label>
+            </div>
+          </div>
+        </div>
 
         <!-- Botón Lanzar Búsqueda (Pill Navy) -->
         <button 
@@ -1728,8 +1779,118 @@
       }
     }
 
-    function exportLeadsCsv() {
-      window.location.href = '/api/export-csv';
+    function toggleExportMenu(e) {
+      if (e) e.stopPropagation();
+      const menu = document.getElementById('exportDropdownMenu');
+      menu.classList.toggle('hidden');
+      const countEl = document.getElementById('exportCountBadge');
+      if (countEl) {
+        const onlyFiltered = document.getElementById('chkExportFilteredOnly')?.checked;
+        countEl.textContent = onlyFiltered ? STATE.filteredLeads.length : STATE.allLeads.length;
+      }
+    }
+
+    function closeExportMenu() {
+      const menu = document.getElementById('exportDropdownMenu');
+      if (menu) menu.classList.add('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const menu = document.getElementById('exportDropdownMenu');
+      const btn = document.getElementById('exportMenuBtn');
+      if (menu && !menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        closeExportMenu();
+      }
+    });
+
+    function exportData(format) {
+      closeExportMenu();
+      const onlyFiltered = document.getElementById('chkExportFilteredOnly')?.checked ?? true;
+      const leadsToExport = (onlyFiltered && STATE.filteredLeads.length > 0) ? STATE.filteredLeads : STATE.allLeads;
+
+      if (!leadsToExport || leadsToExport.length === 0) {
+        alert("No hay prospectos para exportar con los filtros actuales.");
+        return;
+      }
+
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      if (format === 'json') {
+        const jsonStr = JSON.stringify(leadsToExport, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+        downloadBlob(blob, `darox_leads_${todayStr}.json`);
+        return;
+      }
+
+      // Preparar filas estructuradas y limpias para Excel y CSV
+      const rows = leadsToExport.map(l => ({
+        "Nombre": l.name || '',
+        "Origen": l.source_label || l.source || '',
+        "Categoría": l.category || '',
+        "Score": l.score || 0,
+        "Ciudad": l.city || l.province || '',
+        "Provincia": l.province || '',
+        "Dirección": l.subtitle || '',
+        "Sector": l.sector || '',
+        "Capital / Reseñas": l.capital || '',
+        "Tiene Web": l.has_website ? 'SÍ' : 'NO',
+        "Sitio Web": l.website || '',
+        "Dominio Sugerido": l.domain_suggested ? (l.domain_suggested + '.es') : '',
+        "Teléfono": l.phone || '',
+        "Contacto / Email": l.contact_name || '',
+        "Valoración Maps": l.rating ? (l.rating + '★') : '',
+        "Google Maps URL": l.google_maps_url || '',
+        "Latitud": l.lat || '',
+        "Longitud": l.lng || '',
+        "Oportunidad Detectada": l.opportunity || '',
+        "Motivos": l.reasons || '',
+        "Estado CRM": l.crm_status || 'Nuevo',
+        "Favorito": l.is_favorite ? 'SÍ' : 'NO',
+        "Notas CRM": l.notes || '',
+        "Fecha Registro": l.date || ''
+      }));
+
+      if (format === 'excel') {
+        if (typeof XLSX === 'undefined') {
+          alert('Cargando motor de Excel... Descargando en CSV como alternativa.');
+          exportData('csv');
+          return;
+        }
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Prospectos DAROX");
+        XLSX.writeFile(wb, `darox_leads_${todayStr}.xlsx`);
+        return;
+      }
+
+      if (format === 'csv') {
+        const headers = Object.keys(rows[0]);
+        const csvRows = [headers.join(';')];
+
+        for (const row of rows) {
+          const values = headers.map(h => {
+            const val = row[h] == null ? '' : String(row[h]);
+            return /[;"\n\r]/.test(val) ? `"${val.replace(/"/g, '""')}"` : val;
+          });
+          csvRows.push(values.join(';'));
+        }
+
+        // \uFEFF Byte Order Mark para que Excel en Windows reconozca UTF-8 con tildes y caracteres en español
+        const csvContent = '\uFEFF' + csvRows.join('\r\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        downloadBlob(blob, `darox_leads_${todayStr}.csv`);
+      }
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     function openSearchModal(type) {
