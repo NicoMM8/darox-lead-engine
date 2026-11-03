@@ -1,0 +1,13 @@
+{
+ "negocio": "clinica dental",
+ "lugar": "Burgos, Castilla y León, España",
+ "llamadas": 82,
+ "busquedas": 82,
+ "reintentos": 0,
+ "sinHacer": 0,
+ "gastoUsd": 0.0123,
+ "segundos": 33,
+ "encontrados": 126,
+ "dentroDeLaCiudad": 126,
+ "parada": null
+}

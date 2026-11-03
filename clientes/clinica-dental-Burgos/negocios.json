@@ -1,0 +1,2237 @@
+[
+ {
+  "place_id": "ChIJiQXOR9f8RQ0RSmR84gtfVmY",
+  "nombre": "Clínica Dental FGA",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av. del Cid Campeador, 2, 3ºG, 09005 Burgos",
+  "telefono": "947 26 98 03",
+  "web": "https://www.fgaclinicadental.es/",
+  "nota": 4.9,
+  "resenas": 110,
+  "lat": 42.343098999999995,
+  "lng": -3.699049,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ1_5BVNT8RQ0R3LFtyyla9Sw",
+  "nombre": "Clínica Dental Sánchez Arranz",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Dentista",
+   "Periodoncista de implantes dentales",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "C. Progreso, 10, 09002 Burgos",
+  "telefono": "947 20 03 75",
+  "web": "https://clinicasanchezarranz.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp",
+  "nota": 4.8,
+  "resenas": 677,
+  "lat": 42.336998,
+  "lng": -3.700145,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJwXDMTcX8RQ0R4izaTA6YsKk",
+  "nombre": "Centro Dental Virgen del Manzano",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. Cantabria, 5, BAJO, 09004 Burgos",
+  "telefono": "947 24 47 77",
+  "web": "https://www.centrodentalvirgendelmanzano.com/",
+  "nota": 4.7,
+  "resenas": 453,
+  "lat": 42.3444451,
+  "lng": -3.6867989999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJsZcei9TiRQ0RAFGhdIKNDfg",
+  "nombre": "CYH Clínica Dental San Felices",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Pedro y San Felices, 43, bajo, 09001 Burgos",
+  "telefono": "947 10 02 44",
+  "web": "https://www.instagram.com/clinicadentalsanfelices/",
+  "nota": 4.8,
+  "resenas": 33,
+  "lat": 42.3318529,
+  "lng": -3.7068217999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJdxW5Tdb8RQ0RFuKX0-zceN8",
+  "nombre": "Clínica Dental Implan-T Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Proveedor de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Ortodoncista",
+   "Periodoncista",
+   "Servicio de blanqueamiento dental"
+  ],
+  "direccion": "Calle del Almte. Bonifaz, 1, 1º A, 09003 Burgos",
+  "telefono": "947 27 46 55",
+  "web": "https://implan-t.es/?l=burgos",
+  "nota": 4.9,
+  "resenas": 331,
+  "lat": 42.3414338,
+  "lng": -3.7011509,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJWxlFEsT8RQ0R3-lfNRmZu14",
+  "nombre": "Dental Burgos",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Av. Cantabria, 37, 09006 Burgos",
+  "telefono": "947 21 31 46",
+  "web": "http://www.dentalburgos.es/",
+  "nota": 5,
+  "resenas": 5,
+  "lat": 42.3487018,
+  "lng": -3.6889662999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJnf1VGtr8RQ0RbxPtvu7HLPY",
+  "nombre": "Clínica Dental Dr. Izquierdo",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Ana Lopidana, 6, 09005 Burgos",
+  "telefono": "947 27 31 51",
+  "web": "",
+  "nota": 4.8,
+  "resenas": 22,
+  "lat": 42.345002699999995,
+  "lng": -3.6973311,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJK7LXodr8RQ0RPPI1GLFGhqM",
+  "nombre": "Clínica Dental Villanueva & de Pablo | Dentistas Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. de la Paz, 10, 8º C, 09004 Burgos",
+  "telefono": "947 20 74 50",
+  "web": "http://www.clinicadentalvillanueva.com/",
+  "nota": 5,
+  "resenas": 114,
+  "lat": 42.3442308,
+  "lng": -3.6942717999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJIVdJpdz8RQ0ReIK0wfhZVOg",
+  "nombre": "Clínica Dental Adeslas",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Ortodoncista"
+  ],
+  "direccion": "C. de Doña Berenguela, 11, 09005 Burgos",
+  "telefono": "900 229 922",
+  "web": "https://www.adeslasdental.es/clinicas/clinica-dental-adeslas-Burgos?utm_campaign=Local&utm_medium=organic&utm_source=googlemybusiness",
+  "nota": 4.7,
+  "resenas": 735,
+  "lat": 42.350025599999995,
+  "lng": -3.6936250999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJVzZ4XNj9RQ0RWT8jl6rBB-I",
+  "nombre": "Clinica Dental Miranda Dental Smile",
+  "tipo": "Periodoncista de implantes dentales",
+  "tipos": [
+   "Periodoncista de implantes dentales"
+  ],
+  "direccion": "C. Miranda, 5, Piso 1A, 09002 Burgos",
+  "telefono": "947 27 25 65",
+  "web": "",
+  "nota": 5,
+  "resenas": 2,
+  "lat": 42.3385234,
+  "lng": -3.7011711999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJkflX1tn8RQ0RBzhZRD10fWE",
+  "nombre": "Clínica Dental Sanz Pastor",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Ortodoncista",
+   "Dentista infantil"
+  ],
+  "direccion": "C. Gral. Sanz Pastor, 18, 09003 Burgos",
+  "telefono": "947 07 53 90",
+  "web": "http://clinicadentalsanzpastor.com/",
+  "nota": 4.6,
+  "resenas": 58,
+  "lat": 42.3443396,
+  "lng": -3.6999546999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJVX0JWyrjRQ0RnIPlNAxtQP8",
+  "nombre": "Clínica Dental San Agustín",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av de, Calle de Calleja y Zurita, 14, 09001 Burgos",
+  "telefono": "947 20 74 80",
+  "web": "",
+  "nota": 4.3,
+  "resenas": 24,
+  "lat": 42.3314959,
+  "lng": -3.7013222,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJHQflvM_8RQ0RyAlgupiQWo4",
+  "nombre": "Clínica dental DRuiz Burgos | Dr. Álvaro Ruiz",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Cirujano maxilofacial",
+   "Ortodoncista",
+   "Dentista infantil"
+  ],
+  "direccion": "C. Vitoria, 37, 09004 Burgos",
+  "telefono": "947 10 74 17",
+  "web": "https://clinicadruiz.com/",
+  "nota": 4.8,
+  "resenas": 138,
+  "lat": 42.3430896,
+  "lng": -3.6911983,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJg4nVTtP8RQ0RfdFz5UgYHEY",
+  "nombre": "Clínica Dental Martín",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Calvario, 4, Bajo, 09002 Burgos",
+  "telefono": "947 27 00 38",
+  "web": "https://www.clinicadentalmartinburgos.es/es/",
+  "nota": 3.5,
+  "resenas": 13,
+  "lat": 42.334865699999995,
+  "lng": -3.6968779,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJyaw7qdr8RQ0RfvcwZiZF9h8",
+  "nombre": "Clínica Dental Isabel Pérez",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Radiología odontológica",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. de la Paz, 14, 09004 Burgos",
+  "telefono": "947 10 01 60",
+  "web": "https://www.clinicadentalisabelperez.es/",
+  "nota": 4.8,
+  "resenas": 205,
+  "lat": 42.344513299999996,
+  "lng": -3.6935729,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJXZQo0db8RQ0RYU8VrPa1WJk",
+  "nombre": "Clínica Dental Martín Luxen",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Pl. Mío Cid, 6, 1º-1, 09004 Burgos",
+  "telefono": "947 20 91 81",
+  "web": "http://www.clinicadentalmartinluxen.com/",
+  "nota": 4.9,
+  "resenas": 62,
+  "lat": 42.340665099999995,
+  "lng": -3.6994279,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJbSR6iLf9RQ0RXfspvlNDVOg",
+  "nombre": "Clínica dental Blázquez",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Vitoria, 150, 09007 Burgos",
+  "telefono": "690 61 55 83",
+  "web": "https://www.instagram.com/clinicadentalblazquez?igsh=YnlmdGVnOGs0NWZ6",
+  "nota": 5,
+  "resenas": 41,
+  "lat": 42.3500376,
+  "lng": -3.6746391,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJix6inCr9RQ0Ry_Q5b4xHHjE",
+  "nombre": "Clínica Dental Teresa Manso",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Calle Barrio Gimeno, 19, 09001 Burgos",
+  "telefono": "947 26 45 38",
+  "web": "http://www.clinicadentalteresamanso.com/",
+  "nota": 4.6,
+  "resenas": 29,
+  "lat": 42.335870899999996,
+  "lng": -3.7026211,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJV4FGDmP7RQ0Rwd9dMqHjitA",
+  "nombre": "Clinica Dental Villimarsur",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Rosa Chacel, 3, 09007 Burgos",
+  "telefono": "947 48 10 22",
+  "web": "",
+  "nota": 4.2,
+  "resenas": 10,
+  "lat": 42.363188799999996,
+  "lng": -3.6589503999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJP_IUrqP8RQ0RBkrr-3nHdXk",
+  "nombre": "Clínica Dental Sonrisalud Burgos (Gamonal)",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Alejandro Yagüe, 9, 09007 Burgos",
+  "telefono": "947 21 08 74",
+  "web": "http://www.sonrisalud.es/",
+  "nota": 4.6,
+  "resenas": 177,
+  "lat": 42.3521247,
+  "lng": -3.6693943,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJo1NdeyrjRQ0RuMGo3ze3ePs",
+  "nombre": "Policlinic Center Martín Alonso",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Fisioterapeuta",
+   "Podólogo"
+  ],
+  "direccion": "C. de los Alfareros, 19, 09001 Burgos",
+  "telefono": "947 65 53 96",
+  "web": "https://policlinicmartinalonso.com/",
+  "nota": 4.9,
+  "resenas": 176,
+  "lat": 42.3314422,
+  "lng": -3.7023409999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJPUMdHTv9RQ0RmWjMc8fFfjI",
+  "nombre": "VM Clínica Dental",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Murcia, 2, 09003 Burgos",
+  "telefono": "947 02 78 85",
+  "web": "http://www.vmclinicadental.es/",
+  "nota": 4.8,
+  "resenas": 25,
+  "lat": 42.346370199999996,
+  "lng": -3.7148993,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJJatsc9f8RQ0RKO3ZRH9gf-4",
+  "nombre": "Clínica Dental Raquel Gómez",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Juan, 5, 2-D, 09003 Burgos",
+  "telefono": "947 27 85 44",
+  "web": "http://www.clinicaraquelgomez.com/",
+  "nota": 4.7,
+  "resenas": 83,
+  "lat": 42.3430371,
+  "lng": -3.6999462,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ4WweqtX8RQ0R9OLVaaFCwpI",
+  "nombre": "Clínica Dental Gil Cuesta",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista",
+   "Servicio de blanqueamiento dental"
+  ],
+  "direccion": "Calle Madrid, 13, 1º B, 09002 Burgos",
+  "telefono": "947 26 35 61",
+  "web": "https://clinicadentalgilcuesta.com/",
+  "nota": 5,
+  "resenas": 27,
+  "lat": 42.3370257,
+  "lng": -3.7007244,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJUbkQd9r8RQ0RmqtJH_OVNHI",
+  "nombre": "Clínica Dental Nuño Gil | Dentista en Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Endodoncista",
+   "Cirujano maxilofacial",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. Reyes Católicos, 2, 09004 Burgos",
+  "telefono": "947 27 47 56",
+  "web": "https://clinicadentalnunogil.com/",
+  "nota": 4.8,
+  "resenas": 240,
+  "lat": 42.344224,
+  "lng": -3.6962509999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJF3tVMdT8RQ0Rq5nTYglKthg",
+  "nombre": "Clínica Dental Sonrisalud",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Miranda, 17, 09002 Burgos",
+  "telefono": "947 26 64 13",
+  "web": "http://www.sonrisalud.es/",
+  "nota": 4.5,
+  "resenas": 146,
+  "lat": 42.338354599999995,
+  "lng": -3.6997016,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ8yFn5db8RQ0RdKwnN2JB_-Q",
+  "nombre": "Clínica Dental Ubierna",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. del Cid Campeador, 14, 09005 Burgos",
+  "telefono": "947 20 94 84",
+  "web": "http://ubiernaclinicadental.es/?utm_source=google&utm_medium=local&utm_campaign=mybusiness",
+  "nota": 4.9,
+  "resenas": 89,
+  "lat": 42.3446834,
+  "lng": -3.6981669,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJmT-QE9f8RQ0Ru9KbzXNl6tU",
+  "nombre": "Clínicas Fernández Couce · Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "C. de Santander, 27, 09004 Burgos",
+  "telefono": "947 25 09 86",
+  "web": "http://www.clinicasfernandezcouce.com/",
+  "nota": 4.8,
+  "resenas": 95,
+  "lat": 42.3427473,
+  "lng": -3.6995266,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJCwVtF9H8RQ0R_PElbbkgbY8",
+  "nombre": "Arnaiz Clínica Dental | Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Proveedor de implantes dentales",
+   "Dentista",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. del Arlanzón, 9, 1º C, 09004 Burgos",
+  "telefono": "947 20 68 82",
+  "web": "http://www.arnaizclinicadental.com/",
+  "nota": 4.3,
+  "resenas": 38,
+  "lat": 42.3411974,
+  "lng": -3.6963176,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJbwYa_qL8RQ0R5J95CcMLRvM",
+  "nombre": "Clínica Dental Vitoria 190",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Vitoria, 188, 09007 Burgos",
+  "telefono": "947 22 58 71",
+  "web": "",
+  "nota": 4.2,
+  "resenas": 17,
+  "lat": 42.3522955,
+  "lng": -3.6704247,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJWwYXp9r8RQ0RNE9uWFqp4JM",
+  "nombre": "Clínica Dental Montes",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Dentista",
+   "Periodoncista de implantes dentales",
+   "Radiología odontológica",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista",
+   "Servicio de blanqueamiento dental"
+  ],
+  "direccion": "Av. de la Paz, 8, 2c, 09004 Burgos",
+  "telefono": "947 20 06 08",
+  "web": "https://www.clinicamontes.com/",
+  "nota": 4.5,
+  "resenas": 48,
+  "lat": 42.3440759,
+  "lng": -3.6947034999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJodby29v8RQ0RTQI2h7xhwOs",
+  "nombre": "Clínica Dental Vitaldent",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Diego Laínez, 2, 09005 Burgos",
+  "telefono": "947 23 99 43",
+  "web": "https://clinicas.vitaldent.com/burgos/clinica-dental-vitaldent-burgos-centro-37/?utm_source=google-my-business&utm_medium=organic&utm_id=cmp-01487-q5t8w&utm_campaign=gbp:ficha-gbp&utm_term=sin-t%C3%A9rmino&utm_content=vitaldent",
+  "nota": 4.6,
+  "resenas": 446,
+  "lat": 42.347648799999995,
+  "lng": -3.6973903999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJg_I846L8RQ0RnNemM_jMW9w",
+  "nombre": "Clínica BUQUO Centro",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista",
+   "Periodoncista de implantes dentales",
+   "Endodoncista",
+   "Ortodoncista"
+  ],
+  "direccion": "Pl. Vega, 13, 09003 Burgos",
+  "telefono": "947 07 00 50",
+  "web": "https://www.clinicabuquo.com/",
+  "nota": 4.9,
+  "resenas": 737,
+  "lat": 42.3386396,
+  "lng": -3.7024317,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJR-unUDj9RQ0ROSYttvFRR0o",
+  "nombre": "ALBERTO RODRIGUEZ. LABORATORIO DE PROTESIS DENTAL",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Pl. de la Tesla, 2, bajo, 09003 Burgos",
+  "telefono": "637 89 02 46",
+  "web": "http://www.protesicodentalburgos.com/",
+  "nota": 4.8,
+  "resenas": 6,
+  "lat": 42.3455534,
+  "lng": -3.7214680999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJT0XoBRv9RQ0RX2BS8rmNsrM",
+  "nombre": "Clínica Dental Da Vinci",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Esteban Sáez Alvarado, 7, 09007 Burgos",
+  "telefono": "649 88 79 54",
+  "web": "http://www.davincidental.es/",
+  "nota": 4.5,
+  "resenas": 8,
+  "lat": 42.355768,
+  "lng": -3.6642699999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJQ5GsfdTiRQ0RsNaN33tUnzc",
+  "nombre": "Dental Labor S.L.",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. San Pedro y San Felices, 47, bajo, 09001 Burgos",
+  "telefono": "947 26 86 80",
+  "web": "http://www.dentalabor.com/",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3314909,
+  "lng": -3.707554,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ-amg8Q79RQ0Rh-2l55yB2ro",
+  "nombre": "Dr. Alberto Carrillo Clínica Odontológica",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "P.º de Laserna, 7, 09001 Burgos",
+  "telefono": "947 02 27 74",
+  "web": "http://www.dralbertocarrillo.com/",
+  "nota": 5,
+  "resenas": 34,
+  "lat": 42.3358698,
+  "lng": -3.7103215,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJq6qa_irjRQ0RpKp5h0vIfcw",
+  "nombre": "Dr. Víctor González García",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Luisa Rosado, 1, 09001 Burgos",
+  "telefono": "947 24 21 09",
+  "web": "",
+  "nota": 5,
+  "resenas": 3,
+  "lat": 42.3350109,
+  "lng": -3.7021159999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJk2OckIj9RQ0RqOObY6969VM",
+  "nombre": "Clínica Dental Vitaldent",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Proveedor de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "C. San Pablo, 4, 09002 Burgos",
+  "telefono": "947 42 71 42",
+  "web": "https://clinicas.vitaldent.com/burgos/clinica-dental-vitaldent-burgos-san-pablo/?utm_source=google-my-business&utm_medium=organic&utm_id=cmp-01487-q5t8w&utm_campaign=gbp:ficha-gbp&utm_term=sin-t%C3%A9rmino&utm_content=vitaldent",
+  "nota": 5,
+  "resenas": 126,
+  "lat": 42.3390124,
+  "lng": -3.699001,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJrWA5gLz8RQ0RB57nTrhHYVg",
+  "nombre": "Clínica Dental Novabur | Dentista en Burgos | Implantes dentales | Odontopediatría | Ortodoncia",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Proveedor de implantes dentales",
+   "Radiología odontológica",
+   "Dentista",
+   "Endodoncista",
+   "Cirujano oral y maxilofacial",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "C. Vitoria, 148, bajo, 09007 Burgos",
+  "telefono": "947 24 51 63",
+  "web": "https://clinicadentalnovabur.com/",
+  "nota": 4.5,
+  "resenas": 103,
+  "lat": 42.349920999999995,
+  "lng": -3.6750241999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJN6o7kMX8RQ0RR4K0XTZ2EpE",
+  "nombre": "Clínica Colina",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. Reyes Católicos, 41, 09005 Burgos",
+  "telefono": "947 04 40 37",
+  "web": "https://clinicacolina.com/clinica-dental-en-burgos/",
+  "nota": 4.6,
+  "resenas": 235,
+  "lat": 42.3481205,
+  "lng": -3.6935575,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJkcSIXMX8RQ0RUTvav7kW8Mw",
+  "nombre": "Clínica Dental Milenium Burgos - Sanitas",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Mecánico protésico dental",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. de la Paz, 22A, 09004 Burgos",
+  "telefono": "947 42 55 50",
+  "web": "https://www.sanitas.es/dental/clinicas-dentales-milenium/burgos/burgos/burgos?gmb=gmb%3Af-google%3Am-link%3Anc-clinica%3Ap-dental",
+  "nota": 4,
+  "resenas": 95,
+  "lat": 42.3449621,
+  "lng": -3.6916336999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJew_0NaP8RQ0RJzx33-_s7JQ",
+  "nombre": "Clínica Dental Vitaldent",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Servicio de urgencias dentales",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Vitoria, 157, 09007 Burgos",
+  "telefono": "947 21 26 70",
+  "web": "https://clinicas.vitaldent.com/burgos/clinica-dental-vitaldent-burgos-gamonal-38/?utm_source=google-my-business&utm_medium=organic&utm_id=cmp-01487-q5t8w&utm_campaign=gbp:ficha-gbp&utm_term=sin-t%C3%A9rmino&utm_content=vitaldent",
+  "nota": 4.6,
+  "resenas": 345,
+  "lat": 42.352002,
+  "lng": -3.6718189,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJfXSFyC39RQ0RBdLTHcwH8z8",
+  "nombre": "Centro Vemar Dental",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Cam. Casa de la Vega, 53, 09006 Burgos",
+  "telefono": "947 25 25 01",
+  "web": "http://www.vemardental.com/",
+  "nota": 4.4,
+  "resenas": 279,
+  "lat": 42.357971,
+  "lng": -3.6709243999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJa5f-OZ78RQ0RCgWE0nV8txs",
+  "nombre": "Dental Clinic, Tu Mejor Sonrisa.",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Huelva, 18, 09007 Burgos",
+  "telefono": "947 11 08 66",
+  "web": "",
+  "nota": 4.4,
+  "resenas": 33,
+  "lat": 42.358238799999995,
+  "lng": -3.6632794,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJsY1R26H8RQ0RwJwLFl3xl24",
+  "nombre": "Abad Clínica Dental Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Mecánico protésico dental",
+   "Endodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "C. Vitoria, 235, Bajo, 09007 Burgos",
+  "telefono": "947 48 21 71",
+  "web": "https://www.abadclinicadental.com/",
+  "nota": 4.2,
+  "resenas": 19,
+  "lat": 42.3544963,
+  "lng": -3.6658595999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJMbfcCwD9RQ0RAg5yZUahN-w",
+  "nombre": "Clinica Dental Dra. Silvana Susset",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Juan de Padilla, 10 BIS, 09006 Burgos",
+  "telefono": "947 21 88 41",
+  "web": "",
+  "nota": 5,
+  "resenas": 20,
+  "lat": 42.350324099999995,
+  "lng": -3.6841554999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJX65BnTr9RQ0RyhA2NCAgiLg",
+  "nombre": "Clínica dental Bizarro",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Zadornil, 8, 09003 Burgos",
+  "telefono": "947 25 76 01",
+  "web": "http://www.dentalbizarro.com/",
+  "nota": 4.4,
+  "resenas": 10,
+  "lat": 42.3437572,
+  "lng": -3.7137114999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ1bD9Cdf8RQ0Rmt3ZyuGotmw",
+  "nombre": "Clínica Dental Castrejana",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "Calle del Almte. Bonifaz, 20, 1ºDcha, 09003 Burgos",
+  "telefono": "947 20 15 56",
+  "web": "https://www.clinicacastrejana.com/",
+  "nota": 4.7,
+  "resenas": 17,
+  "lat": 42.3425742,
+  "lng": -3.7003553,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJhR9b4tD8RQ0Rw2CaT3SEM3k",
+  "nombre": "Clínica Dental Carlos Ganzo",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Vitoria, 27, A, 09004 Burgos",
+  "telefono": "947 26 48 16",
+  "web": "http://www.dentistacarlosganzo.es/",
+  "nota": 5,
+  "resenas": 12,
+  "lat": 42.3419082,
+  "lng": -3.6962718,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJuZGo1tb8RQ0RyztbReLj5bM",
+  "nombre": "Clínica Dental Bp",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Vitoria, 9, 2 A, 09004 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.3414765,
+  "lng": -3.6981561999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJARrxZtz8RQ0RT4rfhgnbFy8",
+  "nombre": "Clínica Dental Doctoras Franco Varas",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av. del Cid Campeador, 72, Bajo, 09005 Burgos",
+  "telefono": "947 21 93 85",
+  "web": "http://clinicadentalfrancovaras.es/",
+  "nota": 4.4,
+  "resenas": 138,
+  "lat": 42.3491463,
+  "lng": -3.6962191,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ2X2UaZH8RQ0RFcj3W66WJsY",
+  "nombre": "Clínica Dental Dr. Roberto Díez Rojo",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Condesa Mencía, 122, 09006 Burgos",
+  "telefono": "947 23 23 23",
+  "web": "http://clinicadentalroberto.es/",
+  "nota": 4.4,
+  "resenas": 7,
+  "lat": 42.3609358,
+  "lng": -3.676522,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJd0L8pJ_8RQ0Rm-SJehIjttw",
+  "nombre": "Dental Natural",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "C. Santiago Apóstol, 43, bajo, 09007 Burgos",
+  "telefono": "947 69 06 04",
+  "web": "http://dentalnatural.es/",
+  "nota": 4.8,
+  "resenas": 144,
+  "lat": 42.349989699999995,
+  "lng": -3.6672932,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJZfmZ2pn8RQ0RwHfT-pyng6o",
+  "nombre": "Clínicas Berlín",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Centro Comercial Camino de la Plata, Av. de Castilla y León, 22, 09006 Burgos",
+  "telefono": "947 48 80 90",
+  "web": "http://www.clinicasberlin.es/",
+  "nota": 4,
+  "resenas": 46,
+  "lat": 42.3493631,
+  "lng": -3.6816953,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJHzyAeB79RQ0R7OyNkIL8Xw0",
+  "nombre": "Clínica Dental Azorín",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Endodoncista",
+   "Cirujano oral y maxilofacial",
+   "Ortodoncista",
+   "Periodoncista",
+   "Servicio de blanqueamiento dental"
+  ],
+  "direccion": "C. Azorín, 1, 09005 Burgos",
+  "telefono": "947 64 95 46",
+  "web": "",
+  "nota": 4.8,
+  "resenas": 23,
+  "lat": 42.345376099999996,
+  "lng": -3.7001736999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJJawHLdj8RQ0RzVOT1JipC6U",
+  "nombre": "GR Clínica dental. Dra Tamara Gómez Royuela",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Periodoncista"
+  ],
+  "direccion": "C. Venerables, 2, 1A, 09003 Burgos",
+  "telefono": "947 20 41 76",
+  "web": "http://www.grclinicadental.es/",
+  "nota": 5,
+  "resenas": 42,
+  "lat": 42.3445628,
+  "lng": -3.7005933,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJP-r-vLz8RQ0RDyH-UkewykQ",
+  "nombre": "Clinica Dental",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "09007 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3506651,
+  "lng": -3.6735596999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJfRVd6Er9RQ0RW992l7iX1tU",
+  "nombre": "Iniesta Clinica",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista",
+   "Endodoncista",
+   "Cirujano oral y maxilofacial",
+   "Ortodoncista",
+   "Servicio de blanqueamiento dental"
+  ],
+  "direccion": "C. Vitoria, 174, 09007 Burgos",
+  "telefono": "947 25 26 00",
+  "web": "https://iniestadental.com/",
+  "nota": 4.7,
+  "resenas": 52,
+  "lat": 42.35147,
+  "lng": -3.67198,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJmfpe1m_9RQ0R_p6TrRfZPyc",
+  "nombre": "Laboratorio Dental Las Veguillas",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Paseo de la Quinta Las Veguillas, s/n, 09002 Burgos",
+  "telefono": "947 20 09 59",
+  "web": "https://laboratoriodentallasveguillas.com/",
+  "nota": null,
+  "resenas": 3,
+  "lat": 42.3414582,
+  "lng": -3.6805575,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ5eWW3bj8RQ0RzS-_JaCS3Q8",
+  "nombre": "Clínica Dental San Roque",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Vitoria, 87, 09006 Burgos",
+  "telefono": "947 06 23 30",
+  "web": "",
+  "nota": 3.6,
+  "resenas": 32,
+  "lat": 42.3457662,
+  "lng": -3.6834029,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJOxwZYsX9RQ0RA5HIk0hiAdg",
+  "nombre": "Clínica Dental Dra. Cristina Martín",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Salamanca, 2, 09004 Burgos",
+  "telefono": "947 21 64 14",
+  "web": "http://www.clinicadentalcristinamartin.com/",
+  "nota": 5,
+  "resenas": 14,
+  "lat": 42.3446694,
+  "lng": -3.6880618,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ_9B7m8j8RQ0RiBtlURpA9GE",
+  "nombre": "MORANDEIRA ORTODONCIA INVISIBLE Burgos",
+  "tipo": "Ortodoncista",
+  "tipos": [
+   "Ortodoncista"
+  ],
+  "direccion": "C. Vitoria, 59, 1ºD, 09006 Burgos",
+  "telefono": "947 27 11 03",
+  "web": "https://www.morandeiraorto.com/",
+  "nota": 4.9,
+  "resenas": 320,
+  "lat": 42.344265299999996,
+  "lng": -3.6859151,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJRxdqI4D9RQ0RIW9ydHjt3kI",
+  "nombre": "HER 3Dental Lab",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. Jesús María Ordoño, 8, Local, 09004 Burgos",
+  "telefono": "624 51 87 97",
+  "web": "",
+  "nota": null,
+  "resenas": 2,
+  "lat": 42.3441762,
+  "lng": -3.6877397,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJg-gXbMX8RQ0RXyVNySxGkP8",
+  "nombre": "Carmen Fdez. De Velasco Muñoz",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av. de la Paz, 29, 4-B, 09004 Burgos",
+  "telefono": "947 21 00 13",
+  "web": "http://clinicadentalcarmenfernandezdevelasco.com/",
+  "nota": 4.8,
+  "resenas": 5,
+  "lat": 42.345637499999995,
+  "lng": -3.6910429,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJl_ASw9D8RQ0RybVp8UoxjBU",
+  "nombre": "Pedro Gómez Gutiérrez Clínica Dental",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Luis Alberdi, 3, ENTREPLANTA, 09007 Burgos",
+  "telefono": "947 20 65 11",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3510998,
+  "lng": -3.6665508,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJrfMssqb8RQ0ReQ0uXX3F3AI",
+  "nombre": "Dra Alonso Alonso, Mª Isidora",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Federico García Lorca, 1, 1 º B, 09007 Burgos",
+  "telefono": "947 48 78 78",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.3501674,
+  "lng": -3.6667207,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ3bP0-tX8RQ0RATjJMefnM8I",
+  "nombre": "Clínica BUQUO Gamonal",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Vitoria, 171, 09007 Burgos",
+  "telefono": "947 07 00 52",
+  "web": "https://www.clinicabuquo.com/",
+  "nota": 4.8,
+  "resenas": 111,
+  "lat": 42.352661,
+  "lng": -3.670628,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJSyPg5KP8RQ0RcbOfpHktZk0",
+  "nombre": "Centro Médico Santiago - Burgos",
+  "tipo": "Centro médico",
+  "tipos": [
+   "Centro médico",
+   "Médico",
+   "Médico de medicina general",
+   "Clínica de fisioterapia"
+  ],
+  "direccion": "C. de la Igualdad, 17, 09007 Burgos",
+  "telefono": "947 23 61 55",
+  "web": "https://centromedicosantiago.com/",
+  "nota": 3.8,
+  "resenas": 63,
+  "lat": 42.3507945,
+  "lng": -3.6679093,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ66ag8Zr9RQ0RgFJqP7M7wZc",
+  "nombre": "ORTEGA CLINIC | Odontología infantil",
+  "tipo": "Dentista infantil",
+  "tipos": [
+   "Dentista infantil",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Francisco Grandmontagne, 15, 09007 Burgos",
+  "telefono": "692 23 08 60",
+  "web": "https://ortegaclinic.es/",
+  "nota": 4.6,
+  "resenas": 98,
+  "lat": 42.3509357,
+  "lng": -3.6698809999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJTyCpVaP8RQ0Rm11DduQxulA",
+  "nombre": "ANA LUENGO Clínica Dental",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Pl. San Bruno, 15, 09007 Burgos",
+  "telefono": "947 23 44 07",
+  "web": "",
+  "nota": 5,
+  "resenas": 6,
+  "lat": 42.3500764,
+  "lng": -3.6722911999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJFdCLw1X9RQ0Ry0_6l30BnaU",
+  "nombre": "OCHOA 11 POLICLINICA",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Clínica especializada"
+  ],
+  "direccion": "Calle Severo Ochoa, 11, 09006 Burgos",
+  "telefono": "947 64 96 82",
+  "web": "https://www.instagram.com/ochoa11policlinica/",
+  "nota": 4.6,
+  "resenas": 10,
+  "lat": 42.352863299999996,
+  "lng": -3.6796018,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJsS_js7j8RQ0Rvrvl-nsSooI",
+  "nombre": "Clínica Dental",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. de Castilla y León, 22, 09006 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.349361599999995,
+  "lng": -3.6817164,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ0SCjpJT8RQ0Rf55d8jgCI2g",
+  "nombre": "Clínica Dres. Nebreda",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Condesa Mencía, 117, 09006 Burgos",
+  "telefono": "947 24 04 44",
+  "web": "",
+  "nota": 3.8,
+  "resenas": 39,
+  "lat": 42.3590003,
+  "lng": -3.6815743,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJK2gRP8D9RQ0RCiuGjVWcJN8",
+  "nombre": "Policlinic Center Martín Alonso",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Fisioterapeuta",
+   "Podólogo"
+  ],
+  "direccion": "C. Condesa Mencía, 116, 09006 Burgos",
+  "telefono": "947 64 92 16",
+  "web": "https://policlinicmartinalonso.com/",
+  "nota": 4.9,
+  "resenas": 143,
+  "lat": 42.35985,
+  "lng": -3.6783799999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJqydhM5X8RQ0R5NVEireWE1g",
+  "nombre": "Santamaría Laboratorio Dental S L",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. de Loudun, 2, 09006 Burgos",
+  "telefono": "947 24 15 69",
+  "web": "",
+  "nota": 4,
+  "resenas": 1,
+  "lat": 42.3560942,
+  "lng": -3.6823477999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJL0nfHrj9RQ0RGCoodLiKjBc",
+  "nombre": "Laboratorio Fusión Dental",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "P.º Comuneros de Castilla, 5, 09006 Burgos",
+  "telefono": "623 50 35 85",
+  "web": "",
+  "nota": 5,
+  "resenas": 6,
+  "lat": 42.348807,
+  "lng": -3.6867992999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJA6fxZtz8RQ0RiG_9hON4B_0",
+  "nombre": "CDV Clínica Dental",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av. del Cid Campeador, 86, 09005 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3502268,
+  "lng": -3.6957404,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJMQmc1dz8RQ0RjhLWZvaCN_8",
+  "nombre": "Clínica Dental Dra. Cristina Frías",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Padre Aramburu, 2, 09006 Burgos",
+  "telefono": "947 23 28 79",
+  "web": "",
+  "nota": 4.3,
+  "resenas": 11,
+  "lat": 42.3514031,
+  "lng": -3.6927936999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJm7FTLNr8RQ0Ra6nowdDyO-c",
+  "nombre": "Clínica Dental Doctora Llarena - Dentistas en Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista",
+   "Higienista dental",
+   "Periodoncista de implantes dentales",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "Av. del Cid Campeador, 36, piso 1ºa, 09005 Burgos",
+  "telefono": "947 21 33 05",
+  "web": "https://clinicadentaldrallarena.com/",
+  "nota": 4.5,
+  "resenas": 30,
+  "lat": 42.3464988,
+  "lng": -3.6973479,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJNyK7Gtf8RQ0R2vrOGIn9ecI",
+  "nombre": "Dentalia Nova Laboratorio",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Av. del Cid Campeador, 33, 09005 Burgos",
+  "telefono": "947 26 61 38",
+  "web": "",
+  "nota": 5,
+  "resenas": 2,
+  "lat": 42.347367899999995,
+  "lng": -3.6974228,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJRakjFtv8RQ0RBNN8VRxW-Ng",
+  "nombre": "Clínica Dental Ortodoncia Humberto Díez Rebolleda",
+  "tipo": "Ortodoncista",
+  "tipos": [
+   "Ortodoncista"
+  ],
+  "direccion": "Av. Reyes Católicos, 39, 3ºA, 09005 Burgos",
+  "telefono": "947 22 23 31",
+  "web": "",
+  "nota": 4.3,
+  "resenas": 24,
+  "lat": 42.348123199999996,
+  "lng": -3.6934891,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ86finxn9RQ0RywT2WDTHuJQ",
+  "nombre": "Clínica Veterinaria Río Vena",
+  "tipo": "Veterinario",
+  "tipos": [
+   "Veterinario"
+  ],
+  "direccion": "C. José María Francés Gil, 2, 09006 Burgos",
+  "telefono": "947 59 18 94",
+  "web": "http://veterinariariovena.es/",
+  "nota": 4.7,
+  "resenas": 165,
+  "lat": 42.3651184,
+  "lng": -3.6630886,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJRWMr_9n8RQ0Rz24o92iPR0E",
+  "nombre": "Clínica Dental Dra. Concha Pacheco Plaza. Especialista en endodoncia.",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "Pl. de España, 1, 1C, 09005 Burgos",
+  "telefono": "947 27 54 08",
+  "web": "http://endodonciaburgos.es/",
+  "nota": 4,
+  "resenas": 20,
+  "lat": 42.344523699999996,
+  "lng": -3.697952,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJnRgeANH8RQ0RwbckJiwenEI",
+  "nombre": "Clínica Pordomingo",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Vitoria, 28, 1º A, 09004 Burgos",
+  "telefono": "947 25 77 93",
+  "web": "http://www.pordomingo.es/",
+  "nota": 4.7,
+  "resenas": 36,
+  "lat": 42.3416786,
+  "lng": -3.6962365999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJByFQxNX8RQ0RFvqC8RMz_T4",
+  "nombre": "Clínica Dental Eduardo Hernáez Barrio",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Miranda, 5, 1º A, 09002 Burgos",
+  "telefono": "947 27 25 65",
+  "web": "http://www.clinicadentalhernaezbarrio.es/",
+  "nota": 4,
+  "resenas": 23,
+  "lat": 42.3384449,
+  "lng": -3.7012443,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJt84dudD8RQ0RFHWKSt8N548",
+  "nombre": "Dra Casado Recio M Agustina",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Lesmes, 18, 09004 Burgos",
+  "telefono": "947 26 79 07",
+  "web": "",
+  "nota": 4.3,
+  "resenas": 7,
+  "lat": 42.3432786,
+  "lng": -3.6971524999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJn6syhdP8RQ0RkJKPjPDwecc",
+  "nombre": "Progreso Dental",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Progreso, 33, 09002 Burgos",
+  "telefono": "947 20 19 32",
+  "web": "http://www.clinicaprogresodentalburgos.es/",
+  "nota": 5,
+  "resenas": 16,
+  "lat": 42.3373637,
+  "lng": -3.6971928,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJIabKbdD8RQ0ReUgy4RReoJs",
+  "nombre": "Clínica Dental Vivar | Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Dentista",
+   "Periodoncista de implantes dentales",
+   "Endodoncista",
+   "Ortodoncista",
+   "Dentista infantil",
+   "Periodoncista"
+  ],
+  "direccion": "C. Calzadas, 5, 09004 Burgos",
+  "telefono": "947 27 19 24",
+  "web": "https://www.clinicadentalvivar.com/",
+  "nota": 5,
+  "resenas": 24,
+  "lat": 42.343568399999995,
+  "lng": -3.6939732,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJAQBsGtT8RQ0RlbE53Wo1_3c",
+  "nombre": "Clínica Dental San Pablo",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Pablo, 15, 09002 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3387168,
+  "lng": -3.6986786,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJmb_zJdH8RQ0RziDJlpYLwIE",
+  "nombre": "Clínica Dental Valentín Ojeda",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Vitoria, 20, 2 IZDA, 09004 Burgos",
+  "telefono": "947 20 36 67",
+  "web": "http://clinicadentalvalentinojeda.es/",
+  "nota": 4.8,
+  "resenas": 6,
+  "lat": 42.3414572,
+  "lng": -3.6972159999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJJeAGuND8RQ0R7YBUVNcWH_U",
+  "nombre": "Clínica Dental Agustina Casado",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. San Lesmes, 18, 09004 Burgos",
+  "telefono": "947 26 79 07",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.343019,
+  "lng": -3.697167,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJfeHf_tD8RQ0RFZtbFYEJ4kM",
+  "nombre": "Clínica Dental Juan Antonio Ortiz",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista",
+   "Periodoncista de implantes dentales",
+   "Endodoncista",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Vitoria, 31, 09004 Burgos",
+  "telefono": "947 25 71 07",
+  "web": "https://clinicadentaljuanantonioortiz.es/",
+  "nota": 4.4,
+  "resenas": 9,
+  "lat": 42.3421684,
+  "lng": -3.6954890999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJAQDQhin9RQ0RRSaeQ8GcK6E",
+  "nombre": "Pinto - Clínica Dental Infantil y Ortodoncia Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Eduardo Martínez del Campo, 6, 1º B, 09003 Burgos",
+  "telefono": "691 07 53 35",
+  "web": "https://pintoclinicaintegral.com/",
+  "nota": 4.7,
+  "resenas": 84,
+  "lat": 42.3392099,
+  "lng": -3.7049878,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJpQ3hG9T8RQ0RIpU4nU5v9PY",
+  "nombre": "Clínica Dental Dr. Mariano Alonso y Dra. Ariadna Alonso",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "Calle San pablo 9-11- 2°B, 09002 Burgos",
+  "telefono": "947 27 69 16",
+  "web": "",
+  "nota": 5,
+  "resenas": 6,
+  "lat": 42.3389287,
+  "lng": -3.6986586999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJVyYlP9X8RQ0RwY2F6MIc7_A",
+  "nombre": "CLÍNICA DENTAL González García",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "C. Luisa Rosado, 1, 09001 Burgos",
+  "telefono": "947 24 21 09",
+  "web": "",
+  "nota": 3.9,
+  "resenas": 9,
+  "lat": 42.3350599,
+  "lng": -3.7019200999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJm2eOwtX8RQ0Rg1mOjHviDa0",
+  "nombre": "Ramón Pérez Fernández",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Miranda, 3, 09002 Burgos",
+  "telefono": "947 27 34 57",
+  "web": "",
+  "nota": 5,
+  "resenas": 2,
+  "lat": 42.338447099999996,
+  "lng": -3.7014253,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJs1cs69X8RQ0RWQWQCakyoAc",
+  "nombre": "Clínica Dental Arteche, Juan Carlos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Calle Madrid, 2, 3-IZDA, 09002 Burgos",
+  "telefono": "947 26 74 28",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.337955199999996,
+  "lng": -3.7020269,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJle3bJyr9RQ0Ri7nJHPB6x_Y",
+  "nombre": "Clínica Dental Doctor Luis Ortiz Camarero",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "C. Eduardo Martínez del Campo, 1, 1 IZD, 09003 Burgos",
+  "telefono": "947 20 44 70",
+  "web": "http://www.clinicadentalortiz.net/",
+  "nota": 3,
+  "resenas": 2,
+  "lat": 42.339061,
+  "lng": -3.7055768999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJIw8GSND8RQ0RrMT8t1DJT1o",
+  "nombre": "Clínica Dental Morandeira",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Dentista",
+   "Endodoncista",
+   "Dentista infantil"
+  ],
+  "direccion": "Av. del Arlanzón, 25, 09004 Burgos",
+  "telefono": "947 27 00 63",
+  "web": "https://clinicamorandeira.com/",
+  "nota": 4.7,
+  "resenas": 29,
+  "lat": 42.3423252,
+  "lng": -3.6927672,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ-zJBDtD8RQ0Rgd8XK3cS9mk",
+  "nombre": "Clínica Dental Moisés Nogal",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Calle del Morco, 2, 1º D, 09004 Burgos",
+  "telefono": "947 27 41 36",
+  "web": "http://www.clinicadentalmoisesnogal.com/",
+  "nota": 4.9,
+  "resenas": 7,
+  "lat": 42.343769599999995,
+  "lng": -3.6936313,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJEVWFsNr8RQ0Rp1ikKCsPEg0",
+  "nombre": "Clínica Dental Ana Simón López",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Av. de la Paz, 11, 1-A, 09004 Burgos",
+  "telefono": "947 22 51 01",
+  "web": "http://www.clinicadentalanasimon.com/",
+  "nota": 4.8,
+  "resenas": 17,
+  "lat": 42.3448983,
+  "lng": -3.6937602,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJCYgfztr8RQ0RgV2bE1WLD2k",
+  "nombre": "Sanident Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Antonio Machado, 6, 09005 Burgos",
+  "telefono": "947 24 24 20",
+  "web": "https://sanidentclinicadental.es/",
+  "nota": 4.5,
+  "resenas": 15,
+  "lat": 42.3451344,
+  "lng": -3.6925337,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJmz08OGH9RQ0RuPv4Ce2svM0",
+  "nombre": "Clínica Dental Gonzalo Madero",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista"
+  ],
+  "direccion": "C. Soria, 2, 4, 09004 Burgos",
+  "telefono": "947 23 68 54",
+  "web": "http://www.clinicagonzalomadero.com/",
+  "nota": 4.6,
+  "resenas": 15,
+  "lat": 42.3460404,
+  "lng": -3.6897393999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJU8R__9r8RQ0RPnHaP6Fx36s",
+  "nombre": "Clínica Dental Óscar Gallo",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. Reyes Católicos, 18, bajo, 09005 Burgos",
+  "telefono": "947 26 35 34",
+  "web": "http://www.oscargallo.es/",
+  "nota": 3.9,
+  "resenas": 60,
+  "lat": 42.3468468,
+  "lng": -3.6940439,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJUasVe9X8RQ0R9Yw6-ekXKqs",
+  "nombre": "Isabel Pérez Ortega",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Lugar Barrio Gimeno, 9, Calle Barrio Gimeno, 09001 Burgos",
+  "telefono": "947 27 14 07",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.335802199999996,
+  "lng": -3.7023778999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJPR7kueAJRg0Rk9QfapfIbic",
+  "nombre": "Laboratorio de prótesis dentales y oculares Ibáñez",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental",
+   "Laboratorio de órtesis y prótesis"
+  ],
+  "direccion": "C/ Legión Española, 15, bajo, 09001 Burgos",
+  "telefono": "",
+  "web": "https://laboratorioibanez.es/",
+  "nota": 5,
+  "resenas": 5,
+  "lat": 42.3327907,
+  "lng": -3.6971694999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJLRha9738RQ0RoUHHj5lWG48",
+  "nombre": "Centro Salud Gamonal-Las Torres",
+  "tipo": "Centro de salud",
+  "tipos": [
+   "Centro de salud",
+   "Médico"
+  ],
+  "direccion": "C. Vicente Aleixandre, S/N, 09006 Burgos",
+  "telefono": "947 21 66 21",
+  "web": "https://www.saludcastillayleon.es/CABurgos/es/area-influencia/z-b-s-torres",
+  "nota": 3,
+  "resenas": 53,
+  "lat": 42.3542051,
+  "lng": -3.6762694,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJPeoSvNz8RQ0RjaEb2NjxY0Q",
+  "nombre": "Centro Médico Adeslas",
+  "tipo": "Centro médico",
+  "tipos": [
+   "Centro médico",
+   "Médico",
+   "Médico de urgencias",
+   "Médico de familia",
+   "Médico de medicina general",
+   "Centro de salud",
+   "Auxiliar técnico sanitario"
+  ],
+  "direccion": "C. de Doña Berenguela, 11, 09005 Burgos",
+  "telefono": "947 24 44 68",
+  "web": "https://www.segurcaixaadeslas.es/es/cuadro-medico/centro-medico?Centro=Centro+Medico+Adeslas-Burgos-09006",
+  "nota": 3.4,
+  "resenas": 125,
+  "lat": 42.34986,
+  "lng": -3.6934099999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJgfDPJsX8RQ0RimtR5Q2YdOA",
+  "nombre": "Clínica Dental Dr. Condado",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Laboratorio dental",
+   "Dentista"
+  ],
+  "direccion": "C. Santo Domingo de Silos, 09005 Burgos",
+  "telefono": "947 22 14 66",
+  "web": "http://www.dentistacondado.es/",
+  "nota": 4.3,
+  "resenas": 20,
+  "lat": 42.3469324,
+  "lng": -3.6929203,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJCfX5Akn9RQ0RtnwT-wbnpUw",
+  "nombre": "Colina Dental Institute",
+  "tipo": "Centro formativo profesional",
+  "tipos": [
+   "Centro formativo profesional"
+  ],
+  "direccion": "Av. Reyes Católicos, 41, B, 09005 Burgos",
+  "telefono": "601 07 30 00",
+  "web": "https://colinadentalinstitute.com/",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3481205,
+  "lng": -3.6935575,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ9ZONr-79RQ0Rj4iPMdydRYY",
+  "nombre": "Clínica Estética Dental Smysecret",
+  "tipo": "Dentista cosmético",
+  "tipos": [
+   "Dentista cosmético",
+   "Higienista dental",
+   "Dentista",
+   "Ortodoncista"
+  ],
+  "direccion": "Calle Diego Lainez, Av. del Cid Campeador, 2, esq, 09005 Burgos",
+  "telefono": "900 730 720",
+  "web": "https://www.smysecret.com/espacios/?utm_campaign=smysecret:general&utm_content=smysecret&utm_id=cmp-01502-f7y1t&utm_medium=google-my-business&utm_source=google&utm_term=estetica",
+  "nota": 5,
+  "resenas": 3,
+  "lat": 42.347648799999995,
+  "lng": -3.6973903999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJKy-p_9f8RQ0RXRVKf3_UNFQ",
+  "nombre": "M.G.O. Laboratorio Dental",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Calle San Cosme, 8, bajo 2, 09002 Burgos",
+  "telefono": "947 99 25 36",
+  "web": "https://mgodental.es/",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.3378361,
+  "lng": -3.702474,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ7drI0Cn9RQ0RIZGRFLuTdP0",
+  "nombre": "Dental Santamaría, SC",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. Paloma, 18, 09003 Burgos",
+  "telefono": "947 20 72 53",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.34113,
+  "lng": -3.70334,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJMWZntwf9RQ0RLYLdOIEOHH0",
+  "nombre": "Solución Dental",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "C. Gral. Sanz Pastor, 5, 09003 Burgos",
+  "telefono": "947 25 70 57",
+  "web": "",
+  "nota": 5,
+  "resenas": 2,
+  "lat": 42.3443432,
+  "lng": -3.6992730999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJT9xxo6r9RQ0R_4vvUsPGilo",
+  "nombre": "ESENCIAL Dr Aragüés",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista",
+   "Periodoncista"
+  ],
+  "direccion": "Avda de la Paz, Pl. de España, 1 - esquina, 09004 Burgos",
+  "telefono": "947 20 53 78",
+  "web": "http://www.cuidamostusencias.com/",
+  "nota": 4.8,
+  "resenas": 86,
+  "lat": 42.344093699999995,
+  "lng": -3.6961910999999996,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJX16yENH8RQ0RMAsps9itd04",
+  "nombre": "Laboratorio Dental Arnaiz S.L.",
+  "tipo": "Mecánico protésico dental",
+  "tipos": [
+   "Mecánico protésico dental"
+  ],
+  "direccion": "Av. del Arlanzón, 9, 1, 09004 Burgos",
+  "telefono": "947 26 50 17",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.3411974,
+  "lng": -3.6963176,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJffOuNtT8RQ0RjJLjcs3rLT0",
+  "nombre": "Clínica Dental Dres. Nebreda",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Periodoncista de implantes dentales",
+   "Dentista",
+   "Ortodoncista"
+  ],
+  "direccion": "C. Miranda, 6, 09002 Burgos",
+  "telefono": "947 26 26 65",
+  "web": "",
+  "nota": 4.1,
+  "resenas": 13,
+  "lat": 42.33824,
+  "lng": -3.700958,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJMdD-8dP8RQ0RB7CLsvWTcE8",
+  "nombre": "Laboratorio de Prótesis Dental - Carlos Zayas",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. del Burgense, 10, 09002 Burgos",
+  "telefono": "947 25 05 46",
+  "web": "",
+  "nota": 5,
+  "resenas": 1,
+  "lat": 42.3384649,
+  "lng": -3.6971235,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJY4xKrpP9RQ0RqnzgRIXJUuY",
+  "nombre": "Clínica Dental Dres. Feced",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. del Cid Campeador, 8, 5°, 09005 Burgos",
+  "telefono": "947 20 17 79",
+  "web": "https://www.clinicadentalfeced.es/",
+  "nota": 4.6,
+  "resenas": 21,
+  "lat": 42.3440132,
+  "lng": -3.6986746999999998,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJVVWFG9T8RQ0RMss2eDCgUe8",
+  "nombre": "Protedent",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "C. San Pablo, 9, 1;A, 09002 Burgos",
+  "telefono": "",
+  "web": "",
+  "nota": null,
+  "resenas": 1,
+  "lat": 42.3389287,
+  "lng": -3.6986586999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJX9VHLVP9RQ0RJwm_U0vAeBw",
+  "nombre": "CIRUJANO MAXILOFACIAL DR. RODRÍGUEZ DEL VAL",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental"
+  ],
+  "direccion": "Av. del Cid Campeador, 3, 3º-G, 09003 Burgos",
+  "telefono": "947 20 45 69",
+  "web": "",
+  "nota": 4.5,
+  "resenas": 8,
+  "lat": 42.3435056,
+  "lng": -3.6992122999999997,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJS3XPgMT8RQ0RKry76e71r24",
+  "nombre": "Desinbur SL",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental",
+   "Soporte y servicios informáticos"
+  ],
+  "direccion": "Av. Reyes Católicos, 42, Bajo, 09005 Burgos",
+  "telefono": "947 24 41 17",
+  "web": "https://www.desinbur.es/",
+  "nota": 5,
+  "resenas": 4,
+  "lat": 42.349050299999995,
+  "lng": -3.6899718,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJ4XdRedD8RQ0R_YC9wP_A0AM",
+  "nombre": "CLÍNICA DENTAL MINERVA MARTÍNEZ & ÁNGEL ANTÓN",
+  "tipo": "Dentista",
+  "tipos": [
+   "Dentista"
+  ],
+  "direccion": "Calle Guardia Civil, 4, bajo, 09004 Burgos",
+  "telefono": "",
+  "web": "https://www.clinicamartinezyanton.es/",
+  "nota": 4.4,
+  "resenas": 21,
+  "lat": 42.3454632,
+  "lng": -3.694759,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJZ840Owv9RQ0R-E8IjffuXWo",
+  "nombre": "DR SMILE® Burgos",
+  "tipo": "Clínica dental",
+  "tipos": [
+   "Clínica dental",
+   "Dentista cosmético",
+   "Ortodoncista",
+   "Dentista"
+  ],
+  "direccion": "C. Santo Domingo de Silos, Local Bajo, 09005 Burgos",
+  "telefono": "910 78 21 23",
+  "web": "https://drsmile.es/clinicas/burgos/",
+  "nota": 4.1,
+  "resenas": 9,
+  "lat": 42.3469013,
+  "lng": -3.6929672,
+  "dentro": true
+ },
+ {
+  "place_id": "ChIJgS975d39RQ0RaNQBC4tgqos",
+  "nombre": "Alberto Gallo Dental",
+  "tipo": "Laboratorio dental",
+  "tipos": [
+   "Laboratorio dental"
+  ],
+  "direccion": "Av. Reyes Católicos, 20, Bajo. Local 2. Traseras, 09005 Burgos",
+  "telefono": "648 64 55 54",
+  "web": "",
+  "nota": null,
+  "resenas": 3,
+  "lat": 42.3469056,
+  "lng": -3.6937868,
+  "dentro": true
+ }
+]
