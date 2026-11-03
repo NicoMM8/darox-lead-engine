@@ -603,78 +603,56 @@
           
           <thead class="bg-[#F4EFEA] text-[#544A3F] border-b border-[#E7DFD4] font-mono text-[11px] uppercase tracking-wider sticky top-0 z-10 select-none">
             <tr>
-              
-              <!-- Favorito -->
-              <th class="py-3 px-3 w-10 text-center cursor-pointer hover:bg-[#EAE2D7]" onclick="setSourceTab(STATE.activeSource === 'favorites' ? 'all' : 'favorites')" title="Filtrar por Favoritos">
-                <span id="colHeaderFav">⭐</span>
-              </th>
-
-              <!-- Score (Ordenable) -->
-              <th class="py-3 px-3.5 w-28 cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('score')" title="Clic para ordenar por Score">
-                <div class="flex items-center gap-1">
+              <!-- Prioridad / Score (Compacto) -->
+              <th class="py-3 px-3 w-16 text-center cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('score')" title="Ordenar por Score">
+                <div class="flex items-center justify-center gap-1">
                   <span>Score</span>
-                  <span id="sortIndicatorScore" class="text-[10px] text-[#A74B2C] font-bold">↕</span>
+                  <span id="sortIndicatorScore" class="text-[10px] text-[#A74B2C] font-bold">▼</span>
                 </div>
               </th>
 
-              <!-- Empresa (Ordenable) -->
-              <th class="py-3 px-3.5 min-w-[260px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('name')" title="Clic para ordenar alfabéticamente A-Z">
+              <!-- Empresa & Ubicación (Consolidado) -->
+              <th class="py-3 px-3.5 min-w-[260px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('name')" title="Ordenar por Nombre de Empresa">
                 <div class="flex items-center gap-1">
-                  <span>Empresa / Razón Social</span>
+                  <span>Empresa & Ubicación</span>
                   <span id="sortIndicatorName" class="text-[10px] text-[#7A6D5E]">↕</span>
                 </div>
               </th>
 
-              <!-- Ciudad (Ordenable & Filtrable) -->
-              <th class="py-3 px-3.5 min-w-[160px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('city')" title="Clic para ordenar por Ciudad">
+              <!-- Reputación / Capital -->
+              <th class="py-3 px-3.5 min-w-[140px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('capital')" title="Ordenar por Reseñas o Capital">
                 <div class="flex items-center gap-1">
-                  <span>Ciudad / Sede</span>
-                  <span id="sortIndicatorCity" class="text-[10px] text-[#7A6D5E]">↕</span>
-                </div>
-              </th>
-
-              <!-- Sector (Ordenable) -->
-              <th class="py-3 px-3.5 min-w-[150px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('sector')" title="Clic para ordenar por Sector">
-                <div class="flex items-center gap-1">
-                  <span>Sector / Actividad</span>
-                  <span id="sortIndicatorSector" class="text-[10px] text-[#7A6D5E]">↕</span>
-                </div>
-              </th>
-
-              <!-- Capital / Reseñas (Ordenable) -->
-              <th class="py-3 px-3.5 min-w-[140px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('capital')" title="Clic para ordenar por Capital / Reseñas">
-                <div class="flex items-center gap-1">
-                  <span>Capital / Reseñas</span>
+                  <span>Reputación / Reseñas</span>
                   <span id="sortIndicatorCapital" class="text-[10px] text-[#7A6D5E]">↕</span>
                 </div>
               </th>
 
-              <!-- Estado Web (Filtrable Clic Directo!) -->
-              <th class="py-3 px-3.5 min-w-[170px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleNoWebFilter()" title="Clic para alternar: Solo Sin Web vs Todos">
-                <div class="flex items-center gap-1">
-                  <span>Estado Web / Ficha</span>
-                  <span id="filterIndicatorNoWeb" class="text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#FAECE6] text-[#A74B2C]">Filtro</span>
-                </div>
-              </th>
-
-              <!-- Contacto / Teléfono (Filtrable Clic Directo!) -->
-              <th class="py-3 px-3.5 min-w-[180px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleHasContactFilter()" title="Clic para alternar: Solo Con Teléfono vs Todos">
-                <div class="flex items-center gap-1">
-                  <span>Contacto / Teléfono</span>
-                  <span id="filterIndicatorContact" class="text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#F0F6F3] text-[#1E5443]">Filtro</span>
-                </div>
-              </th>
-
-              <!-- Pipeline CRM Semáforo (Clic para ordenar) -->
-              <th class="py-3 px-3.5 min-w-[155px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleCrmSort()" title="Ordenar por Semáforo CRM">
+              <!-- Presencia Web -->
+              <th class="py-3 px-3.5 min-w-[130px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleNoWebFilter()" title="Clic para alternar filtro: Solo Sin Web vs Todos">
                 <div class="flex items-center gap-1.5">
-                  <span>Estado CRM 🚦</span>
+                  <span>Presencia Web</span>
+                  <span id="filterIndicatorNoWeb" class="w-1.5 h-1.5 rounded-full bg-[#A74B2C] hidden"></span>
+                </div>
+              </th>
+
+              <!-- Contacto Directo -->
+              <th class="py-3 px-3.5 min-w-[140px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleHasContactFilter()" title="Clic para alternar filtro: Solo Con Teléfono vs Todos">
+                <div class="flex items-center gap-1.5">
+                  <span>Contacto Directo</span>
+                  <span id="filterIndicatorContact" class="w-1.5 h-1.5 rounded-full bg-[#1E5443] hidden"></span>
+                </div>
+              </th>
+
+              <!-- Pipeline CRM Semáforo -->
+              <th class="py-3 px-3.5 min-w-[135px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleCrmSort()" title="Ordenar por Semáforo CRM">
+                <div class="flex items-center gap-1.5">
+                  <span>Pipeline CRM 🚦</span>
                   <span id="sortIndicatorCrm" class="text-[10px] text-[#7A6D5E]"> </span>
                 </div>
               </th>
 
-              <!-- Acciones -->
-              <th class="py-3 px-3 w-24 text-center">Acciones</th>
+              <!-- Acciones (Espacio garantizado, jamás se corta) -->
+              <th class="py-3 px-3 w-28 text-center">Acciones</th>
             </tr>
           </thead>
 
@@ -1246,57 +1224,49 @@
     // FILTRO INTERACTIVO "SOLO SIN WEB" (DISPONIBLE DESDE BARRAS SUPERIORES O TABLA)
     function toggleNoWebFilter() {
       STATE.activeFilters.onlyNoWeb = !STATE.activeFilters.onlyNoWeb;
-      
       const card = document.getElementById('kpiCardNoWeb');
-      const tableTag = document.getElementById('filterIndicatorNoWeb');
+      const dot = document.getElementById('filterIndicatorNoWeb');
       const mapBtn = document.getElementById('btnMapFilterNoWeb');
 
-      if (STATE.activeFilters.onlyNoWeb) {
-        if (card) card.classList.add('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
-        if (tableTag) {
-          tableTag.className = "text-[10px] px-2 py-0.5 rounded-full font-sans font-bold bg-[#A74B2C] text-white shadow-sm";
-          tableTag.textContent = "✓ Solo Sin Web";
+      if (card) {
+        if (STATE.activeFilters.onlyNoWeb) {
+          card.classList.add('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
+        } else {
+          card.classList.remove('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
         }
-        if (mapBtn) {
+      }
+      if (dot) {
+        if (STATE.activeFilters.onlyNoWeb) dot.classList.remove('hidden');
+        else dot.classList.add('hidden');
+      }
+      if (mapBtn) {
+        if (STATE.activeFilters.onlyNoWeb) {
           mapBtn.classList.add('bg-[#A74B2C]', 'text-white');
           mapBtn.classList.remove('bg-[#FAECE6]', 'text-[#A74B2C]');
-        }
-      } else {
-        if (card) card.classList.remove('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
-        if (tableTag) {
-          tableTag.className = "text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#FAECE6] text-[#A74B2C]";
-          tableTag.textContent = "Filtro";
-        }
-        if (mapBtn) {
+        } else {
           mapBtn.classList.remove('bg-[#A74B2C]', 'text-white');
           mapBtn.classList.add('bg-[#FAECE6]', 'text-[#A74B2C]');
         }
       }
-
       applyFilters();
     }
 
-    // FILTRO INTERACTIVO "SOLO CON CONTACTO" (DESDE KPI CARD O TABLA)
     function toggleHasContactFilter() {
       STATE.activeFilters.onlyHasContact = !STATE.activeFilters.onlyHasContact;
-      
       const card = document.getElementById('kpiCardContacts');
-      const tableTag = document.getElementById('filterIndicatorContact');
+      const dot = document.getElementById('filterIndicatorContact');
 
-      if (STATE.activeFilters.onlyHasContact) {
-        if (card) card.classList.add('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
-        if (tableTag) {
-          tableTag.className = "text-[10px] px-2 py-0.5 rounded-full font-sans font-bold bg-[#1E5443] text-white shadow-sm";
-          tableTag.textContent = "✓ Solo Con Teléfono";
-        }
-      } else {
-        if (card) card.classList.remove('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
-        if (tableTag) {
-          tableTag.className = "text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#F0F6F3] text-[#1E5443]";
-          tableTag.textContent = "Filtro";
+      if (card) {
+        if (STATE.activeFilters.onlyHasContact) {
+          card.classList.add('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
+        } else {
+          card.classList.remove('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
         }
       }
-
+      if (dot) {
+        if (STATE.activeFilters.onlyHasContact) dot.classList.remove('hidden');
+        else dot.classList.add('hidden');
+      }
       applyFilters();
     }
 
@@ -1446,7 +1416,7 @@
             <button onclick="clearAllFilters()" class="mt-3 px-4 py-1.5 rounded-full bg-[#121E2A] text-white text-xs font-semibold">Restablecer Filtros</button>
           </div>
         `;
-        tbody.innerHTML = `<tr><td colspan="10">${emptyHtml}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7">${emptyHtml}</td></tr>`;
         mobileContainer.innerHTML = emptyHtml;
         return;
       }
@@ -1456,92 +1426,80 @@
         const scoreBadgeClass = lead.score >= 90 ? 'bg-[#FAECE6] text-[#A74B2C] border-[#F4D6CA]' : 'bg-[#FDF7EE] text-[#A66723] border-[#F4DFC1]';
         
         return `
-          <tr class="hover:bg-[#FAF7F2] transition-colors group cursor-pointer" onclick="openDrawer('${lead.id}')">
+          <tr class="hover:bg-[#FAF7F2] transition-colors group cursor-pointer border-b border-[#E7DFD4]/50" onclick="openDrawer('${lead.id}')">
             
-            <!-- Favorito -->
-            <td class="py-3 px-3 text-center" onclick="event.stopPropagation(); toggleFavorite('${lead.id}')">
-              <span class="text-sm ${lead.is_favorite ? 'text-amber-500' : 'text-[#D5C9BA] hover:text-amber-400'}">
-                ${lead.is_favorite ? '★' : '☆'}
-              </span>
-            </td>
-
-            <!-- Score -->
-            <td class="py-3 px-3.5">
-              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border ${scoreBadgeClass}">
-                <span class="w-1.5 h-1.5 rounded-full ${lead.score >= 90 ? 'bg-[#A74B2C]' : 'bg-[#A66723]'}"></span>
-                <span>${lead.score} pts</span>
-              </span>
-            </td>
-
-            <!-- Nombre de Empresa -->
-            <td class="py-3 px-3.5">
-              <div class="font-bold text-[#1A1612] group-hover:text-[#A74B2C] transition-colors flex items-center gap-1.5">
-                <span class="truncate max-w-[280px]">${escapeHtml(lead.name)}</span>
-              </div>
-              <div class="text-[11px] text-[#7A6D5E] truncate max-w-[280px] mt-0.5">
-                <span class="text-[10px] font-mono uppercase font-semibold px-1 rounded bg-[#F2ECE4] text-[#544A3F] mr-1">${lead.source_label || lead.source}</span>
-                ${escapeHtml(lead.subtitle || '')}
+            <!-- Prioridad & Score (Compacto) -->
+            <td class="py-3 px-3 text-center whitespace-nowrap" onclick="event.stopPropagation()">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="toggleFavorite('${lead.id}')" class="text-sm ${lead.is_favorite ? 'text-amber-500' : 'text-[#D5C9BA] hover:text-amber-400'} cursor-pointer" title="Marcar Favorito">
+                  ${lead.is_favorite ? '★' : '☆'}
+                </button>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-mono font-bold border ${scoreBadgeClass}">
+                  ${lead.score}
+                </span>
               </div>
             </td>
 
-            <!-- Ciudad -->
-            <td class="py-3 px-3.5 text-[#544A3F] font-medium">
-              <div class="truncate max-w-[150px] font-semibold text-[#1A1612]">${escapeHtml(lead.city || lead.province || 'España')}</div>
-              <div class="text-[10px] text-[#A89987] font-mono">${lead.date || ''}</div>
-            </td>
-
-            <!-- Sector -->
+            <!-- Empresa, Ubicación y Sector (Jerarquía visual limpia y legible) -->
             <td class="py-3 px-3.5">
-              <span class="text-[11px] font-medium text-[#544A3F] bg-[#FAF7F2] border border-[#E7DFD4] px-2 py-0.5 rounded-full whitespace-nowrap">
-                ${escapeHtml(lead.sector || 'Servicios')}
-              </span>
+              <div class="font-bold text-[#1A1612] group-hover:text-[#A74B2C] transition-colors text-sm truncate max-w-[340px]">
+                ${escapeHtml(lead.name)}
+              </div>
+              <div class="text-[11px] text-[#7A6D5E] flex items-center gap-1.5 mt-0.5 truncate max-w-[340px]">
+                <span class="text-[9px] font-mono uppercase font-semibold px-1 rounded bg-[#F2ECE4] text-[#544A3F] shrink-0">${lead.source_label || lead.source}</span>
+                <span class="font-semibold text-[#1A1612] shrink-0">${escapeHtml(lead.city || lead.province || 'España')}</span>
+                <span class="text-[#D5C9BA]">•</span>
+                <span class="text-[#7A6D5E] truncate">${escapeHtml(lead.sector || 'Servicios')}</span>
+              </div>
             </td>
 
-            <!-- Capital / Reseñas -->
-            <td class="py-3 px-3.5 font-mono text-[11px]">
+            <!-- Reputación / Capital -->
+            <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px]">
               <div class="font-bold text-[#1A1612]">${escapeHtml(lead.capital || '—')}</div>
-              <div class="text-[10px] text-[#A89987]">${lead.rating ? lead.rating + ' ★ valoración' : 'Capital Auditado'}</div>
+              <div class="text-[10px] text-[#A89987] font-sans">${lead.rating ? '★ ' + lead.rating + ' valoración' : 'Capital Auditado'}</div>
             </td>
 
-            <!-- Estado Web / Dominio -->
-            <td class="py-3 px-3.5">
+            <!-- Presencia Web -->
+            <td class="py-3 px-3.5 whitespace-nowrap">
               ${lead.has_website ? `
                 <a href="${escapeHtml(lead.website)}" target="_blank" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 text-[11px] font-medium text-[#1E5443] hover:underline">
                   <span class="w-1.5 h-1.5 rounded-full bg-[#1E5443]"></span>
-                  <span class="truncate max-w-[140px]">${escapeHtml(lead.website.replace(/^https?:\/\//, ''))}</span>
+                  <span class="truncate max-w-[130px]">${escapeHtml(lead.website.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</span>
+                  <span class="text-[9px] opacity-75">↗</span>
                 </a>
               ` : `
-                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#FAECE6] text-[#A74B2C] border border-[#F4D6CA]">
-                  🔴 Sin Web Detectada
+                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#FAECE6] text-[#A74B2C] border border-[#F4D6CA]">
+                  🔴 Sin Web
                 </span>
               `}
             </td>
 
-            <!-- Contacto / Teléfono -->
-            <td class="py-3 px-3.5">
+            <!-- Contacto Directo -->
+            <td class="py-3 px-3.5 whitespace-nowrap">
               ${lead.phone ? `
-                <div class="font-mono text-xs font-bold text-[#1A1612] flex items-center gap-1">
-                  <span>📞 ${escapeHtml(lead.phone)}</span>
-                </div>
+                <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" onclick="event.stopPropagation()" class="font-mono text-xs font-bold text-[#1A1612] hover:text-[#A74B2C] flex items-center gap-1">
+                  <span>📞</span> <span>${escapeHtml(lead.phone)}</span>
+                </a>
               ` : `
-                <div class="text-xs text-[#7A6D5E] truncate max-w-[180px]">${escapeHtml(lead.contact_name || 'Decisor')}</div>
+                <span class="text-xs text-[#A89987] italic">Sin teléfono</span>
               `}
-              ${lead.contact_name && lead.phone ? `<div class="text-[10px] text-[#A89987] truncate max-w-[180px]">${escapeHtml(lead.contact_name)}</div>` : ''}
+              ${lead.contact_name && lead.contact_name.includes('@') ? `<div class="text-[10px] text-[#7A6D5E] truncate max-w-[150px] font-mono">${escapeHtml(lead.contact_name)}</div>` : ''}
             </td>
 
             <!-- Pipeline CRM Semáforo -->
-            <td class="py-3 px-3.5" onclick="event.stopPropagation()">
+            <td class="py-3 px-3.5 whitespace-nowrap" onclick="event.stopPropagation()">
               ${renderSemaforoPill(lead)}
             </td>
 
             <!-- Acciones -->
-            <td class="py-3 px-3.5 text-center" onclick="event.stopPropagation()">
+            <td class="py-3 px-3 text-center whitespace-nowrap" onclick="event.stopPropagation()">
               <div class="flex items-center justify-center gap-1.5">
-                <button onclick="openDrawer('${lead.id}')" class="p-1.5 rounded-full bg-[#FAF7F2] hover:bg-[#121E2A] text-[#544A3F] hover:text-white border border-[#E7DFD4] transition-all" title="Ver Análisis & Pitch">
+                <button onclick="openDrawer('${lead.id}')" class="px-2.5 py-1 rounded-full bg-[#FAF7F2] hover:bg-[#121E2A] text-[#544A3F] hover:text-white border border-[#E7DFD4] text-[11px] font-semibold transition-all flex items-center gap-1 cursor-pointer" title="Ver Análisis & Pitch">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span>Ficha</span>
                 </button>
                 ${lead.google_maps_url ? `
-                  <a href="${escapeHtml(lead.google_maps_url)}" target="_blank" class="p-1.5 rounded-full bg-[#FAF7F2] hover:bg-[#A74B2C] text-[#544A3F] hover:text-white border border-[#E7DFD4] transition-all" title="Abrir Google Maps">
+                  <a href="${escapeHtml(lead.google_maps_url)}" target="_blank" class="p-1 rounded-full bg-[#FAF7F2] hover:bg-[#A74B2C] text-[#544A3F] hover:text-white border border-[#E7DFD4] transition-all" title="Abrir Google Maps">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                   </a>
                 ` : ''}
@@ -1552,41 +1510,71 @@
         `;
       }).join('');
 
-      // 2. Render Mobile Cards View (Optimizado para Teléfonos)
+      // 2. Render Mobile Cards View (Experiencia App Nativa para Teléfonos)
       mobileContainer.innerHTML = pageLeads.map(lead => {
+        const scoreBadgeClass = lead.score >= 90 ? 'bg-[#FAECE6] text-[#A74B2C] border-[#F4D6CA]' : 'bg-[#FDF7EE] text-[#A66723] border-[#F4DFC1]';
+        
         return `
-          <div class="p-3.5 bg-[#FFFFFF] rounded-xl border border-[#E7DFD4] space-y-2 cursor-pointer shadow-sm active:bg-[#FAF7F2]" onclick="openDrawer('${lead.id}')">
+          <div class="p-3.5 bg-[#FFFFFF] rounded-2xl border border-[#E7DFD4] shadow-warm space-y-2.5 transition-all active:scale-[0.99] cursor-pointer" onclick="openDrawer('${lead.id}')">
+            
+            <!-- Cabecera de la Tarjeta Móvil -->
             <div class="flex items-start justify-between gap-2">
-              <div>
-                <span class="text-[9px] font-mono uppercase font-semibold px-1.5 py-0.5 rounded bg-[#F2ECE4] text-[#544A3F] mr-1">${lead.source_label || lead.source}</span>
-                <span class="text-[10px] text-[#7A6D5E] font-medium font-mono">${escapeHtml(lead.city || 'España')}</span>
-                <h4 class="font-bold text-sm text-[#1A1612] leading-snug mt-0.5">${escapeHtml(lead.name)}</h4>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-1.5 text-[10px] text-[#7A6D5E] font-medium mb-0.5">
+                  <span class="text-[9px] font-mono uppercase font-semibold px-1 rounded bg-[#F2ECE4] text-[#544A3F] shrink-0">${lead.source_label || lead.source}</span>
+                  <span class="font-bold text-[#1A1612] shrink-0">${escapeHtml(lead.city || lead.province || 'España')}</span>
+                  <span class="text-[#D5C9BA]">•</span>
+                  <span class="truncate">${escapeHtml(lead.sector || 'Servicios')}</span>
+                </div>
+                <h4 class="font-bold text-sm text-[#1A1612] leading-snug truncate">${escapeHtml(lead.name)}</h4>
               </div>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold shrink-0 ${lead.score >= 90 ? 'bg-[#FAECE6] text-[#A74B2C]' : 'bg-[#FDF7EE] text-[#A66723]'}">
-                ${lead.score} pts
-              </span>
+              
+              <div class="flex items-center gap-1 shrink-0" onclick="event.stopPropagation()">
+                <button onclick="toggleFavorite('${lead.id}')" class="text-sm p-1 ${lead.is_favorite ? 'text-amber-500' : 'text-[#D5C9BA]'}">
+                  ${lead.is_favorite ? '★' : '☆'}
+                </button>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold border ${scoreBadgeClass}">
+                  ${lead.score}
+                </span>
+              </div>
             </div>
 
-            <div class="flex items-center gap-2 text-[11px] text-[#7A6D5E]">
+            <!-- Resumen de Ficha y Web -->
+            <div class="flex flex-wrap items-center gap-2 text-[11px] text-[#7A6D5E] pt-0.5">
               ${lead.has_website ? `
-                <span class="text-[#1E5443] font-medium">🌐 Con Web</span>
+                <span class="inline-flex items-center gap-1 text-[#1E5443] font-semibold text-[10px]">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#1E5443]"></span> Con Web
+                </span>
               ` : `
-                <span class="text-[#A74B2C] font-semibold bg-[#FAECE6] px-1.5 py-0.2 rounded-full">🔴 Sin Web</span>
+                <span class="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-[#FAECE6] text-[#A74B2C]">
+                  🔴 Sin Web
+                </span>
               `}
-              <span>·</span>
-              <span class="font-mono">${escapeHtml(lead.capital || '')}</span>
+              <span class="text-[#D5C9BA]">•</span>
+              <span class="font-mono text-[10px] text-[#1A1612] font-semibold">${escapeHtml(lead.capital || '')}</span>
+              ${lead.subtitle ? `<span class="text-[#D5C9BA]">•</span><span class="truncate text-[10px] text-[#A89987] max-w-[150px]">${escapeHtml(lead.subtitle)}</span>` : ''}
             </div>
 
-            <div class="pt-2 border-t border-[#E7DFD4]/60 flex items-center justify-between gap-2">
-              <div onclick="event.stopPropagation()">
+            <!-- Botones de Acción Táctil (Semáforo + Llamada 1-Toque) -->
+            <div class="pt-2 border-t border-[#E7DFD4]/70 flex items-center justify-between gap-2" onclick="event.stopPropagation()">
+              <div>
                 ${renderSemaforoPill(lead, true)}
               </div>
-              ${lead.phone ? `
-                <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" onclick="event.stopPropagation()" class="px-3 py-1 rounded-full bg-[#121E2A] text-white text-[10px] font-semibold flex items-center gap-1 shrink-0">
-                  <span>📞</span> Llamar
-                </a>
-              ` : ''}
+              
+              <div class="flex items-center gap-1.5">
+                ${lead.phone ? `
+                  <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" class="px-3 py-1.5 rounded-full bg-[#121E2A] hover:bg-[#A74B2C] text-white text-xs font-semibold flex items-center gap-1 shadow-sm transition-colors">
+                    <span>📞</span>
+                    <span class="font-mono">${escapeHtml(lead.phone)}</span>
+                  </a>
+                ` : `
+                  <button onclick="openDrawer('${lead.id}')" class="px-3 py-1.5 rounded-full bg-[#FAF7F2] border border-[#E7DFD4] text-[#544A3F] text-xs font-semibold cursor-pointer">
+                    Ver Ficha
+                  </button>
+                `}
+              </div>
             </div>
+
           </div>
         `;
       }).join('');
@@ -1906,46 +1894,30 @@
 
       if (sem === 'green') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#EBF5F0] border-[#BEE3D2] text-[#1E5443] hover:scale-[1.02] active:scale-95" title="Estado: Interesado 🟢. Clic para pasar a 'Lo va a pensar' 🟡">
-            <span class="inline-flex items-center gap-1">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#1E5443] ring-2 ring-[#1E5443]/30 animate-pulse"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-[#C4E3D5]"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-[#C4E3D5]"></span>
-            </span>
-            <span class="whitespace-nowrap font-bold text-[11px]">Interesado</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#EBF5F0] border-[#BEE3D2] text-[#1E5443] hover:scale-[1.02] active:scale-95" title="🟢 Interesado (Clic: pasar a 'Lo piensa' 🟡)">
+            <span class="w-2 h-2 rounded-full bg-[#1E5443] ring-2 ring-[#1E5443]/30 animate-pulse"></span>
+            <span class="whitespace-nowrap">Interesado</span>
           </button>
         `;
       } else if (sem === 'amber') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#FEF7ED] border-[#F6DFC2] text-[#A66723] hover:scale-[1.02] active:scale-95" title="Estado: Lo va a pensar 🟡. Clic para pasar a 'No quiere' 🔴">
-            <span class="inline-flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#F3D6B5]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#D97706] ring-2 ring-[#D97706]/30"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-[#F3D6B5]"></span>
-            </span>
-            <span class="whitespace-nowrap font-bold text-[11px]">Lo piensa</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FEF7ED] border-[#F6DFC2] text-[#A66723] hover:scale-[1.02] active:scale-95" title="🟡 Lo piensa (Clic: pasar a 'No quiere' 🔴)">
+            <span class="w-2 h-2 rounded-full bg-[#D97706] ring-2 ring-[#D97706]/30"></span>
+            <span class="whitespace-nowrap">Lo piensa</span>
           </button>
         `;
       } else if (sem === 'red') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#FDF1EC] border-[#F8D2C4] text-[#A74B2C] hover:scale-[1.02] active:scale-95" title="Estado: No quiere 🔴. Clic para reiniciar a 'Sin contactar' ⚪">
-            <span class="inline-flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#F7C6B6]"></span>
-              <span class="w-1.5 h-1.5 rounded-full bg-[#F7C6B6]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/30"></span>
-            </span>
-            <span class="whitespace-nowrap font-bold text-[11px]">No quiere</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FDF1EC] border-[#F8D2C4] text-[#A74B2C] hover:scale-[1.02] active:scale-95" title="🔴 No quiere (Clic: reiniciar a ⚪)">
+            <span class="w-2 h-2 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/30"></span>
+            <span class="whitespace-nowrap">No quiere</span>
           </button>
         `;
       } else {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all cursor-pointer shadow-sm bg-[#FAF7F2] border-[#E7DFD4] text-[#7A6D5E] hover:bg-[#FFFFFF] hover:border-[#D5C9BA] hover:scale-[1.02] active:scale-95" title="Semáforo sin luz (Sin contactar). Clic para marcar 'Interesado' 🟢">
-            <span class="inline-flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
-              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
-              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
-            </span>
-            <span class="whitespace-nowrap text-[11px]">${isCompact ? 'Pendiente' : 'Sin contactar'}</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium border transition-all cursor-pointer bg-[#FAF7F2] border-[#E7DFD4] text-[#7A6D5E] hover:bg-white hover:border-[#D5C9BA] hover:scale-[1.02] active:scale-95" title="⚪ Sin contactar (Clic: marcar 'Interesado' 🟢)">
+            <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
+            <span class="whitespace-nowrap text-[#7A6D5E] font-medium">${isCompact ? 'Pendiente' : 'Sin contactar'}</span>
           </button>
         `;
       }
