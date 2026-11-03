@@ -303,12 +303,13 @@
         
         <!-- Filtro Provincia -->
         <div>
-          <label class="block text-slate-400 font-medium mb-1.5">Provincia / Hub Mercantil</label>
+          <label class="block text-slate-400 font-medium mb-1.5">Provincia / Ciudad</label>
           <select id="filterProvince" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2.5 py-1.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
-            <option value="TODAS">Todas las Provincias</option>
+            <option value="TODAS">Todas las Ciudades / Provincias</option>
+            <option value="VALENCIA">Valencia</option>
+            <option value="BURGOS">Burgos</option>
             <option value="MADRID">Madrid</option>
             <option value="BARCELONA">Barcelona</option>
-            <option value="VALENCIA">Valencia</option>
             <option value="ALICANTE">Alicante</option>
             <option value="SEVILLA">Sevilla</option>
             <option value="MALAGA">Málaga</option>
@@ -347,14 +348,6 @@
         <div>
           <label class="block text-slate-400 font-medium mb-1.5">Ordenar Por</label>
           <select id="filterSort" onchange="applyFilters()" class="w-full bg-[#070A12] border border-[#1E283D] rounded px-2.5 py-1.5 text-slate-200 text-xs focus:border-amber-500 focus:outline-none">
-            <option value="score_desc">Puntuación / Oportunidad (Mayor)</option>
-            <option value="capital_desc">Capital Social (Mayor)</option>
-            <option value="name_asc">Razón Social (A-Z)</option>
-            <option value="date_desc">Fecha de Constitución (Reciente)</option>
-          </select>
-        </div>
-
-      </div>
             <option value="score_desc">Puntuación / Oportunidad (Mayor)</option>
             <option value="capital_desc">Capital Social (Mayor)</option>
             <option value="name_asc">Razón Social (A-Z)</option>
