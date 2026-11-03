@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Leaflet CSS & JS para Mapa Interactivo (Sin APIs externas, ultra rápido) -->
+  <!-- Leaflet CSS & JS para Mapa Interactivo (100% Gratuito, Sin API Keys, OpenStreetMap) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
@@ -103,7 +103,7 @@
     .leaflet-popup-content-wrapper {
       background: #FFFFFF;
       color: #1A1612;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 0;
       box-shadow: 0 10px 25px -5px rgba(45, 35, 25, 0.15);
       border: 1px solid #E7DFD4;
@@ -127,8 +127,14 @@
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .map-pin:hover {
-      transform: scale(1.25);
+      transform: scale(1.3);
       z-index: 999 !important;
+    }
+
+    /* Column Sort Hover & Active */
+    .col-header-active {
+      color: #A74B2C !important;
+      background-color: #FAF2EC !important;
     }
   </style>
 
@@ -139,13 +145,13 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-[#FAECE6] selection:text-[#A74B2C]">
 
-  <!-- HEADER EDITORIAL DAROX STUDIO -->
+  <!-- HEADER EDITORIAL DAROX STUDIO (RESPONSIVE) -->
   <header class="sticky top-0 z-40 bg-[#FFFFFF]/90 backdrop-blur-md border-b border-[#E7DFD4] transition-all">
-    <div class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <div class="max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
       
       <!-- Marca DAROX con Isotipo Oficial -->
-      <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4] p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+      <div class="flex items-center gap-2.5 sm:gap-3.5">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4] p-1 sm:p-1.5 flex items-center justify-center shrink-0 shadow-sm">
           <img 
             src="assets/darox-logo-black.png" 
             alt="DAROX Studio" 
@@ -154,23 +160,23 @@
           />
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-editorial text-xl font-bold tracking-tight text-[#1A1612]">DAROX</span>
-            <span class="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C] border border-[#F4D6CA]">
-              Sales Ops Studio
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="font-editorial text-lg sm:text-xl font-bold tracking-tight text-[#1A1612]">DAROX</span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C] border border-[#F4D6CA]">
+              Studio Engine
             </span>
           </div>
-          <p class="text-xs text-[#7A6D5E] font-medium hidden sm:block">
+          <p class="text-xs text-[#7A6D5E] font-medium hidden md:block">
             Captación temprana B2B · Nuevas Sociedades (BORME) & Negocios Locales (Google Maps)
           </p>
         </div>
       </div>
 
       <!-- Acciones de Cabecera -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         
-        <!-- Estado sincronizado -->
-        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F0F6F3] border border-[#DFECE6] text-[11px] font-medium text-[#1E5443]">
+        <!-- Estado sincronizado (Desktop) -->
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F0F6F3] border border-[#DFECE6] text-[11px] font-medium text-[#1E5443]">
           <span class="w-2 h-2 rounded-full bg-[#2E6F56] animate-pulse"></span>
           <span>Sincronizado con Registro & Maps</span>
         </div>
@@ -178,30 +184,30 @@
         <!-- Botón Exportar CSV -->
         <button 
           onclick="exportLeadsCsv()" 
-          class="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#D5C9BA] hover:border-[#A74B2C] bg-[#FFFFFF] hover:bg-[#FDF6F3] text-xs font-semibold text-[#544A3F] hover:text-[#A74B2C] transition-all shadow-sm cursor-pointer"
+          class="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#D5C9BA] hover:border-[#A74B2C] bg-[#FFFFFF] hover:bg-[#FDF6F3] text-xs font-semibold text-[#544A3F] hover:text-[#A74B2C] transition-all shadow-sm cursor-pointer"
           title="Descargar datos en CSV para Excel / Sheets"
         >
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          <span class="hidden sm:inline">Exportar</span> CSV
+          <span class="hidden sm:inline">Exportar</span><span class="sm:hidden">CSV</span>
         </button>
 
         <!-- Botón Lanzar Búsqueda (Pill Navy) -->
         <button 
           onclick="openSearchModal('places')" 
-          class="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#121E2A] hover:bg-[#1A2A3A] text-white text-xs font-medium shadow-sm hover:shadow transition-all cursor-pointer"
+          class="flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2.5 rounded-full bg-[#121E2A] hover:bg-[#1A2A3A] text-white text-xs font-medium shadow-sm hover:shadow transition-all cursor-pointer"
         >
           <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-          <span>Nueva Búsqueda</span>
+          <span class="hidden sm:inline">Nueva Búsqueda</span><span class="sm:hidden">Buscar</span>
         </button>
 
         <!-- Refresh -->
         <button 
           onclick="refreshData()" 
           id="refreshBtn" 
-          class="p-2.5 rounded-full bg-[#FFFFFF] border border-[#E7DFD4] hover:bg-[#F2ECE4] text-[#7A6D5E] hover:text-[#1A1612] transition-colors cursor-pointer"
+          class="p-2 sm:p-2.5 rounded-full bg-[#FFFFFF] border border-[#E7DFD4] hover:bg-[#F2ECE4] text-[#7A6D5E] hover:text-[#1A1612] transition-colors cursor-pointer"
           title="Actualizar datos"
         >
-          <svg class="w-4 h-4" id="refreshIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <svg class="w-3.5 sm:w-4 h-3.5 sm:h-4" id="refreshIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
         </button>
 
       </div>
@@ -210,76 +216,106 @@
   </header>
 
   <!-- CONTENEDOR PRINCIPAL -->
-  <main class="flex-1 max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <main class="flex-1 max-w-[1720px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
 
-    <!-- HERO KPI CARDS: ESTILO CENTRO AMARÉ (CÁLIDO, EDITORIAL, ORGÁNICO) -->
-    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
+    <!-- HERO KPI CARDS INTERACTIVAS: CLICABLES PARA FILTRAR RÁPIDAMENTE -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3.5">
       
-      <!-- Card 1: Prospectos Calificados -->
-      <div class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-4 shadow-warm flex flex-col justify-between">
+      <!-- Card 1: Prospectos Totales (Clic = Mostrar Todos) -->
+      <div 
+        onclick="setSourceTab('all'); clearAllFilters();" 
+        class="kpi-card bg-[#FFFFFF] border border-[#E7DFD4] hover:border-[#121E2A] rounded-2xl p-3 sm:p-4 shadow-warm flex flex-col justify-between cursor-pointer transition-all hover:scale-[1.01] group"
+        title="Clic para ver todos los prospectos"
+      >
         <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
-          <span>Prospectos Totales</span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F2ECE4] text-[#544A3F]">ACTIVOS</span>
+          <span class="group-hover:text-[#1A1612] transition-colors">Prospectos Totales</span>
+          <span class="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F2ECE4] text-[#544A3F]">VER TODOS</span>
         </div>
-        <div class="mt-2.5">
-          <div class="font-editorial text-3xl font-bold tracking-tight text-[#1A1612]" id="statTotalLeads">820</div>
-          <p class="text-[11px] text-[#A89987] font-medium mt-0.5">
+        <div class="mt-2">
+          <div class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-[#1A1612]" id="statTotalLeads">820</div>
+          <p class="text-[10px] sm:text-[11px] text-[#A89987] font-medium mt-0.5">
             <span class="text-[#544A3F] font-semibold">180</span> BORME · <span class="text-[#544A3F] font-semibold">640</span> Maps
           </p>
         </div>
       </div>
 
-      <!-- Card 2: Hot Leads Sin Web -->
-      <div class="bg-[#FFFFFF] border border-[#F4D6CA] rounded-2xl p-4 shadow-warm flex flex-col justify-between relative overflow-hidden">
+      <!-- Card 2: Hot Leads Sin Web (Clic = Filtrar solo sin web) -->
+      <div 
+        onclick="toggleNoWebFilter()" 
+        id="kpiCardNoWeb"
+        class="kpi-card bg-[#FFFFFF] border border-[#F4D6CA] hover:border-[#A74B2C] rounded-2xl p-3 sm:p-4 shadow-warm flex flex-col justify-between relative overflow-hidden cursor-pointer transition-all hover:scale-[1.01] group"
+        title="Clic para filtrar únicamente empresas sin página web"
+      >
         <div class="flex items-center justify-between text-xs font-medium text-[#A74B2C]">
-          <span class="flex items-center gap-1.5">
+          <span class="flex items-center gap-1.5 font-bold">
             <span class="w-2 h-2 rounded-full bg-[#A74B2C]"></span>
             <span>Hot Leads (Sin Web)</span>
           </span>
-          <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C]" id="statNoWebPct">44.8%</span>
+          <span class="text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C]" id="statNoWebPct">44.8%</span>
         </div>
-        <div class="mt-2.5">
-          <div class="font-editorial text-3xl font-bold tracking-tight text-[#A74B2C]" id="statNoWebLeads">367</div>
-          <p class="text-[11px] text-[#8F3D22] font-medium mt-0.5">Alta intención · Necesitan desarrollo web</p>
-        </div>
-      </div>
-
-      <!-- Card 3: Capital Auditado -->
-      <div class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-4 shadow-warm flex flex-col justify-between">
-        <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
-          <span>Capital Social Auditado</span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F2ECE4] text-[#544A3F]">BORME</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="font-editorial text-2xl font-bold tracking-tight text-[#1A1612]" id="statTotalCapital">2.325.971 €</div>
-          <p class="text-[11px] text-[#A89987] font-medium mt-0.5">Solvencia mercantil inscrita</p>
-        </div>
-      </div>
-
-      <!-- Card 4: Contactos con Decisor -->
-      <div class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-4 shadow-warm flex flex-col justify-between">
-        <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
-          <span>Contactos con Decisor</span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F0F6F3] text-[#1E5443]">DIRECTO</span>
-        </div>
-        <div class="mt-2.5">
-          <div class="font-editorial text-3xl font-bold tracking-tight text-[#1E5443]" id="statContacts">780</div>
-          <p class="text-[11px] text-[#7A6D5E] font-medium mt-0.5">
-            <span class="font-semibold text-[#1A1612]">596</span> Teléfonos · <span class="font-semibold text-[#1A1612]">343</span> Emails
+        <div class="mt-2">
+          <div class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-[#A74B2C]" id="statNoWebLeads">367</div>
+          <p class="text-[10px] sm:text-[11px] text-[#8F3D22] font-medium mt-0.5 flex items-center justify-between">
+            <span>Alta intención</span>
+            <span class="text-[9px] underline font-semibold group-hover:text-[#A74B2C]">Filtrar →</span>
           </p>
         </div>
       </div>
 
-      <!-- Card 5: Empresas Geolocalizadas en Mapa -->
-      <div class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-4 shadow-warm flex flex-col justify-between col-span-2 md:col-span-1">
+      <!-- Card 3: Capital Auditado (Clic = Filtrar solo BORME) -->
+      <div 
+        onclick="setSourceTab('borme')" 
+        class="kpi-card bg-[#FFFFFF] border border-[#E7DFD4] hover:border-[#A66723] rounded-2xl p-3 sm:p-4 shadow-warm flex flex-col justify-between cursor-pointer transition-all hover:scale-[1.01] group"
+        title="Clic para ver solo sociedades del BORME"
+      >
         <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
-          <span>En Mapa Interactivo</span>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C]">GPS READY</span>
+          <span class="group-hover:text-[#1A1612] transition-colors">Capital Auditado</span>
+          <span class="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F2ECE4] text-[#544A3F]">BORME</span>
         </div>
-        <div class="mt-2.5">
-          <div class="font-editorial text-3xl font-bold tracking-tight text-[#121E2A]" id="statMapCount">621</div>
-          <p class="text-[11px] text-[#7A6D5E] font-medium mt-0.5">
-            <span class="font-semibold text-[#1A1612]">501</span> Valencia · <span class="font-semibold text-[#1A1612]">120</span> Burgos
+        <div class="mt-2">
+          <div class="font-editorial text-xl sm:text-2xl font-bold tracking-tight text-[#1A1612]" id="statTotalCapital">2.325.971 €</div>
+          <p class="text-[10px] sm:text-[11px] text-[#A89987] font-medium mt-0.5 flex items-center justify-between">
+            <span>Solvencia inscrita</span>
+            <span class="text-[9px] underline font-semibold group-hover:text-[#1A1612]">Ver BORME →</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4: Contactos con Decisor (Clic = Filtrar con teléfono/email) -->
+      <div 
+        onclick="toggleHasContactFilter()" 
+        id="kpiCardContacts"
+        class="kpi-card bg-[#FFFFFF] border border-[#E7DFD4] hover:border-[#1E5443] rounded-2xl p-3 sm:p-4 shadow-warm flex flex-col justify-between cursor-pointer transition-all hover:scale-[1.01] group"
+        title="Clic para filtrar negocios con teléfono o email directo"
+      >
+        <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
+          <span class="group-hover:text-[#1E5443] transition-colors">Contactos con Decisor</span>
+          <span class="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#F0F6F3] text-[#1E5443]">DIRECTO</span>
+        </div>
+        <div class="mt-2">
+          <div class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-[#1E5443]" id="statContacts">780</div>
+          <p class="text-[10px] sm:text-[11px] text-[#7A6D5E] font-medium mt-0.5 flex items-center justify-between">
+            <span><strong class="text-[#1A1612]">596</strong> Tlf · <strong class="text-[#1A1612]">343</strong> Email</span>
+            <span class="text-[9px] underline font-semibold group-hover:text-[#1E5443]">Filtrar →</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 5: Empresas Geolocalizadas en Mapa (Clic = Ir al mapa) -->
+      <div 
+        onclick="switchView('map')" 
+        class="kpi-card bg-[#FFFFFF] border border-[#E7DFD4] hover:border-[#A74B2C] rounded-2xl p-3 sm:p-4 shadow-warm flex flex-col justify-between col-span-2 md:col-span-1 cursor-pointer transition-all hover:scale-[1.01] group"
+        title="Clic para ver las empresas en el mapa interactivo"
+      >
+        <div class="flex items-center justify-between text-xs text-[#7A6D5E] font-medium">
+          <span class="group-hover:text-[#A74B2C] transition-colors">En Mapa Interactivo</span>
+          <span class="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#FAECE6] text-[#A74B2C] font-semibold">VER MAPA</span>
+        </div>
+        <div class="mt-2">
+          <div class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-[#121E2A]" id="statMapCount">621</div>
+          <p class="text-[10px] sm:text-[11px] text-[#7A6D5E] font-medium mt-0.5 flex items-center justify-between">
+            <span><strong class="text-[#1A1612]">501</strong> VLC · <strong class="text-[#1A1612]">120</strong> BU</span>
+            <span class="text-[9px] underline font-semibold text-[#A74B2C]">Abrir Mapa 🗺️</span>
           </p>
         </div>
       </div>
@@ -287,17 +323,17 @@
     </section>
 
     <!-- CONTROL CENTER & SELECTOR DE VISTAS (TABLA / MAPA) -->
-    <section class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-4 shadow-warm space-y-4">
+    <section class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl p-3.5 sm:p-4 shadow-warm space-y-3.5">
       
       <!-- Fila 1: Selector de Vistas + Omnibox + Pestañas de Fuente -->
-      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3.5">
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
         
         <!-- Toggle de Vistas: Directorio vs Mapa -->
-        <div class="flex items-center bg-[#FAF7F2] p-1 rounded-full border border-[#E7DFD4] shrink-0 self-start lg:self-auto">
+        <div class="flex items-center bg-[#FAF7F2] p-1 rounded-full border border-[#E7DFD4] shrink-0 self-start sm:self-auto w-full sm:w-auto justify-between sm:justify-start">
           <button 
             onclick="switchView('table')" 
             id="btnViewTable" 
-            class="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer"
+            class="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer"
           >
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
             <span>Directorio</span>
@@ -307,7 +343,7 @@
           <button 
             onclick="switchView('map')" 
             id="btnViewMap" 
-            class="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer"
+            class="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer"
           >
             <svg class="w-3.5 h-3.5 text-[#A74B2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             <span>Mapa Interactivo</span>
@@ -316,23 +352,23 @@
         </div>
 
         <!-- Pestañas de Fuente (Segmented Control) -->
-        <div class="flex items-center bg-[#FAF7F2] p-1 rounded-full border border-[#E7DFD4] overflow-x-auto scrollbar-none self-start lg:self-auto">
-          <button onclick="setSourceTab('all')" id="tabSourceAll" class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#1A1612] bg-[#FFFFFF] border border-[#E7DFD4] shadow-sm transition-all whitespace-nowrap cursor-pointer">
+        <div class="flex items-center bg-[#FAF7F2] p-1 rounded-full border border-[#E7DFD4] overflow-x-auto scrollbar-none w-full sm:w-auto">
+          <button onclick="setSourceTab('all')" id="tabSourceAll" class="flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#1A1612] bg-[#FFFFFF] border border-[#E7DFD4] shadow-sm transition-all whitespace-nowrap cursor-pointer text-center">
             Todos <span class="ml-1 text-[10px] font-mono text-[#7A6D5E]" id="badgeSourceAll">(820)</span>
           </button>
-          <button onclick="setSourceTab('borme')" id="tabSourceBorme" class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer">
-            BORME (Día 0) <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourceBorme">(180)</span>
+          <button onclick="setSourceTab('borme')" id="tabSourceBorme" class="flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer text-center">
+            BORME <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourceBorme">(180)</span>
           </button>
-          <button onclick="setSourceTab('places')" id="tabSourcePlaces" class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer">
-            Google Places / Maps <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourcePlaces">(640)</span>
+          <button onclick="setSourceTab('places')" id="tabSourcePlaces" class="flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer text-center">
+            Google Maps <span class="ml-1 text-[10px] font-mono opacity-70" id="badgeSourcePlaces">(640)</span>
           </button>
-          <button onclick="setSourceTab('favorites')" id="tabSourceFavs" class="px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap flex items-center gap-1 cursor-pointer">
-            <span>⭐ Guardados</span> <span class="text-[10px] font-mono opacity-70" id="badgeSourceFavs">(0)</span>
+          <button onclick="setSourceTab('favorites')" id="tabSourceFavs" class="flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap flex items-center justify-center gap-1 cursor-pointer">
+            <span>⭐</span> <span class="text-[10px] font-mono opacity-70" id="badgeSourceFavs">(0)</span>
           </button>
         </div>
 
         <!-- Omnibox Search Bar con Ctrl+K -->
-        <div class="flex-1 relative max-w-xl">
+        <div class="flex-1 relative w-full lg:max-w-xl">
           <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#A89987]">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
@@ -340,7 +376,7 @@
             type="text" 
             id="omniSearchInput" 
             oninput="handleSearchInput(this.value)"
-            placeholder="Buscar por clínica, empresa, administrador, ciudad, sector, CIF o calle..." 
+            placeholder="Buscar clínica, administrador, ciudad, CIF, calle... (Ctrl+K)" 
             class="w-full pl-10 pr-16 py-2 bg-[#FAF7F2] border border-[#E7DFD4] focus:border-[#A74B2C] focus:bg-[#FFFFFF] focus:outline-none focus:ring-1 focus:ring-[#A74B2C]/40 rounded-full text-xs text-[#1A1612] placeholder-[#A89987] font-sans transition-all"
           />
           <div class="absolute inset-y-0 right-0 pr-2.5 flex items-center gap-1.5">
@@ -353,7 +389,7 @@
         <button 
           onclick="toggleAdvancedFilters()" 
           id="advancedFiltersToggleBtn" 
-          class="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#FAF7F2] hover:bg-[#F2ECE4] border border-[#E7DFD4] text-[#544A3F] text-xs font-semibold rounded-full transition-colors self-end lg:self-auto cursor-pointer"
+          class="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#FAF7F2] hover:bg-[#F2ECE4] border border-[#E7DFD4] text-[#544A3F] text-xs font-semibold rounded-full transition-colors shrink-0 cursor-pointer"
         >
           <svg class="w-3.5 h-3.5 text-[#7A6D5E]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
           <span>Filtros</span>
@@ -362,11 +398,11 @@
 
       </div>
 
-      <!-- Fila 2: Filtro Temporal por Días / Semanas / Mes / Año -->
-      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs border-t border-[#E7DFD4]/70 pt-3" id="timeFilterBar">
+      <!-- Fila 2: Filtro Temporal por Días / Semanas / Mes / Año (Scroll Horizontal) -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs border-t border-[#E7DFD4]/70 pt-2.5 scrollbar-none" id="timeFilterBar">
         <span class="text-[11px] font-semibold text-[#7A6D5E] uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
           <svg class="w-3.5 h-3.5 text-[#A74B2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>Período:</span>
+          <span class="hidden sm:inline">Período:</span>
         </span>
         <button onclick="setTimeRange('all')" id="btnTimeAll" class="time-range-btn px-3 py-1 rounded-full bg-[#121E2A] text-white text-[11px] font-medium whitespace-nowrap cursor-pointer shadow-sm">Todo el Histórico <span class="text-[10px] opacity-75 font-mono" id="timeCountAll">(820)</span></button>
         <button onclick="setTimeRange('today')" id="btnTimeToday" class="time-range-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#544A3F] hover:text-[#1A1612] border border-[#E7DFD4] text-[11px] font-medium whitespace-nowrap cursor-pointer">Hoy (24h) <span class="text-[10px] opacity-75 font-mono" id="timeCountToday">(765)</span></button>
@@ -376,7 +412,7 @@
         <button onclick="setTimeRange('1y')" id="btnTime1y" class="time-range-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#544A3F] hover:text-[#1A1612] border border-[#E7DFD4] text-[11px] font-medium whitespace-nowrap cursor-pointer">Último año (365d) <span class="text-[10px] opacity-75 font-mono" id="timeCount1y">(820)</span></button>
       </div>
 
-      <!-- Fila 3: Chips de Sectores Rápidos -->
+      <!-- Fila 3: Chips de Sectores Rápidos (Scroll Horizontal) -->
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs scrollbar-none" id="sectorChipsContainer">
         <span class="text-[11px] font-semibold text-[#7A6D5E] uppercase tracking-wider shrink-0 mr-1">Sector:</span>
         <button onclick="setSectorFilter('Todos')" class="sector-chip px-3 py-1 rounded-full bg-[#FAECE6] text-[#A74B2C] border border-[#F4D6CA] text-[11px] font-semibold whitespace-nowrap cursor-pointer">Todos</button>
@@ -389,11 +425,11 @@
       </div>
 
       <!-- Fila 4: Cajón Expandible de Filtros Avanzados -->
-      <div id="advancedFiltersDrawer" class="hidden pt-3 border-t border-[#E7DFD4] grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+      <div id="advancedFiltersDrawer" class="hidden pt-3 border-t border-[#E7DFD4] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3.5 text-xs">
         
         <!-- Filtro Provincia / Ciudad -->
         <div>
-          <label class="block text-[#544A3F] font-semibold mb-1.5">Provincia / Ciudad</label>
+          <label class="block text-[#544A3F] font-semibold mb-1">Provincia / Ciudad</label>
           <select id="filterProvince" onchange="applyFilters()" class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl px-3 py-2 text-[#1A1612] text-xs focus:border-[#A74B2C] focus:outline-none">
             <option value="TODAS">Todas las Ciudades / Provincias</option>
             <option value="VALENCIA">Valencia (501 en Mapa)</option>
@@ -409,7 +445,7 @@
 
         <!-- Filtro Rango de Capital -->
         <div>
-          <label class="block text-[#544A3F] font-semibold mb-1.5">Capital Social Mínimo (BORME)</label>
+          <label class="block text-[#544A3F] font-semibold mb-1">Capital Social Mínimo (BORME)</label>
           <select id="filterCapital" onchange="applyFilters()" class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl px-3 py-2 text-[#1A1612] text-xs focus:border-[#A74B2C] focus:outline-none">
             <option value="0">Cualquier Capital</option>
             <option value="5000">Mayor a 5.000 €</option>
@@ -421,7 +457,7 @@
 
         <!-- Rango de Fechas Personalizado -->
         <div>
-          <label class="block text-[#544A3F] font-semibold mb-1.5">Rango de Fecha Exacto</label>
+          <label class="block text-[#544A3F] font-semibold mb-1">Rango de Fecha Exacto</label>
           <div class="grid grid-cols-2 gap-2">
             <div>
               <span class="text-[10px] text-[#A89987]">Desde</span>
@@ -436,11 +472,12 @@
 
         <!-- Ordenación -->
         <div>
-          <label class="block text-[#544A3F] font-semibold mb-1.5">Ordenar Por</label>
+          <label class="block text-[#544A3F] font-semibold mb-1">Ordenar Por</label>
           <select id="filterSort" onchange="applyFilters()" class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl px-3 py-2 text-[#1A1612] text-xs focus:border-[#A74B2C] focus:outline-none">
             <option value="score_desc">Puntuación / Oportunidad (Mayor)</option>
             <option value="capital_desc">Capital Social / Reseñas (Mayor)</option>
             <option value="name_asc">Razón Social (A-Z)</option>
+            <option value="city_asc">Ciudad (A-Z)</option>
             <option value="date_desc">Fecha de Constitución (Reciente)</option>
           </select>
         </div>
@@ -449,61 +486,121 @@
 
     </section>
 
-    <!-- SECCIÓN VISTA 1: TABLA MAESTRA DE LEADS -->
+    <!-- SECCIÓN VISTA 1: TABLA MAESTRA DE LEADS (CON CABECERA FILTRABLE & VISTA MOBILE) -->
     <section id="tableSection" class="bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl overflow-hidden flex flex-col shadow-warm">
       
       <!-- Barra superior de conteo -->
-      <div class="px-5 py-3 border-b border-[#E7DFD4] bg-[#FAF7F2] flex items-center justify-between text-xs text-[#7A6D5E]">
+      <div class="px-4 sm:px-5 py-3 border-b border-[#E7DFD4] bg-[#FAF7F2] flex flex-wrap items-center justify-between gap-2 text-xs text-[#7A6D5E]">
         <div class="flex items-center gap-2">
           <span>Mostrando <strong class="text-[#1A1612] font-mono font-bold" id="tableCountText">820</strong> prospectos</span>
-          <span id="filterDescription" class="text-[#A89987] hidden sm:inline"></span>
+          <span id="activeFilterTagsContainer" class="flex items-center gap-1.5 ml-2"></span>
         </div>
-        <div class="flex items-center gap-4 text-[11px] font-medium">
+        <div class="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-[11px] font-medium">
           <span class="flex items-center gap-1.5 text-[#A74B2C]">
-            <span class="w-2 h-2 rounded-full bg-[#A74B2C]"></span> Hot Lead / Sin Web (>90)
+            <span class="w-2 h-2 rounded-full bg-[#A74B2C]"></span> Hot Lead (>90)
           </span>
           <span class="flex items-center gap-1.5 text-[#A66723]">
-            <span class="w-2 h-2 rounded-full bg-[#A66723]"></span> Oportunidad Maps (60-80)
+            <span class="w-2 h-2 rounded-full bg-[#A66723]"></span> Oportunidad (60-80)
           </span>
           <span class="flex items-center gap-1.5 text-[#1E5443]">
-            <span class="w-2 h-2 rounded-full bg-[#1E5443]"></span> Empresa con Web
+            <span class="w-2 h-2 rounded-full bg-[#1E5443]"></span> Con Web
           </span>
         </div>
       </div>
 
-      <!-- Tabla Contenedor con Scroll Horizontal -->
-      <div class="overflow-x-auto min-h-[420px]">
+      <!-- DESKTOP / TABLET: TABLA MAESTRA CON TODAS LAS COLUMNAS FILTRABLES -->
+      <div class="overflow-x-auto min-h-[420px] hidden sm:block">
         <table class="w-full text-left text-xs border-collapse">
           
-          <thead class="bg-[#F4EFEA] text-[#544A3F] border-b border-[#E7DFD4] font-mono text-[11px] uppercase tracking-wider sticky top-0 z-10">
+          <thead class="bg-[#F4EFEA] text-[#544A3F] border-b border-[#E7DFD4] font-mono text-[11px] uppercase tracking-wider sticky top-0 z-10 select-none">
             <tr>
-              <th class="py-3 px-3.5 w-10 text-center">⭐</th>
-              <th class="py-3 px-3.5 w-28 cursor-pointer hover:text-[#1A1612]" onclick="toggleSort('score')">Score ↕</th>
-              <th class="py-3 px-3.5 min-w-[260px] cursor-pointer hover:text-[#1A1612]" onclick="toggleSort('name')">Empresa / Razón Social ↕</th>
-              <th class="py-3 px-3.5 min-w-[160px]">Ciudad / Sede</th>
-              <th class="py-3 px-3.5 min-w-[150px]">Sector / Actividad</th>
-              <th class="py-3 px-3.5 min-w-[140px] cursor-pointer hover:text-[#1A1612]" onclick="toggleSort('capital')">Capital / Reseñas ↕</th>
-              <th class="py-3 px-3.5 min-w-[180px]">Estado Web / Ficha</th>
-              <th class="py-3 px-3.5 min-w-[190px]">Contacto / Teléfono</th>
-              <th class="py-3 px-3.5 w-28 text-center">Acciones</th>
+              
+              <!-- Favorito -->
+              <th class="py-3 px-3 w-10 text-center cursor-pointer hover:bg-[#EAE2D7]" onclick="setSourceTab(STATE.activeSource === 'favorites' ? 'all' : 'favorites')" title="Filtrar por Favoritos">
+                <span id="colHeaderFav">⭐</span>
+              </th>
+
+              <!-- Score (Ordenable) -->
+              <th class="py-3 px-3.5 w-28 cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('score')" title="Clic para ordenar por Score">
+                <div class="flex items-center gap-1">
+                  <span>Score</span>
+                  <span id="sortIndicatorScore" class="text-[10px] text-[#A74B2C] font-bold">↕</span>
+                </div>
+              </th>
+
+              <!-- Empresa (Ordenable) -->
+              <th class="py-3 px-3.5 min-w-[260px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('name')" title="Clic para ordenar alfabéticamente A-Z">
+                <div class="flex items-center gap-1">
+                  <span>Empresa / Razón Social</span>
+                  <span id="sortIndicatorName" class="text-[10px] text-[#7A6D5E]">↕</span>
+                </div>
+              </th>
+
+              <!-- Ciudad (Ordenable & Filtrable) -->
+              <th class="py-3 px-3.5 min-w-[160px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('city')" title="Clic para ordenar por Ciudad">
+                <div class="flex items-center gap-1">
+                  <span>Ciudad / Sede</span>
+                  <span id="sortIndicatorCity" class="text-[10px] text-[#7A6D5E]">↕</span>
+                </div>
+              </th>
+
+              <!-- Sector (Ordenable) -->
+              <th class="py-3 px-3.5 min-w-[150px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('sector')" title="Clic para ordenar por Sector">
+                <div class="flex items-center gap-1">
+                  <span>Sector / Actividad</span>
+                  <span id="sortIndicatorSector" class="text-[10px] text-[#7A6D5E]">↕</span>
+                </div>
+              </th>
+
+              <!-- Capital / Reseñas (Ordenable) -->
+              <th class="py-3 px-3.5 min-w-[140px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleSort('capital')" title="Clic para ordenar por Capital / Reseñas">
+                <div class="flex items-center gap-1">
+                  <span>Capital / Reseñas</span>
+                  <span id="sortIndicatorCapital" class="text-[10px] text-[#7A6D5E]">↕</span>
+                </div>
+              </th>
+
+              <!-- Estado Web (Filtrable Clic Directo!) -->
+              <th class="py-3 px-3.5 min-w-[170px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleNoWebFilter()" title="Clic para alternar: Solo Sin Web vs Todos">
+                <div class="flex items-center gap-1">
+                  <span>Estado Web / Ficha</span>
+                  <span id="filterIndicatorNoWeb" class="text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#FAECE6] text-[#A74B2C]">Filtro</span>
+                </div>
+              </th>
+
+              <!-- Contacto / Teléfono (Filtrable Clic Directo!) -->
+              <th class="py-3 px-3.5 min-w-[180px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleHasContactFilter()" title="Clic para alternar: Solo Con Teléfono vs Todos">
+                <div class="flex items-center gap-1">
+                  <span>Contacto / Teléfono</span>
+                  <span id="filterIndicatorContact" class="text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#F0F6F3] text-[#1E5443]">Filtro</span>
+                </div>
+              </th>
+
+              <!-- Acciones -->
+              <th class="py-3 px-3 w-24 text-center">Acciones</th>
             </tr>
           </thead>
 
           <tbody id="leadsTableBody" class="divide-y divide-[#E7DFD4]/60 text-[#332C25] font-sans">
-            <!-- Las filas se renderizan dinámicamente -->
+            <!-- Renderizado dinámico en desktop -->
           </tbody>
 
         </table>
       </div>
 
-      <!-- Paginación -->
-      <div class="px-5 py-3.5 bg-[#FAF7F2] border-t border-[#E7DFD4] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#7A6D5E]">
-        <div id="paginationInfo">Mostrando 1-50 de 820 prospectos</div>
+      <!-- MOBILE ONLY: VISTA DE TARJETAS RESPONSIVE (MÁXIMA COMODIDAD EN MÓVIL) -->
+      <div id="mobileCardsContainer" class="sm:hidden divide-y divide-[#E7DFD4]/70 p-2 space-y-2">
+        <!-- Renderizado dinámico en mobile -->
+      </div>
+
+      <!-- Paginación Responsive -->
+      <div class="px-4 sm:px-5 py-3 sm:py-3.5 bg-[#FAF7F2] border-t border-[#E7DFD4] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#7A6D5E]">
+        <div id="paginationInfo" class="text-center sm:text-left">Mostrando 1-50 de 820 prospectos</div>
         <div class="flex items-center gap-2">
           <button onclick="changePage(-1)" id="btnPrevPage" class="px-3.5 py-1.5 rounded-full border border-[#D5C9BA] bg-[#FFFFFF] hover:bg-[#F2ECE4] text-[#1A1612] disabled:opacity-40 disabled:cursor-not-allowed font-medium transition-colors">
             ← Anterior
           </button>
-          <span id="pageIndicator" class="font-mono text-xs font-semibold px-2 text-[#1A1612]">Página 1</span>
+          <span id="pageIndicator" class="font-mono text-xs font-semibold px-2 text-[#1A1612]">Pág 1</span>
           <button onclick="changePage(1)" id="btnNextPage" class="px-3.5 py-1.5 rounded-full border border-[#D5C9BA] bg-[#FFFFFF] hover:bg-[#F2ECE4] text-[#1A1612] disabled:opacity-40 disabled:cursor-not-allowed font-medium transition-colors">
             Siguiente →
           </button>
@@ -512,76 +609,76 @@
 
     </section>
 
-    <!-- SECCIÓN VISTA 2: MAPA INTERACTIVO DE EMPRESAS (LEAFLET + CARTODB POSITRON) -->
+    <!-- SECCIÓN VISTA 2: MAPA INTERACTIVO (100% OPENSTREETMAP, SIN MARCAS DE AGUA) -->
     <section id="mapSection" class="hidden bg-[#FFFFFF] border border-[#E7DFD4] rounded-2xl overflow-hidden shadow-warm flex flex-col">
       
       <!-- Barra superior de control del mapa -->
-      <div class="p-4 bg-[#FAF7F2] border-b border-[#E7DFD4] flex flex-wrap items-center justify-between gap-3">
+      <div class="p-3.5 sm:p-4 bg-[#FAF7F2] border-b border-[#E7DFD4] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div class="flex items-center gap-2.5">
           <span class="font-editorial text-lg font-bold text-[#1A1612]">Mapa de Oportunidades</span>
           <span class="text-xs text-[#7A6D5E] font-medium" id="mapVisibleCountText">(621 empresas geolocalizadas)</span>
         </div>
 
         <!-- Botones de salto rápido a ciudades -->
-        <div class="flex items-center gap-1.5 text-xs">
-          <span class="text-[11px] font-semibold text-[#7A6D5E] mr-1 hidden sm:inline">Zoom rápido:</span>
-          <button onclick="zoomMapToCity('all')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#1A1612] font-semibold transition-all shadow-sm">
+        <div class="flex items-center gap-1.5 text-xs overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
+          <span class="text-[11px] font-semibold text-[#7A6D5E] mr-1 shrink-0 hidden md:inline">Zoom:</span>
+          <button onclick="zoomMapToCity('all')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#1A1612] font-semibold transition-all shadow-sm shrink-0">
             Toda España
           </button>
-          <button onclick="zoomMapToCity('Valencia')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#A74B2C] font-semibold transition-all shadow-sm">
+          <button onclick="zoomMapToCity('Valencia')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#A74B2C] font-semibold transition-all shadow-sm shrink-0">
             📍 Valencia (501)
           </button>
-          <button onclick="zoomMapToCity('Burgos')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#A74B2C] font-semibold transition-all shadow-sm">
+          <button onclick="zoomMapToCity('Burgos')" class="px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#D5C9BA] hover:bg-[#F2ECE4] text-[#A74B2C] font-semibold transition-all shadow-sm shrink-0">
             📍 Burgos (120)
           </button>
-          <button onclick="filterMapOnlyNoWeb()" id="btnMapFilterNoWeb" class="px-3 py-1 rounded-full bg-[#FAECE6] border border-[#F4D6CA] text-[#A74B2C] font-semibold hover:bg-[#F4D6CA] transition-all shadow-sm">
-            🔥 Solo Sin Web (<span id="mapNoWebBadge">168</span>)
+          <button onclick="toggleNoWebFilter()" id="btnMapFilterNoWeb" class="px-3 py-1 rounded-full bg-[#FAECE6] border border-[#F4D6CA] text-[#A74B2C] font-semibold hover:bg-[#F4D6CA] transition-all shadow-sm shrink-0">
+            🔥 Solo Sin Web (<span id="mapNoWebBadge">367</span>)
           </button>
         </div>
       </div>
 
-      <!-- Contenedor del Mapa Leaflet -->
-      <div id="leafletMap" class="w-full h-[620px] bg-[#FAF7F2] z-0"></div>
+      <!-- Contenedor del Mapa Leaflet (Responsive) -->
+      <div id="leafletMap" class="w-full h-[400px] sm:h-[520px] lg:h-[620px] bg-[#FAF7F2] z-0"></div>
 
       <!-- Leyenda inferior del mapa -->
-      <div class="px-5 py-2.5 bg-[#FAF7F2] border-t border-[#E7DFD4] flex flex-wrap items-center justify-between text-xs text-[#7A6D5E]">
-        <div class="flex items-center gap-4">
+      <div class="px-4 sm:px-5 py-2.5 bg-[#FAF7F2] border-t border-[#E7DFD4] flex flex-wrap items-center justify-between text-xs text-[#7A6D5E] gap-2">
+        <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
           <span class="flex items-center gap-1.5">
             <span class="w-3 h-3 rounded-full bg-[#A74B2C] shadow-sm"></span> 
-            <strong class="text-[#A74B2C]">Hot Lead</strong> (Sin página web activa)
+            <strong class="text-[#A74B2C]">Hot Lead</strong> (Sin web)
           </span>
           <span class="flex items-center gap-1.5">
             <span class="w-3 h-3 rounded-full bg-[#A66723] shadow-sm"></span> 
-            <strong class="text-[#A66723]">Oportunidad Maps</strong> (Pocas reseñas / Ficha descuidada)
+            <strong class="text-[#A66723]">Oportunidad Maps</strong> (Ficha descuidada)
           </span>
           <span class="flex items-center gap-1.5">
             <span class="w-3 h-3 rounded-full bg-[#1E5443] shadow-sm"></span> 
             <strong class="text-[#1E5443]">Con Web</strong> (Empresa activa)
           </span>
         </div>
-        <div class="text-[11px] text-[#A89987]">Haz clic sobre cualquier chincheta para ver sus datos y redactar el pitch comercial directo</div>
+        <div class="text-[11px] text-[#A89987] hidden md:block">Haz clic en cualquier chincheta para ver sus datos y redactar el pitch comercial directo</div>
       </div>
 
     </section>
 
   </main>
 
-  <!-- DRAWER LATERAL DE INSPECCIÓN Y PITCH GENERATOR -->
+  <!-- DRAWER LATERAL DE INSPECCIÓN Y PITCH (FULLSCREEN EN MÓVIL) -->
   <aside id="inspectorDrawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
     <div class="absolute inset-0 bg-[#1A1612]/40 backdrop-blur-sm transition-opacity" onclick="closeDrawer()"></div>
     
-    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
       <div class="w-screen max-w-xl bg-[#FFFFFF] border-l border-[#E7DFD4] shadow-2xl flex flex-col justify-between">
         
         <!-- Header Drawer -->
-        <div class="p-6 border-b border-[#E7DFD4] bg-[#FAF7F2] flex items-start justify-between">
-          <div class="pr-6">
+        <div class="p-4 sm:p-6 border-b border-[#E7DFD4] bg-[#FAF7F2] flex items-start justify-between">
+          <div class="pr-4 sm:pr-6">
             <div class="flex items-center gap-2 mb-1.5">
               <span id="drawerScoreBadge" class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold">95 pts</span>
               <span id="drawerSourceBadge" class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FFFFFF] border border-[#E7DFD4] text-[#544A3F]">PLACES</span>
               <span id="drawerCityBadge" class="text-[10px] font-semibold text-[#7A6D5E]">VALENCIA</span>
             </div>
-            <h2 id="drawerCompanyName" class="font-editorial text-2xl font-bold text-[#1A1612] leading-tight">Clínica Dental</h2>
+            <h2 id="drawerCompanyName" class="font-editorial text-xl sm:text-2xl font-bold text-[#1A1612] leading-tight">Clínica Dental</h2>
             <p id="drawerAddress" class="text-xs text-[#7A6D5E] mt-1">Dirección completa</p>
           </div>
           <button onclick="closeDrawer()" class="p-2 rounded-full hover:bg-[#E7DFD4] text-[#7A6D5E] hover:text-[#1A1612] transition-colors cursor-pointer">
@@ -590,17 +687,17 @@
         </div>
 
         <!-- Contenido Tabs Drawer -->
-        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 sm:space-y-6">
           
           <!-- Pestañas internas del Drawer -->
-          <div class="flex items-center border-b border-[#E7DFD4] text-xs font-semibold gap-6">
+          <div class="flex items-center border-b border-[#E7DFD4] text-xs font-semibold gap-4 sm:gap-6">
             <button onclick="switchDrawerTab('resumen')" id="btnDrawerTabResumen" class="pb-2.5 border-b-2 border-[#A74B2C] text-[#A74B2C] transition-all">Resumen & Oportunidad</button>
             <button onclick="switchDrawerTab('pitch')" id="btnDrawerTabPitch" class="pb-2.5 border-b-2 border-transparent text-[#7A6D5E] hover:text-[#1A1612] transition-all">Pitches Comerciales</button>
             <button onclick="switchDrawerTab('crm')" id="btnDrawerTabCrm" class="pb-2.5 border-b-2 border-transparent text-[#7A6D5E] hover:text-[#1A1612] transition-all">Estado CRM</button>
           </div>
 
           <!-- TAB 1: RESUMEN -->
-          <div id="drawerTabContentResumen" class="space-y-5">
+          <div id="drawerTabContentResumen" class="space-y-4 sm:space-y-5">
             
             <!-- Bloque de Oportunidad Detectada -->
             <div class="p-4 rounded-xl bg-[#FAECE6] border border-[#F4D6CA] space-y-2">
@@ -616,9 +713,9 @@
             </div>
 
             <!-- Datos de Contacto Directo -->
-            <div class="space-y-3">
+            <div class="space-y-2.5">
               <h3 class="text-xs font-bold text-[#1A1612] uppercase tracking-wider">Canales de Contacto Directo</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                 
                 <div class="p-3 bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl">
                   <span class="text-[10px] font-semibold text-[#A89987] uppercase block">Teléfono</span>
@@ -644,9 +741,9 @@
             </div>
 
             <!-- Datos Web / Dominios / Maps -->
-            <div class="space-y-3">
+            <div class="space-y-2.5">
               <h3 class="text-xs font-bold text-[#1A1612] uppercase tracking-wider">Presencia Digital & Dominios</h3>
-              <div class="p-3.5 bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl space-y-2.5 text-xs">
+              <div class="p-3.5 bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl space-y-2 text-xs">
                 
                 <div class="flex items-center justify-between">
                   <span class="text-[#7A6D5E]">Sitio Web Actual:</span>
@@ -677,7 +774,7 @@
           </div>
 
           <!-- TAB 2: PITCH GENERATOR -->
-          <div id="drawerTabContentPitch" class="hidden space-y-4">
+          <div id="drawerTabContentPitch" class="hidden space-y-3.5">
             <div class="flex items-center justify-between text-xs">
               <span class="text-[#7A6D5E]">Canal de prospección:</span>
               <div class="flex gap-1.5 bg-[#FAF7F2] p-1 rounded-full border border-[#E7DFD4]">
@@ -693,7 +790,7 @@
                 id="pitchTextArea" 
                 rows="11" 
                 readonly 
-                class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl p-4 text-xs font-sans text-[#1A1612] leading-relaxed resize-none focus:outline-none"
+                class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl p-3.5 text-xs font-sans text-[#1A1612] leading-relaxed resize-none focus:outline-none"
               ></textarea>
               <button 
                 onclick="copyCurrentPitch()" 
@@ -704,14 +801,14 @@
                 <span>Copiar Pitch</span>
               </button>
             </div>
-            <p class="text-[11px] text-[#A89987] italic">Pitch personalizado generado automáticamente según si el negocio no tiene web, tiene bajas reseñas en Google Maps o es una sociedad recién constituida.</p>
+            <p class="text-[11px] text-[#A89987] italic">Pitch personalizado generado automáticamente según los datos auditados de la empresa.</p>
           </div>
 
           <!-- TAB 3: ESTADO CRM -->
           <div id="drawerTabContentCrm" class="hidden space-y-4 text-xs">
             
             <div>
-              <label class="block text-[#544A3F] font-semibold mb-1.5">Estado en Pipeline</label>
+              <label class="block text-[#544A3F] font-semibold mb-1">Estado en Pipeline</label>
               <select id="crmStatusSelect" onchange="saveLeadCrmStatus()" class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl px-3 py-2 text-[#1A1612] font-semibold focus:outline-none">
                 <option value="Nuevo">⚪ Nuevo Prospecto</option>
                 <option value="Contactado">🟡 Contactado (Mensaje Enviado)</option>
@@ -722,7 +819,7 @@
             </div>
 
             <div>
-              <label class="block text-[#544A3F] font-semibold mb-1.5">Notas Comerciales Internas</label>
+              <label class="block text-[#544A3F] font-semibold mb-1">Notas Comerciales Internas</label>
               <textarea 
                 id="crmNotesText" 
                 oninput="saveLeadNotes(this.value)" 
@@ -807,7 +904,8 @@
         province: 'TODAS',
         minCapital: 0,
         sortBy: 'score_desc',
-        onlyNoWeb: false
+        onlyNoWeb: false,
+        onlyHasContact: false
       },
       searchQuery: '',
       pagination: {
@@ -872,30 +970,29 @@
       if (view === 'table') {
         tableSec.classList.remove('hidden');
         mapSec.classList.add('hidden');
-        btnTable.className = "flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer";
-        btnMap.className = "flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer";
+        btnTable.className = "flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer";
+        btnMap.className = "flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer";
       } else {
         tableSec.classList.add('hidden');
         mapSec.classList.remove('hidden');
-        btnMap.className = "flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer";
-        btnTable.className = "flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer";
+        btnMap.className = "flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full bg-[#121E2A] text-white shadow-sm transition-all cursor-pointer";
+        btnTable.className = "flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all cursor-pointer";
         
         // Inicializar Leaflet si no existe
         initMap();
       }
     }
 
-    // INICIALIZAR Y ACTUALIZAR MAPA INTERACTIVO LEAFLET
+    // INICIALIZAR Y ACTUALIZAR MAPA INTERACTIVO CON OPENSTREETMAP (100% GRATUITO Y SIN MARCAS)
     function initMap() {
       if (!STATE.map) {
         // Centro geográfico de España
         STATE.map = L.map('leafletMap').setView([40.2, -3.7], 6);
 
-        // Capa CartoDB Positron: estética minimalista y cálida que encaja con el diseño
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
+        // Capa OpenStreetMap estándar: 100% gratuita, global, sin restricciones ni marcas de "API KEY REQUIRED"
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(STATE.map);
       }
 
@@ -972,16 +1069,60 @@
       }
     }
 
-    function filterMapOnlyNoWeb() {
+    // FILTRO INTERACTIVO "SOLO SIN WEB" (DISPONIBLE DESDE BARRAS SUPERIORES O TABLA)
+    function toggleNoWebFilter() {
       STATE.activeFilters.onlyNoWeb = !STATE.activeFilters.onlyNoWeb;
-      const btn = document.getElementById('btnMapFilterNoWeb');
+      
+      const card = document.getElementById('kpiCardNoWeb');
+      const tableTag = document.getElementById('filterIndicatorNoWeb');
+      const mapBtn = document.getElementById('btnMapFilterNoWeb');
+
       if (STATE.activeFilters.onlyNoWeb) {
-        btn.classList.add('bg-[#A74B2C]', 'text-white');
-        btn.classList.remove('bg-[#FAECE6]', 'text-[#A74B2C]');
+        if (card) card.classList.add('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
+        if (tableTag) {
+          tableTag.className = "text-[10px] px-2 py-0.5 rounded-full font-sans font-bold bg-[#A74B2C] text-white shadow-sm";
+          tableTag.textContent = "✓ Solo Sin Web";
+        }
+        if (mapBtn) {
+          mapBtn.classList.add('bg-[#A74B2C]', 'text-white');
+          mapBtn.classList.remove('bg-[#FAECE6]', 'text-[#A74B2C]');
+        }
       } else {
-        btn.classList.remove('bg-[#A74B2C]', 'text-white');
-        btn.classList.add('bg-[#FAECE6]', 'text-[#A74B2C]');
+        if (card) card.classList.remove('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
+        if (tableTag) {
+          tableTag.className = "text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#FAECE6] text-[#A74B2C]";
+          tableTag.textContent = "Filtro";
+        }
+        if (mapBtn) {
+          mapBtn.classList.remove('bg-[#A74B2C]', 'text-white');
+          mapBtn.classList.add('bg-[#FAECE6]', 'text-[#A74B2C]');
+        }
       }
+
+      applyFilters();
+    }
+
+    // FILTRO INTERACTIVO "SOLO CON CONTACTO" (DESDE KPI CARD O TABLA)
+    function toggleHasContactFilter() {
+      STATE.activeFilters.onlyHasContact = !STATE.activeFilters.onlyHasContact;
+      
+      const card = document.getElementById('kpiCardContacts');
+      const tableTag = document.getElementById('filterIndicatorContact');
+
+      if (STATE.activeFilters.onlyHasContact) {
+        if (card) card.classList.add('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
+        if (tableTag) {
+          tableTag.className = "text-[10px] px-2 py-0.5 rounded-full font-sans font-bold bg-[#1E5443] text-white shadow-sm";
+          tableTag.textContent = "✓ Solo Con Teléfono";
+        }
+      } else {
+        if (card) card.classList.remove('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
+        if (tableTag) {
+          tableTag.className = "text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#F0F6F3] text-[#1E5443]";
+          tableTag.textContent = "Filtro";
+        }
+      }
+
       applyFilters();
     }
 
@@ -1003,8 +1144,11 @@
         // Sector
         if (STATE.activeSector !== 'Todos' && lead.sector !== STATE.activeSector) return false;
 
-        // Solo sin web (toggle desde mapa)
+        // Filtro Solo Sin Web
         if (STATE.activeFilters.onlyNoWeb && lead.has_website) return false;
+
+        // Filtro Solo Con Contacto
+        if (STATE.activeFilters.onlyHasContact && !(lead.phone || (lead.contact_name && lead.contact_name.includes('@')))) return false;
 
         // Provincia / Ciudad
         if (prov !== 'TODAS') {
@@ -1033,11 +1177,21 @@
       // Ordenación
       STATE.filteredLeads.sort((a, b) => {
         if (sortBy === 'score_desc') return (b.score || 0) - (a.score || 0);
+        if (sortBy === 'score_asc') return (a.score || 0) - (b.score || 0);
         if (sortBy === 'capital_desc') return (b.capital_num || 0) - (a.capital_num || 0);
+        if (sortBy === 'capital_asc') return (a.capital_num || 0) - (b.capital_num || 0);
         if (sortBy === 'name_asc') return (a.name || '').localeCompare(b.name || '');
+        if (sortBy === 'name_desc') return (b.name || '').localeCompare(a.name || '');
+        if (sortBy === 'city_asc') return (a.city || a.province || '').localeCompare(b.city || b.province || '');
+        if (sortBy === 'city_desc') return (b.city || b.province || '').localeCompare(a.city || a.province || '');
+        if (sortBy === 'sector_asc') return (a.sector || '').localeCompare(b.sector || '');
+        if (sortBy === 'sector_desc') return (b.sector || '').localeCompare(a.sector || '');
         if (sortBy === 'date_desc') return (b.date || '').localeCompare(a.date || '');
         return 0;
       });
+
+      // Actualizar indicadores visuales de ordenación en la cabecera
+      updateSortIndicators(sortBy);
 
       // Renderizar tabla y mapa
       STATE.pagination.page = 1;
@@ -1047,31 +1201,38 @@
       updateKpiCards();
     }
 
-    function updateKpiCards() {
-      const total = STATE.allLeads.length;
-      const noWeb = STATE.allLeads.filter(l => !l.has_website).length;
-      const noWebPct = total > 0 ? ((noWeb / total) * 100).toFixed(1) + '%' : '0%';
-      const withCoords = STATE.allLeads.filter(l => l.lat && l.lng).length;
+    function updateSortIndicators(sortBy) {
+      const reset = (id) => { const el = document.getElementById(id); if (el) { el.textContent = '↕'; el.className = 'text-[10px] text-[#7A6D5E]'; } };
+      reset('sortIndicatorScore');
+      reset('sortIndicatorName');
+      reset('sortIndicatorCity');
+      reset('sortIndicatorSector');
+      reset('sortIndicatorCapital');
 
-      let sumCap = 0;
-      let contacts = 0;
-      STATE.allLeads.forEach(l => {
-        if (l.capital_num) sumCap += l.capital_num;
-        if (l.phone || (l.contact_name && l.contact_name.includes('@'))) contacts++;
-      });
+      const setInd = (id, isDesc) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = isDesc ? '▼' : '▲';
+          el.className = 'text-[10px] text-[#A74B2C] font-bold';
+        }
+      };
 
-      if (document.getElementById('statTotalLeads')) document.getElementById('statTotalLeads').textContent = total;
-      if (document.getElementById('statNoWebLeads')) document.getElementById('statNoWebLeads').textContent = noWeb;
-      if (document.getElementById('statNoWebPct')) document.getElementById('statNoWebPct').textContent = noWebPct;
-      if (document.getElementById('statTotalCapital')) document.getElementById('statTotalCapital').textContent = Math.round(sumCap).toLocaleString('es-ES') + ' €';
-      if (document.getElementById('statContacts')) document.getElementById('statContacts').textContent = contacts;
-      if (document.getElementById('statMapCount')) document.getElementById('statMapCount').textContent = withCoords;
-      if (document.getElementById('mapNoWebBadge')) document.getElementById('mapNoWebBadge').textContent = noWeb;
+      if (sortBy === 'score_desc') setInd('sortIndicatorScore', true);
+      else if (sortBy === 'score_asc') setInd('sortIndicatorScore', false);
+      else if (sortBy === 'name_asc') setInd('sortIndicatorName', false);
+      else if (sortBy === 'name_desc') setInd('sortIndicatorName', true);
+      else if (sortBy === 'city_asc') setInd('sortIndicatorCity', false);
+      else if (sortBy === 'city_desc') setInd('sortIndicatorCity', true);
+      else if (sortBy === 'sector_asc') setInd('sortIndicatorSector', false);
+      else if (sortBy === 'sector_desc') setInd('sortIndicatorSector', true);
+      else if (sortBy === 'capital_desc') setInd('sortIndicatorCapital', true);
+      else if (sortBy === 'capital_asc') setInd('sortIndicatorCapital', false);
     }
 
-    // RENDERIZAR TABLA
+    // RENDERIZAR TABLA (DESKTOP) Y TARJETAS (MOBILE)
     function renderTable() {
       const tbody = document.getElementById('leadsTableBody');
+      const mobileContainer = document.getElementById('mobileCardsContainer');
       const start = (STATE.pagination.page - 1) * STATE.pagination.pageSize;
       const end = start + STATE.pagination.pageSize;
       const pageLeads = STATE.filteredLeads.slice(start, end);
@@ -1079,33 +1240,34 @@
       document.getElementById('tableCountText').textContent = STATE.filteredLeads.length;
       document.getElementById('badgeCountTable').textContent = `(${STATE.filteredLeads.length})`;
       document.getElementById('paginationInfo').textContent = `Mostrando ${STATE.filteredLeads.length > 0 ? start + 1 : 0}-${Math.min(end, STATE.filteredLeads.length)} de ${STATE.filteredLeads.length} prospectos`;
-      document.getElementById('pageIndicator').textContent = `Página ${STATE.pagination.page} de ${Math.max(1, Math.ceil(STATE.filteredLeads.length / STATE.pagination.pageSize))}`;
+      document.getElementById('pageIndicator').textContent = `Pág ${STATE.pagination.page} de ${Math.max(1, Math.ceil(STATE.filteredLeads.length / STATE.pagination.pageSize))}`;
       
       document.getElementById('btnPrevPage').disabled = STATE.pagination.page <= 1;
       document.getElementById('btnNextPage').disabled = end >= STATE.filteredLeads.length;
 
+      // Renderizar estado vacío
       if (pageLeads.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="9" class="py-16 text-center text-[#7A6D5E]">
-              <div class="font-editorial text-lg font-bold text-[#1A1612]">No se encontraron prospectos con estos filtros</div>
-              <p class="text-xs text-[#A89987] mt-1">Prueba a seleccionar "Todos" en sector o a borrar el término de búsqueda.</p>
-              <button onclick="clearAllFilters()" class="mt-3 px-4 py-1.5 rounded-full bg-[#121E2A] text-white text-xs font-semibold">Restablecer Filtros</button>
-            </td>
-          </tr>
+        const emptyHtml = `
+          <div class="py-12 px-4 text-center text-[#7A6D5E]">
+            <div class="font-editorial text-lg font-bold text-[#1A1612]">No se encontraron prospectos con estos filtros</div>
+            <p class="text-xs text-[#A89987] mt-1">Prueba a seleccionar "Todos" en sector o restablecer las condiciones.</p>
+            <button onclick="clearAllFilters()" class="mt-3 px-4 py-1.5 rounded-full bg-[#121E2A] text-white text-xs font-semibold">Restablecer Filtros</button>
+          </div>
         `;
+        tbody.innerHTML = `<tr><td colspan="9">${emptyHtml}</td></tr>`;
+        mobileContainer.innerHTML = emptyHtml;
         return;
       }
 
+      // 1. Render Desktop Table
       tbody.innerHTML = pageLeads.map(lead => {
-        const isHot = !lead.has_website;
         const scoreBadgeClass = lead.score >= 90 ? 'bg-[#FAECE6] text-[#A74B2C] border-[#F4D6CA]' : 'bg-[#FDF7EE] text-[#A66723] border-[#F4DFC1]';
         
         return `
           <tr class="hover:bg-[#FAF7F2] transition-colors group cursor-pointer" onclick="openDrawer('${lead.id}')">
             
             <!-- Favorito -->
-            <td class="py-3 px-3.5 text-center" onclick="event.stopPropagation(); toggleFavorite('${lead.id}')">
+            <td class="py-3 px-3 text-center" onclick="event.stopPropagation(); toggleFavorite('${lead.id}')">
               <span class="text-sm ${lead.is_favorite ? 'text-amber-500' : 'text-[#D5C9BA] hover:text-amber-400'}">
                 ${lead.is_favorite ? '★' : '☆'}
               </span>
@@ -1192,6 +1354,64 @@
           </tr>
         `;
       }).join('');
+
+      // 2. Render Mobile Cards View (Optimizado para Teléfonos)
+      mobileContainer.innerHTML = pageLeads.map(lead => {
+        return `
+          <div class="p-3.5 bg-[#FFFFFF] rounded-xl border border-[#E7DFD4] space-y-2 cursor-pointer shadow-sm active:bg-[#FAF7F2]" onclick="openDrawer('${lead.id}')">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="text-[9px] font-mono uppercase font-semibold px-1.5 py-0.5 rounded bg-[#F2ECE4] text-[#544A3F] mr-1">${lead.source_label || lead.source}</span>
+                <span class="text-[10px] text-[#7A6D5E] font-medium font-mono">${escapeHtml(lead.city || 'España')}</span>
+                <h4 class="font-bold text-sm text-[#1A1612] leading-snug mt-0.5">${escapeHtml(lead.name)}</h4>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold shrink-0 ${lead.score >= 90 ? 'bg-[#FAECE6] text-[#A74B2C]' : 'bg-[#FDF7EE] text-[#A66723]'}">
+                ${lead.score} pts
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2 text-[11px] text-[#7A6D5E]">
+              ${lead.has_website ? `
+                <span class="text-[#1E5443] font-medium">🌐 Con Web</span>
+              ` : `
+                <span class="text-[#A74B2C] font-semibold bg-[#FAECE6] px-1.5 py-0.2 rounded-full">🔴 Sin Web</span>
+              `}
+              <span>·</span>
+              <span class="font-mono">${escapeHtml(lead.capital || '')}</span>
+            </div>
+
+            ${lead.phone ? `
+              <div class="pt-1 flex items-center justify-between text-xs">
+                <span class="font-mono font-bold text-[#1A1612]">📞 ${escapeHtml(lead.phone)}</span>
+                <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" onclick="event.stopPropagation()" class="px-3 py-1 rounded-full bg-[#121E2A] text-white text-[10px] font-semibold">Llamar</a>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ACTUALIZAR KPI CARDS DINÁMICAS
+    function updateKpiCards() {
+      const total = STATE.allLeads.length;
+      const noWeb = STATE.allLeads.filter(l => !l.has_website).length;
+      const noWebPct = total > 0 ? ((noWeb / total) * 100).toFixed(1) + '%' : '0%';
+      const withCoords = STATE.allLeads.filter(l => l.lat && l.lng).length;
+
+      let sumCap = 0;
+      let contacts = 0;
+      STATE.allLeads.forEach(l => {
+        if (l.capital_num) sumCap += l.capital_num;
+        if (l.phone || (l.contact_name && l.contact_name.includes('@'))) contacts++;
+      });
+
+      if (document.getElementById('statTotalLeads')) document.getElementById('statTotalLeads').textContent = total;
+      if (document.getElementById('statNoWebLeads')) document.getElementById('statNoWebLeads').textContent = noWeb;
+      if (document.getElementById('statNoWebPct')) document.getElementById('statNoWebPct').textContent = noWebPct;
+      if (document.getElementById('statTotalCapital')) document.getElementById('statTotalCapital').textContent = Math.round(sumCap).toLocaleString('es-ES') + ' €';
+      if (document.getElementById('statContacts')) document.getElementById('statContacts').textContent = contacts;
+      if (document.getElementById('statMapCount')) document.getElementById('statMapCount').textContent = withCoords;
+      if (document.getElementById('mapNoWebBadge')) document.getElementById('mapNoWebBadge').textContent = noWeb;
     }
 
     // ACTUALIZAR BADGES Y CONTADORES
@@ -1213,9 +1433,9 @@
         const btn = document.getElementById(`tabSource${s}`);
         if (!btn) return;
         if (s.toLowerCase() === src.toLowerCase()) {
-          btn.className = "px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#1A1612] bg-[#FFFFFF] border border-[#E7DFD4] shadow-sm transition-all whitespace-nowrap cursor-pointer";
+          btn.className = "flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#1A1612] bg-[#FFFFFF] border border-[#E7DFD4] shadow-sm transition-all whitespace-nowrap cursor-pointer text-center";
         } else {
-          btn.className = "px-3.5 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer";
+          btn.className = "flex-1 sm:flex-initial px-3 py-1.5 text-xs font-semibold rounded-full text-[#7A6D5E] hover:text-[#1A1612] transition-all whitespace-nowrap cursor-pointer text-center";
         }
       });
       applyFilters();
@@ -1285,24 +1505,55 @@
       handleSearchInput('');
     }
 
+    function clearAllFilters() {
+      clearSearch();
+      STATE.activeSector = 'Todos';
+      STATE.activeSource = 'all';
+      STATE.activeTimeRange = 'all';
+      STATE.activeFilters.onlyNoWeb = false;
+      STATE.activeFilters.onlyHasContact = false;
+      if (document.getElementById('filterProvince')) document.getElementById('filterProvince').value = 'TODAS';
+      if (document.getElementById('filterCapital')) document.getElementById('filterCapital').value = '0';
+      if (document.getElementById('filterFromDate')) document.getElementById('filterFromDate').value = '';
+      if (document.getElementById('filterToDate')) document.getElementById('filterToDate').value = '';
+      
+      const cardNoWeb = document.getElementById('kpiCardNoWeb');
+      if (cardNoWeb) cardNoWeb.classList.remove('ring-2', 'ring-[#A74B2C]', 'bg-[#FDF6F3]');
+      const cardContacts = document.getElementById('kpiCardContacts');
+      if (cardContacts) cardContacts.classList.remove('ring-2', 'ring-[#1E5443]', 'bg-[#F0F6F3]');
+
+      setSectorFilter('Todos');
+      setSourceTab('all');
+      setTimeRange('all');
+    }
+
     function toggleAdvancedFilters() {
       const drawer = document.getElementById('advancedFiltersDrawer');
       drawer.classList.toggle('hidden');
     }
 
+    // ORDENACIÓN POR COLUMNAS
     function toggleSort(field) {
-      const current = document.getElementById('filterSort').value;
+      const sortSelect = document.getElementById('filterSort');
+      const current = sortSelect.value;
+      let nextSort = `${field}_desc`;
+      
       if (current === `${field}_desc`) {
-        document.getElementById('filterSort').value = `${field}_asc`;
+        nextSort = `${field}_asc`;
+      } else if (current === `${field}_asc`) {
+        nextSort = `${field}_desc`;
       } else {
-        document.getElementById('filterSort').value = `${field}_desc`;
+        nextSort = (field === 'name' || field === 'city' || field === 'sector') ? `${field}_asc` : `${field}_desc`;
       }
+
+      sortSelect.value = nextSort;
       applyFilters();
     }
 
     function changePage(delta) {
       STATE.pagination.page += delta;
       renderTable();
+      window.scrollTo({ top: 300, behavior: 'smooth' });
     }
 
     // SLIDE-OVER INSPECTOR DRAWER
@@ -1432,7 +1683,7 @@
       navigator.clipboard.writeText(textarea.value);
       const btn = document.getElementById('copyPitchBtn');
       const originalText = btn.innerHTML;
-      btn.innerHTML = `<span class="text-emerald-300">✓ ¡Copiado!</span>`;
+      btn.innerHTML = `<span class="text-emerald-700 font-bold">✓ ¡Copiado!</span>`;
       setTimeout(() => btn.innerHTML = originalText, 1500);
     }
 
@@ -1473,7 +1724,6 @@
           body: JSON.stringify({ lead_id: leadId, ...data })
         });
       } catch (e) {
-        // En modo estático offline se almacena en memoria del navegador
         console.log('CRM guardado localmente en cliente.');
       }
     }
