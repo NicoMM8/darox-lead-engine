@@ -1881,11 +1881,18 @@
     const CRM_STORAGE_KEY = 'darox_crm_store_v1';
 
     function getLeadSemaforo(lead) {
-      if (lead.crm_semaforo && lead.crm_semaforo !== 'none') return lead.crm_semaforo;
-      const st = (lead.crm_status || '').toLowerCase();
-      if (st.includes('interes') || st.includes('ganad')) return 'green';
-      if (st.includes('piensa') || st.includes('seguim') || st.includes('contact') || st.includes('cualific')) return 'amber';
-      if (st.includes('no quier') || st.includes('perdid') || st.includes('descart')) return 'red';
+      // 1. Prioridad absoluta al semáforo explícito
+      if (lead.crm_semaforo === 'green') return 'green';
+      if (lead.crm_semaforo === 'amber') return 'amber';
+      if (lead.crm_semaforo === 'red') return 'red';
+      if (lead.crm_semaforo === 'none') return 'none';
+
+      // 2. Inferencia por status solo si no hay semáforo asignado
+      const st = (lead.crm_status || '').toLowerCase().trim();
+      if (!st || st === 'sin contactar' || st === 'nuevo' || st === 'pendiente') return 'none';
+      if (st.includes('interes') || st === 'ganado') return 'green';
+      if (st.includes('piensa') || st.includes('seguim') || st === 'contactado' || st === 'cualificado') return 'amber';
+      if (st.includes('no quier') || st.includes('descart') || st.includes('perdid')) return 'red';
       return 'none';
     }
 
@@ -1894,30 +1901,30 @@
 
       if (sem === 'green') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#EBF5F0] border-[#BEE3D2] text-[#1E5443] hover:scale-[1.02] active:scale-95" title="🟢 Interesado (Clic: pasar a 'Lo piensa' 🟡)">
-            <span class="w-2 h-2 rounded-full bg-[#1E5443] ring-2 ring-[#1E5443]/30 animate-pulse"></span>
-            <span class="whitespace-nowrap">Interesado</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#EBF5F0] border-[#BEE3D2] text-[#1E5443] hover:scale-[1.02] active:scale-95" style="background-color: #EBF5F0; color: #1E5443; border-color: #BEE3D2;" title="🟢 Interesado (Clic para pasar a: Lo piensa 🟡)">
+            <span class="w-2 h-2 rounded-full bg-[#1E5443] ring-2 ring-[#1E5443]/40 animate-pulse"></span>
+            <span class="whitespace-nowrap font-bold">Interesado</span>
           </button>
         `;
       } else if (sem === 'amber') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FEF7ED] border-[#F6DFC2] text-[#A66723] hover:scale-[1.02] active:scale-95" title="🟡 Lo piensa (Clic: pasar a 'No quiere' 🔴)">
-            <span class="w-2 h-2 rounded-full bg-[#D97706] ring-2 ring-[#D97706]/30"></span>
-            <span class="whitespace-nowrap">Lo piensa</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FEF7ED] border-[#F6DFC2] text-[#A66723] hover:scale-[1.02] active:scale-95" style="background-color: #FEF7ED; color: #A66723; border-color: #F6DFC2;" title="🟡 Lo piensa (Clic para pasar a: No quiere 🔴)">
+            <span class="w-2 h-2 rounded-full bg-[#D97706] ring-2 ring-[#D97706]/40"></span>
+            <span class="whitespace-nowrap font-bold">Lo piensa</span>
           </button>
         `;
       } else if (sem === 'red') {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FDF1EC] border-[#F8D2C4] text-[#A74B2C] hover:scale-[1.02] active:scale-95" title="🔴 No quiere (Clic: reiniciar a ⚪)">
-            <span class="w-2 h-2 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/30"></span>
-            <span class="whitespace-nowrap">No quiere</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-xs bg-[#FDF1EC] border-[#F8D2C4] text-[#A74B2C] hover:scale-[1.02] active:scale-95" style="background-color: #FDF1EC; color: #A74B2C; border-color: #F8D2C4;" title="🔴 No quiere (Clic para reiniciar a: Sin contactar ⚪)">
+            <span class="w-2 h-2 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/40"></span>
+            <span class="whitespace-nowrap font-bold">No quiere</span>
           </button>
         `;
       } else {
         return `
-          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium border transition-all cursor-pointer bg-[#FAF7F2] border-[#E7DFD4] text-[#7A6D5E] hover:bg-white hover:border-[#D5C9BA] hover:scale-[1.02] active:scale-95" title="⚪ Sin contactar (Clic: marcar 'Interesado' 🟢)">
-            <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
-            <span class="whitespace-nowrap text-[#7A6D5E] font-medium">${isCompact ? 'Pendiente' : 'Sin contactar'}</span>
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium border transition-all cursor-pointer bg-[#FAF7F2] border-[#E7DFD4] text-[#7A6D5E] hover:bg-white hover:border-[#D5C9BA] hover:scale-[1.02] active:scale-95" style="background-color: #FAF7F2; color: #7A6D5E; border-color: #E7DFD4;" title="⚪ Sin contactar (Clic para marcar: Interesado 🟢)">
+            <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/70 group-hover:bg-[#D5C9BA] transition-colors"></span>
+            <span class="whitespace-nowrap font-medium">${isCompact ? 'Pendiente' : 'Sin contactar'}</span>
           </button>
         `;
       }
@@ -2137,6 +2144,10 @@
         STATE.allLeads.forEach(l => {
           if (store[l.id]) {
             const item = store[l.id];
+            // Sanitización: Si estaba marcado como Sin contactar o Nuevo, resetear semáforo a 'none'
+            if (item.status === 'Sin contactar' || item.status === 'Nuevo' || !item.status) {
+              item.semaforo = 'none';
+            }
             if (item.semaforo) l.crm_semaforo = item.semaforo;
             if (item.status) l.crm_status = item.status;
             if (item.notes) l.notes = item.notes;
