@@ -233,6 +233,101 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
         except Exception as e:
             print(f"[!] Error cargando Places leads: {e}")
 
+    # 3. Cargar búsquedas generadas por buscar-clientes (treg / Google Maps)
+    clientes_dir = BASE_DIR / "clientes"
+    if clientes_dir.exists():
+        for csv_file in clientes_dir.glob("*/*.csv"):
+            try:
+                c_df = pd.read_csv(csv_file, sep=";")
+                folder_name = csv_file.parent.name
+                parts = folder_name.split("-")
+                inferred_city = parts[-1].capitalize() if parts else "España"
+                for idx, row in c_df.iterrows():
+                    name = str(row.get("nombre", "")).strip()
+                    if not name or name == "nan":
+                        continue
+                    clean_id_name = re.sub(r'[^a-zA-Z0-9]', '_', name)
+                    lead_id = f"treg_{clean_id_name}_{idx}"
+                    lead_crm = crm_data.get(lead_id, {})
+                    web_val = str(row.get("web", "")).strip()
+                    has_web = bool(web_val and web_val != "nan" and web_val.lower() != "none")
+                    correo_val = str(row.get("correo", "")).strip()
+                    if correo_val == "nan":
+                        correo_val = ""
+                    telefono_val = str(row.get("telefono", "")).strip()
+                    if telefono_val == "nan":
+                        telefono_val = ""
+                    direccion_val = str(row.get("direccion", "")).strip()
+                    if direccion_val == "nan":
+                        direccion_val = ""
+                    gmaps_val = str(row.get("google_maps", "")).strip()
+                    if gmaps_val == "nan":
+                        gmaps_val = ""
+
+                    try:
+                        nota_val = float(str(row.get("nota", "0")).replace(",", "."))
+                    except Exception:
+                        nota_val = 0.0
+
+                    try:
+                        resenas_val = int(row.get("resenas", 0))
+                    except Exception:
+                        resenas_val = 0
+
+                    tipo_val = str(row.get("tipo", "")).strip()
+                    if not has_web:
+                        cat = "HOT LEAD (LOCAL SIN WEB)"
+                        opp = "Local sin sitio web activo. Ofrecer desarrollo web corporativo y presencia digital."
+                        motivos = f"Google Maps ({nota_val}★, {resenas_val} reseñas) sin web. Correo: {correo_val or 'contacto presencial/telefónico'}."
+                        score = 95
+                    elif resenas_val < 5 or nota_val < 4.0:
+                        cat = "OPORTUNIDAD PERFIL MAPS"
+                        opp = "Ficha de Google Maps sin optimizar o pocas reseñas. Ofrecer gestión de reputación y SEO Local."
+                        motivos = f"Google Maps con solo {resenas_val} reseñas y nota {nota_val}★. Requiere optimización de ficha local."
+                        score = 80
+                    else:
+                        cat = "LEAD B2B CUALIFICADO"
+                        opp = "Negocio local con presencia activa. Ofrecer optimización o automatización."
+                        motivos = f"Empresa consolidada con {resenas_val} reseñas ({nota_val}★) y web."
+                        score = 75
+
+                    lead = {
+                        "id": lead_id,
+                        "source": "PLACES",
+                        "source_label": "Google Maps (treg)",
+                        "name": name,
+                        "subtitle": direccion_val,
+                        "province": inferred_city.upper(),
+                        "city": inferred_city,
+                        "category": cat,
+                        "score": score,
+                        "date": datetime.date.today().strftime("%Y-%m-%d"),
+                        "capital": f"{resenas_val} reseñas ({nota_val}★)",
+                        "capital_num": float(resenas_val * 100),
+                        "sector": infer_sector(name, tipo_val),
+                        "objeto_social": f"Actividad: {tipo_val}. Dirección: {direccion_val}",
+                        "administradores": [],
+                        "contact_name": correo_val or "Gerente / Responsable",
+                        "linkedin_url": "",
+                        "phone": telefono_val,
+                        "website": web_val if has_web else "",
+                        "has_website": has_web,
+                        "sin_web_detectada": not has_web,
+                        "domain_suggested": re.sub(r'[^a-zA-Z0-9]', '', name).lower(),
+                        "domain_es_available": not has_web,
+                        "domain_com_available": not has_web,
+                        "rating": nota_val,
+                        "opportunity": opp,
+                        "reasons": motivos,
+                        "google_maps_url": gmaps_val,
+                        "crm_status": lead_crm.get("status", "Nuevo"),
+                        "is_favorite": lead_crm.get("favorite", False),
+                        "notes": lead_crm.get("notes", "")
+                    }
+                    leads.append(lead)
+            except Exception as e:
+                print(f"[!] Error cargando clientes CSV {csv_file}: {e}")
+
     # Ordenar por defecto por score descendente
     leads.sort(key=lambda x: (x.get("score", 0), x.get("capital_num", 0)), reverse=True)
     return leads
