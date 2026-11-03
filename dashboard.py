@@ -165,7 +165,9 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
                     "rating": 0.0,
                     "opportunity": str(row.get("accion_sugerida", "Contactar para ofrecer identidad corporativa y desarrollo web.")),
                     "reasons": str(row.get("motivos_cualificacion", "Sociedad recién constituida sin presencia web")),
-                    "crm_status": lead_crm.get("status", "Nuevo"),
+                    "crm_status": lead_crm.get("status", "Sin contactar"),
+                    "crm_semaforo": lead_crm.get("semaforo", "none"),
+                    "crm_updated_at": lead_crm.get("updated_at", None),
                     "is_favorite": lead_crm.get("favorite", False),
                     "notes": lead_crm.get("notes", "")
                 }
@@ -225,7 +227,9 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
                     "rating": rating,
                     "opportunity": "Ofrecer creación de web corporativa para reservas/pedidos y posicionamiento Google Maps.",
                     "reasons": f"Local en Google Maps con {rating}★ de valoración sin página web activa.",
-                    "crm_status": lead_crm.get("status", "Nuevo"),
+                    "crm_status": lead_crm.get("status", "Sin contactar"),
+                    "crm_semaforo": lead_crm.get("semaforo", "none"),
+                    "crm_updated_at": lead_crm.get("updated_at", None),
                     "is_favorite": lead_crm.get("favorite", False),
                     "notes": lead_crm.get("notes", "")
                 }
@@ -331,7 +335,9 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
                         "google_maps_url": gmaps_val,
                         "lat": lat_val,
                         "lng": lng_val,
-                        "crm_status": lead_crm.get("status", "Nuevo"),
+                        "crm_status": lead_crm.get("status", "Sin contactar"),
+                        "crm_semaforo": lead_crm.get("semaforo", "none"),
+                        "crm_updated_at": lead_crm.get("updated_at", None),
                         "is_favorite": lead_crm.get("favorite", False),
                         "notes": lead_crm.get("notes", "")
                     }
@@ -502,7 +508,7 @@ def get_stats():
 
 @app.post("/api/crm/lead")
 def update_crm_lead(payload: Dict[str, Any] = Body(...)):
-    lead_id = payload.get("id")
+    lead_id = payload.get("id") or payload.get("lead_id")
     if not lead_id:
         raise HTTPException(status_code=400, detail="Missing lead id")
 
@@ -511,10 +517,14 @@ def update_crm_lead(payload: Dict[str, Any] = Body(...)):
 
     if "status" in payload:
         current["status"] = payload["status"]
+    if "semaforo" in payload:
+        current["semaforo"] = payload["semaforo"]
     if "favorite" in payload:
         current["favorite"] = bool(payload["favorite"])
     if "notes" in payload:
         current["notes"] = payload["notes"]
+    if "updated_at" in payload:
+        current["updated_at"] = payload["updated_at"]
 
     crm_data[lead_id] = current
     save_crm_store(crm_data)

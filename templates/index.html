@@ -449,6 +449,37 @@
 
       </div>
 
+      <!-- Fila Pipeline CRM (Semáforo de Ventas: Todos, Interesados 🟢, Lo piensan 🟡, No quieren 🔴, Sin contactar ⚪) -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs border-t border-[#E7DFD4]/70 pt-2.5 scrollbar-none" id="crmFilterBar">
+        <span class="text-[11px] font-semibold text-[#7A6D5E] uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1.5">
+          <span class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-[#FAF7F2] border border-[#E7DFD4]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#1E5443]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#D97706]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#DC2626]"></span>
+          </span>
+          <span>Pipeline CRM:</span>
+        </span>
+        <button onclick="setCrmFilter('all')" id="btnCrmAll" class="crm-filter-btn px-3 py-1 rounded-full bg-[#121E2A] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm">
+          Todos <span class="text-[10px] opacity-75 font-mono" id="crmCountAll">(828)</span>
+        </button>
+        <button onclick="setCrmFilter('green')" id="btnCrmGreen" class="crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#1E5443] hover:bg-[#EBF5F0] border border-[#C4E3D5] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#1E5443] inline-block animate-pulse"></span>
+          <span>Interesados</span> <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[#EBF5F0]" id="crmCountGreen">(0)</span>
+        </button>
+        <button onclick="setCrmFilter('amber')" id="btnCrmAmber" class="crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#A66723] hover:bg-[#FEF7ED] border border-[#F6DFC2] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#D97706] inline-block"></span>
+          <span>Lo piensan</span> <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[#FEF7ED]" id="crmCountAmber">(0)</span>
+        </button>
+        <button onclick="setCrmFilter('red')" id="btnCrmRed" class="crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#A74B2C] hover:bg-[#FDF1EC] border border-[#F8D2C4] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#DC2626] inline-block"></span>
+          <span>No quieren</span> <span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[#FDF1EC]" id="crmCountRed">(0)</span>
+        </button>
+        <button onclick="setCrmFilter('none')" id="btnCrmNone" class="crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#7A6D5E] hover:text-[#1A1612] border border-[#E7DFD4] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#D5C9BA] inline-block"></span>
+          <span>Sin contactar</span> <span class="text-[10px] font-mono opacity-75" id="crmCountNone">(828)</span>
+        </button>
+      </div>
+
       <!-- Fila 2: Filtro Temporal por Días / Semanas / Mes / Año (Scroll Horizontal) -->
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs border-t border-[#E7DFD4]/70 pt-2.5 scrollbar-none" id="timeFilterBar">
         <span class="text-[11px] font-semibold text-[#7A6D5E] uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
@@ -530,6 +561,8 @@
             <option value="name_asc">Razón Social (A-Z)</option>
             <option value="city_asc">Ciudad (A-Z)</option>
             <option value="date_desc">Fecha de Constitución (Reciente)</option>
+            <option value="crm_desc">Pipeline CRM: Prioridad (🟢 > 🟡 > 🔴 > ⚪)</option>
+            <option value="crm_asc">Pipeline CRM: Sin Contactar Primero (⚪ > 🔴 > 🟡 > 🟢)</option>
           </select>
         </div>
 
@@ -624,6 +657,14 @@
                 <div class="flex items-center gap-1">
                   <span>Contacto / Teléfono</span>
                   <span id="filterIndicatorContact" class="text-[10px] px-1.5 py-0.2 rounded-full font-sans font-semibold bg-[#F0F6F3] text-[#1E5443]">Filtro</span>
+                </div>
+              </th>
+
+              <!-- Pipeline CRM Semáforo (Clic para ordenar) -->
+              <th class="py-3 px-3.5 min-w-[155px] cursor-pointer hover:bg-[#EAE2D7] transition-colors" onclick="toggleCrmSort()" title="Ordenar por Semáforo CRM">
+                <div class="flex items-center gap-1.5">
+                  <span>Estado CRM 🚦</span>
+                  <span id="sortIndicatorCrm" class="text-[10px] text-[#7A6D5E]"> </span>
                 </div>
               </th>
 
@@ -731,6 +772,10 @@
             </div>
             <h2 id="drawerCompanyName" class="font-editorial text-xl sm:text-2xl font-bold text-[#1A1612] leading-tight">Clínica Dental</h2>
             <p id="drawerAddress" class="text-xs text-[#7A6D5E] mt-1">Dirección completa</p>
+            <div class="mt-2.5 flex items-center gap-2">
+              <div id="drawerSemaforoHeaderBadge"></div>
+              <span class="text-[10px] text-[#A89987] font-mono">1-clic para alternar</span>
+            </div>
           </div>
           <button onclick="closeDrawer()" class="p-2 rounded-full hover:bg-[#E7DFD4] text-[#7A6D5E] hover:text-[#1A1612] transition-colors cursor-pointer">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -855,32 +900,102 @@
             <p class="text-[11px] text-[#A89987] italic">Pitch personalizado generado automáticamente según los datos auditados de la empresa.</p>
           </div>
 
-          <!-- TAB 3: ESTADO CRM -->
+          <!-- TAB 3: ESTADO CRM & SEMÁFORO INTERACTIVO -->
           <div id="drawerTabContentCrm" class="hidden space-y-4 text-xs">
             
-            <div>
-              <label class="block text-[#544A3F] font-semibold mb-1">Estado en Pipeline</label>
-              <select id="crmStatusSelect" onchange="saveLeadCrmStatus()" class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl px-3 py-2 text-[#1A1612] font-semibold focus:outline-none">
-                <option value="Nuevo">⚪ Nuevo Prospecto</option>
-                <option value="Contactado">🟡 Contactado (Mensaje Enviado)</option>
-                <option value="Cualificado">🟣 Cualificado (Reunión Solicitada)</option>
-                <option value="Ganado">🟢 Ganado / Cliente Cerrado</option>
-                <option value="Perdido">🔴 No Interesado</option>
-              </select>
+            <!-- Selector Visual del Semáforo -->
+            <div class="bg-[#FAF7F2] border border-[#E7DFD4] rounded-2xl p-3.5 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <label class="block text-[#1A1612] font-bold text-xs uppercase tracking-wide">Semáforo de Cualificación</label>
+                <span class="text-[10px] text-[#1E5443] font-semibold flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Guardado automático
+                </span>
+              </div>
+              <p class="text-[11px] text-[#7A6D5E]">Selecciona el estado comercial de este prospecto tras la llamada o contacto:</p>
+              
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                
+                <!-- Verde: Interesado -->
+                <button 
+                  type="button"
+                  id="btnDrawerSemaforo_green"
+                  onclick="setLeadSemaforoDirect('green')"
+                  class="p-2.5 rounded-xl border border-[#BEE3D2] bg-[#FFFFFF] hover:bg-[#EBF5F0] text-left transition-all cursor-pointer flex items-center gap-2"
+                >
+                  <span class="w-3 h-3 rounded-full bg-[#1E5443] shrink-0 ring-2 ring-[#1E5443]/30"></span>
+                  <div>
+                    <div class="font-bold text-[#1E5443] text-xs">🟢 Interesado</div>
+                    <div class="text-[10px] text-[#7A6D5E]">Quiere propuesta / web</div>
+                  </div>
+                </button>
+
+                <!-- Ámbar: Lo piensa -->
+                <button 
+                  type="button"
+                  id="btnDrawerSemaforo_amber"
+                  onclick="setLeadSemaforoDirect('amber')"
+                  class="p-2.5 rounded-xl border border-[#F6DFC2] bg-[#FFFFFF] hover:bg-[#FEF7ED] text-left transition-all cursor-pointer flex items-center gap-2"
+                >
+                  <span class="w-3 h-3 rounded-full bg-[#D97706] shrink-0 ring-2 ring-[#D97706]/30"></span>
+                  <div>
+                    <div class="font-bold text-[#A66723] text-xs">🟡 Lo piensa</div>
+                    <div class="text-[10px] text-[#7A6D5E]">En duda / seguimiento</div>
+                  </div>
+                </button>
+
+                <!-- Rojo: No quiere -->
+                <button 
+                  type="button"
+                  id="btnDrawerSemaforo_red"
+                  onclick="setLeadSemaforoDirect('red')"
+                  class="p-2.5 rounded-xl border border-[#F8D2C4] bg-[#FFFFFF] hover:bg-[#FDF1EC] text-left transition-all cursor-pointer flex items-center gap-2"
+                >
+                  <span class="w-3 h-3 rounded-full bg-[#DC2626] shrink-0 ring-2 ring-[#DC2626]/30"></span>
+                  <div>
+                    <div class="font-bold text-[#A74B2C] text-xs">🔴 No quiere</div>
+                    <div class="text-[10px] text-[#7A6D5E]">Descartado / Rechazó</div>
+                  </div>
+                </button>
+
+                <!-- Blanco: Sin contactar -->
+                <button 
+                  type="button"
+                  id="btnDrawerSemaforo_none"
+                  onclick="setLeadSemaforoDirect('none')"
+                  class="p-2.5 rounded-xl border border-[#E7DFD4] bg-[#FFFFFF] hover:bg-[#FAF7F2] text-left transition-all cursor-pointer flex items-center gap-2"
+                >
+                  <span class="w-3 h-3 rounded-full bg-[#D5C9BA] shrink-0"></span>
+                  <div>
+                    <div class="font-semibold text-[#544A3F] text-xs">⚪ Sin contactar</div>
+                    <div class="text-[10px] text-[#A89987]">Semáforo apagado</div>
+                  </div>
+                </button>
+
+              </div>
+
+              <div class="pt-1 flex items-center justify-between text-[10px] text-[#A89987] font-mono border-t border-[#E7DFD4]/60">
+                <span id="crmLastUpdated">Sin interacciones registradas aún</span>
+                <button type="button" onclick="insertCurrentDateNote()" class="text-[#A74B2C] hover:underline font-semibold">+ Insertar fecha en notas</button>
+              </div>
             </div>
 
+            <!-- Notas Comerciales y Registro de Conversación -->
             <div>
-              <label class="block text-[#544A3F] font-semibold mb-1">Notas Comerciales Internas</label>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-[#544A3F] font-semibold">Notas Comerciales & Bitácora de Llamada</label>
+                <span class="text-[10px] text-[#A89987]">Autoguardado instantáneo</span>
+              </div>
               <textarea 
                 id="crmNotesText" 
                 oninput="saveLeadNotes(this.value)" 
                 rows="5" 
-                placeholder="Escribe notas sobre la conversación, presupuesto ofrecido, etc..." 
-                class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl p-3 text-xs text-[#1A1612] focus:border-[#A74B2C] focus:bg-[#FFFFFF] focus:outline-none"
+                placeholder="Escribe notas de la conversación: decisor contactado, presupuesto propuesto, fecha acordada para volver a llamar..." 
+                class="w-full bg-[#FAF7F2] border border-[#E7DFD4] rounded-xl p-3 text-xs text-[#1A1612] focus:border-[#A74B2C] focus:bg-[#FFFFFF] focus:outline-none transition-all"
               ></textarea>
             </div>
 
-            <div class="pt-2">
+            <!-- Guardar Favorito -->
+            <div class="pt-1">
               <button 
                 onclick="toggleFavoriteCurrentLead()" 
                 id="btnToggleFav" 
@@ -951,6 +1066,7 @@
       activeSource: 'all',
       activeSector: 'Todos',
       activeTimeRange: 'all',
+      activeCrmFilter: 'all', // 'all' | 'green' | 'amber' | 'red' | 'none'
       activeFilters: {
         province: 'TODAS',
         minCapital: 0,
@@ -983,14 +1099,16 @@
         }
       });
 
-      // Cargar datos
+      // Cargar datos y sincronizar con CRM local (localStorage)
       if (window.INITIAL_DATA) {
         if (Array.isArray(window.INITIAL_DATA)) {
           STATE.allLeads = window.INITIAL_DATA;
         } else if (window.INITIAL_DATA.leads && Array.isArray(window.INITIAL_DATA.leads)) {
           STATE.allLeads = window.INITIAL_DATA.leads;
         }
+        loadCrmFromStorage();
         applyFilters();
+        updateCrmCounts();
       } else {
         fetchLeads();
       }
@@ -1192,6 +1310,12 @@
         if (STATE.activeSource === 'places' && lead.source !== 'PLACES') return false;
         if (STATE.activeSource === 'favorites' && !lead.is_favorite) return false;
 
+        // Pipeline CRM (Semáforo)
+        if (STATE.activeCrmFilter && STATE.activeCrmFilter !== 'all') {
+          const leadSem = getLeadSemaforo(lead);
+          if (leadSem !== STATE.activeCrmFilter) return false;
+        }
+
         // Sector
         if (STATE.activeSector !== 'Todos' && lead.sector !== STATE.activeSector) return false;
 
@@ -1238,6 +1362,14 @@
         if (sortBy === 'sector_asc') return (a.sector || '').localeCompare(b.sector || '');
         if (sortBy === 'sector_desc') return (b.sector || '').localeCompare(a.sector || '');
         if (sortBy === 'date_desc') return (b.date || '').localeCompare(a.date || '');
+        if (sortBy === 'crm_desc') {
+          const rank = s => s === 'green' ? 3 : s === 'amber' ? 2 : s === 'red' ? 1 : 0;
+          return rank(getLeadSemaforo(b)) - rank(getLeadSemaforo(a));
+        }
+        if (sortBy === 'crm_asc') {
+          const rank = s => s === 'green' ? 3 : s === 'amber' ? 2 : s === 'red' ? 1 : 0;
+          return rank(getLeadSemaforo(a)) - rank(getLeadSemaforo(b));
+        }
         return 0;
       });
 
@@ -1250,6 +1382,7 @@
       renderMapMarkers();
       updateBadges();
       updateKpiCards();
+      updateCrmCounts();
     }
 
     function updateSortIndicators(sortBy) {
@@ -1259,6 +1392,9 @@
       reset('sortIndicatorCity');
       reset('sortIndicatorSector');
       reset('sortIndicatorCapital');
+      reset('sortIndicatorCrm');
+      if (sortBy === 'crm_desc') setInd('sortIndicatorCrm', true);
+      else if (sortBy === 'crm_asc') setInd('sortIndicatorCrm', false);
 
       const setInd = (id, isDesc) => {
         const el = document.getElementById(id);
@@ -1305,7 +1441,7 @@
             <button onclick="clearAllFilters()" class="mt-3 px-4 py-1.5 rounded-full bg-[#121E2A] text-white text-xs font-semibold">Restablecer Filtros</button>
           </div>
         `;
-        tbody.innerHTML = `<tr><td colspan="9">${emptyHtml}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10">${emptyHtml}</td></tr>`;
         mobileContainer.innerHTML = emptyHtml;
         return;
       }
@@ -1388,6 +1524,11 @@
               ${lead.contact_name && lead.phone ? `<div class="text-[10px] text-[#A89987] truncate max-w-[180px]">${escapeHtml(lead.contact_name)}</div>` : ''}
             </td>
 
+            <!-- Pipeline CRM Semáforo -->
+            <td class="py-3 px-3.5" onclick="event.stopPropagation()">
+              ${renderSemaforoPill(lead)}
+            </td>
+
             <!-- Acciones -->
             <td class="py-3 px-3.5 text-center" onclick="event.stopPropagation()">
               <div class="flex items-center justify-center gap-1.5">
@@ -1431,12 +1572,16 @@
               <span class="font-mono">${escapeHtml(lead.capital || '')}</span>
             </div>
 
-            ${lead.phone ? `
-              <div class="pt-1 flex items-center justify-between text-xs">
-                <span class="font-mono font-bold text-[#1A1612]">📞 ${escapeHtml(lead.phone)}</span>
-                <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" onclick="event.stopPropagation()" class="px-3 py-1 rounded-full bg-[#121E2A] text-white text-[10px] font-semibold">Llamar</a>
+            <div class="pt-2 border-t border-[#E7DFD4]/60 flex items-center justify-between gap-2">
+              <div onclick="event.stopPropagation()">
+                ${renderSemaforoPill(lead, true)}
               </div>
-            ` : ''}
+              ${lead.phone ? `
+                <a href="tel:${lead.phone.replace(/[^0-9+]/g, '')}" onclick="event.stopPropagation()" class="px-3 py-1 rounded-full bg-[#121E2A] text-white text-[10px] font-semibold flex items-center gap-1 shrink-0">
+                  <span>📞</span> Llamar
+                </a>
+              ` : ''}
+            </div>
           </div>
         `;
       }).join('');
@@ -1663,9 +1808,8 @@
       document.getElementById('drawerDomainEs').textContent = lead.domain_suggested ? `${lead.domain_suggested}.es (Disponible)` : 'Disponible';
       document.getElementById('drawerDomainCom').textContent = lead.domain_suggested ? `${lead.domain_suggested}.com (Disponible)` : 'Disponible';
 
-      // CRM
-      document.getElementById('crmStatusSelect').value = lead.crm_status || 'Nuevo';
-      document.getElementById('crmNotesText').value = lead.notes || '';
+      // CRM & Semáforo
+      updateDrawerCrmView(lead);
 
       // Generar Pitch Inicial
       generatePitchText();
@@ -1738,28 +1882,312 @@
       setTimeout(() => btn.innerHTML = originalText, 1500);
     }
 
-    // CRM PERSISTENCIA
-    async function saveLeadCrmStatus() {
+    // ==========================================
+    // CRM SEMÁFORO ENGINE & PERSISTENCIA LOCAL
+    // ==========================================
+    const CRM_STORAGE_KEY = 'darox_crm_store_v1';
+
+    function getLeadSemaforo(lead) {
+      if (lead.crm_semaforo && lead.crm_semaforo !== 'none') return lead.crm_semaforo;
+      const st = (lead.crm_status || '').toLowerCase();
+      if (st.includes('interes') || st.includes('ganad')) return 'green';
+      if (st.includes('piensa') || st.includes('seguim') || st.includes('contact') || st.includes('cualific')) return 'amber';
+      if (st.includes('no quier') || st.includes('perdid') || st.includes('descart')) return 'red';
+      return 'none';
+    }
+
+    function renderSemaforoPill(lead, isCompact = false) {
+      const sem = getLeadSemaforo(lead);
+
+      if (sem === 'green') {
+        return `
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#EBF5F0] border-[#BEE3D2] text-[#1E5443] hover:scale-[1.02] active:scale-95" title="Estado: Interesado 🟢. Clic para pasar a 'Lo va a pensar' 🟡">
+            <span class="inline-flex items-center gap-1">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#1E5443] ring-2 ring-[#1E5443]/30 animate-pulse"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C4E3D5]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C4E3D5]"></span>
+            </span>
+            <span class="whitespace-nowrap font-bold text-[11px]">Interesado</span>
+          </button>
+        `;
+      } else if (sem === 'amber') {
+        return `
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#FEF7ED] border-[#F6DFC2] text-[#A66723] hover:scale-[1.02] active:scale-95" title="Estado: Lo va a pensar 🟡. Clic para pasar a 'No quiere' 🔴">
+            <span class="inline-flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#F3D6B5]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#D97706] ring-2 ring-[#D97706]/30"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#F3D6B5]"></span>
+            </span>
+            <span class="whitespace-nowrap font-bold text-[11px]">Lo piensa</span>
+          </button>
+        `;
+      } else if (sem === 'red') {
+        return `
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-all cursor-pointer shadow-sm bg-[#FDF1EC] border-[#F8D2C4] text-[#A74B2C] hover:scale-[1.02] active:scale-95" title="Estado: No quiere 🔴. Clic para reiniciar a 'Sin contactar' ⚪">
+            <span class="inline-flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#F7C6B6]"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#F7C6B6]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#DC2626] ring-2 ring-[#DC2626]/30"></span>
+            </span>
+            <span class="whitespace-nowrap font-bold text-[11px]">No quiere</span>
+          </button>
+        `;
+      } else {
+        return `
+          <button type="button" onclick="cycleSemaforo('${lead.id}', event)" class="group inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all cursor-pointer shadow-sm bg-[#FAF7F2] border-[#E7DFD4] text-[#7A6D5E] hover:bg-[#FFFFFF] hover:border-[#D5C9BA] hover:scale-[1.02] active:scale-95" title="Semáforo sin luz (Sin contactar). Clic para marcar 'Interesado' 🟢">
+            <span class="inline-flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
+              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
+              <span class="w-2 h-2 rounded-full bg-[#D5C9BA]/60 group-hover:bg-[#D5C9BA] transition-colors"></span>
+            </span>
+            <span class="whitespace-nowrap text-[11px]">${isCompact ? 'Pendiente' : 'Sin contactar'}</span>
+          </button>
+        `;
+      }
+    }
+
+    function cycleSemaforo(leadId, event) {
+      if (event) event.stopPropagation();
+      const lead = STATE.allLeads.find(l => l.id === leadId);
+      if (!lead) return;
+
+      const current = getLeadSemaforo(lead);
+      let next = 'none';
+      let nextStatus = 'Sin contactar';
+
+      if (current === 'none') {
+        next = 'green';
+        nextStatus = 'Interesado';
+      } else if (current === 'green') {
+        next = 'amber';
+        nextStatus = 'Lo va a pensar';
+      } else if (current === 'amber') {
+        next = 'red';
+        nextStatus = 'No quiere';
+      } else {
+        next = 'none';
+        nextStatus = 'Sin contactar';
+      }
+
+      lead.crm_semaforo = next;
+      lead.crm_status = nextStatus;
+      lead.crm_updated_at = new Date().toISOString();
+
+      saveCrmToStorage();
+
+      if (STATE.selectedLead && STATE.selectedLead.id === leadId) {
+        updateDrawerCrmView(lead);
+      }
+
+      if (STATE.activeCrmFilter && STATE.activeCrmFilter !== 'all') {
+        applyFilters();
+      } else {
+        renderTable();
+        updateCrmCounts();
+      }
+
+      syncCrm(lead.id, { semaforo: next, status: nextStatus, updated_at: lead.crm_updated_at });
+    }
+
+    function setLeadSemaforoDirect(state) {
       if (!STATE.selectedLead) return;
-      const newStatus = document.getElementById('crmStatusSelect').value;
-      STATE.selectedLead.crm_status = newStatus;
-      await syncCrm(STATE.selectedLead.id, { status: newStatus });
-      renderTable();
+      const lead = STATE.selectedLead;
+      lead.crm_semaforo = state;
+      lead.crm_status = state === 'green' ? 'Interesado' : state === 'amber' ? 'Lo va a pensar' : state === 'red' ? 'No quiere' : 'Sin contactar';
+      lead.crm_updated_at = new Date().toISOString();
+
+      saveCrmToStorage();
+      updateDrawerCrmView(lead);
+      
+      if (STATE.activeCrmFilter && STATE.activeCrmFilter !== 'all') {
+        applyFilters();
+      } else {
+        renderTable();
+        updateCrmCounts();
+      }
+
+      syncCrm(lead.id, { semaforo: state, status: lead.crm_status, updated_at: lead.crm_updated_at });
+    }
+
+    function updateDrawerCrmView(lead) {
+      const sem = getLeadSemaforo(lead);
+
+      // Badge en cabecera del drawer
+      const headerBadge = document.getElementById('drawerSemaforoHeaderBadge');
+      if (headerBadge) {
+        headerBadge.innerHTML = renderSemaforoPill(lead);
+      }
+
+      // Botones táctiles en pestaña CRM
+      ['green', 'amber', 'red', 'none'].forEach(st => {
+        const btn = document.getElementById(`btnDrawerSemaforo_${st}`);
+        if (!btn) return;
+        if (sem === st) {
+          btn.classList.add('ring-2', 'ring-offset-1', 'font-bold');
+          if (st === 'green') btn.classList.add('ring-[#1E5443]', 'bg-[#EBF5F0]');
+          if (st === 'amber') btn.classList.add('ring-[#D97706]', 'bg-[#FEF7ED]');
+          if (st === 'red') btn.classList.add('ring-[#DC2626]', 'bg-[#FDF1EC]');
+          if (st === 'none') btn.classList.add('ring-[#7A6D5E]', 'bg-[#FFFFFF]');
+        } else {
+          btn.classList.remove('ring-2', 'ring-offset-1', 'font-bold', 'ring-[#1E5443]', 'ring-[#D97706]', 'ring-[#DC2626]', 'ring-[#7A6D5E]', 'bg-[#EBF5F0]', 'bg-[#FEF7ED]', 'bg-[#FDF1EC]');
+        }
+      });
+
+      const notesEl = document.getElementById('crmNotesText');
+      if (notesEl) {
+        notesEl.value = lead.notes || '';
+      }
+
+      const updatedEl = document.getElementById('crmLastUpdated');
+      if (updatedEl) {
+        if (lead.crm_updated_at) {
+          try {
+            const dt = new Date(lead.crm_updated_at);
+            updatedEl.textContent = `Actualizado: ${dt.toLocaleDateString('es-ES')} ${dt.toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'})}`;
+          } catch(e) {
+            updatedEl.textContent = 'Actualizado recientemente';
+          }
+        } else {
+          updatedEl.textContent = 'Sin interacciones registradas aún';
+        }
+      }
+    }
+
+    function insertCurrentDateNote() {
+      if (!STATE.selectedLead) return;
+      const notesEl = document.getElementById('crmNotesText');
+      if (!notesEl) return;
+      const now = new Date();
+      const dateTag = `
+[${now.toLocaleDateString('es-ES')} ${now.toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'})}]: `;
+      notesEl.value = notesEl.value ? (notesEl.value + dateTag) : dateTag.trim();
+      notesEl.focus();
+      saveLeadNotes(notesEl.value);
+    }
+
+    function setCrmFilter(filterType) {
+      STATE.activeCrmFilter = filterType;
+      const buttons = ['all', 'green', 'amber', 'red', 'none'];
+      buttons.forEach(t => {
+        const btn = document.getElementById(`btnCrm${t.charAt(0).toUpperCase() + t.slice(1)}`);
+        if (!btn) return;
+        if (t === filterType) {
+          if (t === 'all') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#121E2A] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm";
+          } else if (t === 'green') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#1E5443] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm flex items-center gap-1.5";
+          } else if (t === 'amber') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#D97706] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm flex items-center gap-1.5";
+          } else if (t === 'red') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#DC2626] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm flex items-center gap-1.5";
+          } else {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#544A3F] text-white text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-sm flex items-center gap-1.5";
+          }
+        } else {
+          if (t === 'all') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#544A3F] hover:text-[#1A1612] border border-[#E7DFD4] text-[11px] font-semibold whitespace-nowrap cursor-pointer";
+          } else if (t === 'green') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#1E5443] hover:bg-[#EBF5F0] border border-[#C4E3D5] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5";
+          } else if (t === 'amber') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#A66723] hover:bg-[#FEF7ED] border border-[#F6DFC2] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5";
+          } else if (t === 'red') {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#A74B2C] hover:bg-[#FDF1EC] border border-[#F8D2C4] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5";
+          } else {
+            btn.className = "crm-filter-btn px-3 py-1 rounded-full bg-[#FAF7F2] text-[#7A6D5E] hover:text-[#1A1612] border border-[#E7DFD4] text-[11px] font-semibold whitespace-nowrap cursor-pointer flex items-center gap-1.5";
+          }
+        }
+      });
+      applyFilters();
+    }
+
+    function toggleCrmSort() {
+      const sortSelect = document.getElementById('filterSort');
+      const current = sortSelect ? sortSelect.value : '';
+      const nextSort = current === 'crm_desc' ? 'crm_asc' : 'crm_desc';
+      if (sortSelect) sortSelect.value = nextSort;
+      applyFilters();
+    }
+
+    function updateCrmCounts() {
+      let green = 0;
+      let amber = 0;
+      let red = 0;
+      let none = 0;
+
+      STATE.allLeads.forEach(l => {
+        const sem = getLeadSemaforo(l);
+        if (sem === 'green') green++;
+        else if (sem === 'amber') amber++;
+        else if (sem === 'red') red++;
+        else none++;
+      });
+
+      if (document.getElementById('crmCountAll')) document.getElementById('crmCountAll').textContent = `(${STATE.allLeads.length})`;
+      if (document.getElementById('crmCountGreen')) document.getElementById('crmCountGreen').textContent = `(${green})`;
+      if (document.getElementById('crmCountAmber')) document.getElementById('crmCountAmber').textContent = `(${amber})`;
+      if (document.getElementById('crmCountRed')) document.getElementById('crmCountRed').textContent = `(${red})`;
+      if (document.getElementById('crmCountNone')) document.getElementById('crmCountNone').textContent = `(${none})`;
+    }
+
+    function saveCrmToStorage() {
+      try {
+        const store = {};
+        STATE.allLeads.forEach(l => {
+          const sem = getLeadSemaforo(l);
+          if (sem !== 'none' || l.notes || l.is_favorite || (l.crm_status && l.crm_status !== 'Sin contactar' && l.crm_status !== 'Nuevo')) {
+            store[l.id] = {
+              semaforo: sem,
+              status: l.crm_status || 'Sin contactar',
+              notes: l.notes || '',
+              favorite: !!l.is_favorite,
+              updated_at: l.crm_updated_at || null
+            };
+          }
+        });
+        localStorage.setItem(CRM_STORAGE_KEY, JSON.stringify(store));
+      } catch (e) {
+        console.warn('Error guardando en localStorage:', e);
+      }
+    }
+
+    function loadCrmFromStorage() {
+      try {
+        const raw = localStorage.getItem(CRM_STORAGE_KEY);
+        if (!raw) return;
+        const store = JSON.parse(raw);
+        if (!store || typeof store !== 'object') return;
+
+        STATE.allLeads.forEach(l => {
+          if (store[l.id]) {
+            const item = store[l.id];
+            if (item.semaforo) l.crm_semaforo = item.semaforo;
+            if (item.status) l.crm_status = item.status;
+            if (item.notes) l.notes = item.notes;
+            if (typeof item.favorite === 'boolean') l.is_favorite = item.favorite;
+            if (item.updated_at) l.crm_updated_at = item.updated_at;
+          }
+        });
+      } catch (e) {
+        console.warn('Error cargando CRM de localStorage:', e);
+      }
     }
 
     async function saveLeadNotes(text) {
       if (!STATE.selectedLead) return;
       STATE.selectedLead.notes = text;
-      await syncCrm(STATE.selectedLead.id, { notes: text });
+      STATE.selectedLead.crm_updated_at = new Date().toISOString();
+      saveCrmToStorage();
+      syncCrm(STATE.selectedLead.id, { notes: text, updated_at: STATE.selectedLead.crm_updated_at });
     }
 
     async function toggleFavorite(leadId) {
       const lead = STATE.allLeads.find(l => l.id === leadId);
       if (!lead) return;
       lead.is_favorite = !lead.is_favorite;
-      await syncCrm(lead.id, { favorite: lead.is_favorite });
+      saveCrmToStorage();
       renderTable();
       updateBadges();
+      syncCrm(lead.id, { favorite: lead.is_favorite });
     }
 
     async function toggleFavoriteCurrentLead() {
@@ -1775,7 +2203,7 @@
           body: JSON.stringify({ lead_id: leadId, ...data })
         });
       } catch (e) {
-        console.log('CRM guardado localmente en cliente.');
+        // En Vercel o estático offline, localStorage se encarga de la persistencia
       }
     }
 
@@ -1844,9 +2272,11 @@
         "Longitud": l.lng || '',
         "Oportunidad Detectada": l.opportunity || '',
         "Motivos": l.reasons || '',
-        "Estado CRM": l.crm_status || 'Nuevo',
-        "Favorito": l.is_favorite ? 'SÍ' : 'NO',
+        "Semáforo CRM": getLeadSemaforo(l) === 'green' ? '🟢 Interesado' : getLeadSemaforo(l) === 'amber' ? '🟡 Lo piensa' : getLeadSemaforo(l) === 'red' ? '🔴 No quiere' : '⚪ Sin contactar',
+        "Estado CRM": l.crm_status || 'Sin contactar',
         "Notas CRM": l.notes || '',
+        "Última Interacción CRM": l.crm_updated_at || '',
+        "Favorito": l.is_favorite ? 'SÍ' : 'NO',
         "Fecha Registro": l.date || ''
       }));
 
