@@ -274,6 +274,15 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
                     except Exception:
                         resenas_val = 0
 
+                    try:
+                        lat_val = float(str(row.get("lat", "")).strip().replace(",", "."))
+                    except Exception:
+                        lat_val = None
+                    try:
+                        lng_val = float(str(row.get("lng", "")).strip().replace(",", "."))
+                    except Exception:
+                        lng_val = None
+
                     tipo_val = str(row.get("tipo", "")).strip()
                     if not has_web:
                         cat = "HOT LEAD (LOCAL SIN WEB)"
@@ -320,6 +329,8 @@ def get_all_unified_leads() -> List[Dict[str, Any]]:
                         "opportunity": opp,
                         "reasons": motivos,
                         "google_maps_url": gmaps_val,
+                        "lat": lat_val,
+                        "lng": lng_val,
                         "crm_status": lead_crm.get("status", "Nuevo"),
                         "is_favorite": lead_crm.get("favorite", False),
                         "notes": lead_crm.get("notes", "")
